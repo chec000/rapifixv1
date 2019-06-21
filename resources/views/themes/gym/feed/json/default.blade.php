@@ -1,1 +1,0 @@
-{!! PageBuilder::blockJson(['returnAll' => true]) !!}
