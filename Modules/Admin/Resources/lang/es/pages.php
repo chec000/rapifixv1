@@ -1,0 +1,113 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pages Language Lines
+    |--------------------------------------------------------------------------
+    */
+        'login_remember'=>'Recuérdame',
+    'password'=>'Contraseña',
+    'username'=>'Usuario',
+    'forgot_password'=>'¿Olvidó su contraseña?',
+    'login'=>'Iniciar sesión',
+    'for_all_languages'=>' para todos los idiomas',
+    'add_new_page'=>'Agregar nueva',
+    'global_details'=>'Detalles globales',
+    'message'=>'No existen páginas con los parametros que envió',
+    'message_delete'=>'Esta opción ha sido eliminada',
+    'message_error'=>'La operación no fue completada, por favor intente de nuevo',
+    'page'=>'Página',
+    'add_page'=>'Agregar página',
+    'normal_page'=>'Página Normal',
+    'link_document'=>'Enlace / Documento',
+    'group_page'=>'Grupo de Páginas',
+    'not_live'=>'Desactivada',
+    'modal_history_title'=>'Historial de páginas',
+    'name'=>'Nombre',
+    'url'=>'Url',
+    'brand'=>'Marca',
+    'country'=>'País',
+    'language'=>'Idioma',
+    'records_history' => 'Historial de Registros',
+    'legend_search' => 'Búsqueda',
+    'status'=>'Estatus',
+    'history'=>'Historial de Registros',
+    'duplicate_page'=>'Duplicate Page',
+    'document_page'=>'Ver documentos / Url',
+    'preview'=>'Vista Prevía',
+    'live_page'=>' Ver Página en vivo',
+    'delete_confirm'=>'¿Estas seguro que desas remover la',
+    'remove'=>'Remover',
+    'no'=>'No',
+    'the'=>'El',
+    'yes'=>'Si',
+    'has_delete'=>'ha sido eliminado',
+    'no_delete'=>'no se eliminó (intente actualizar la página, es posible que ya no esté conectado)',
+    'undo'=>'Revertir',
+    'pages' => 'Páginas',
+    'search_pages'=>'Buscar páginas',
+    'page_restored'=>'ha sido restaurado.',
+    'page_no_restored'=>'no se restauró (intente actualizar la página, es posible que ya no esté conectado)',
+    'close'=>'Cerrar',
+    'select_option'=>'Seleccionar opción',
+    'validation_url'=>'url en uso por otra página!',
+    'edit' => 'Editar página',
+    'sub_page' => 'Agregar subpágina',
+    'group_page' => 'Agregar página de grupo',
+    'duplicate_modal_header'=>'Duplicar página',
+    'duplicate_modal_close'=>'Cerrar',
+    'duplicate_modal_confirm'=>'Confirmar ',
+    'item' => 'página',
+    'page_info' => 'Información de la página',
+    'display_info' => [
+        'header' => 'Información de visualización',
+        'page_template' => 'Plantilla de página',
+        'show_menus' => 'Mostrar en los menus'
+    ],
+    'groups' => [
+        'header' => 'Grupos',
+        'yes' => 'Si',
+        'no' => 'No',
+        'new' => 'Nuevo grupo',
+        'top_level' => 'No es grupo de páginas de nivel superior',
+    ],
+    'live_options' => [
+        'header' => 'Opciones de actividad',
+        'link_visible' => '¿Enlace visible?',
+        'is_live' => '¿Activa?',
+        'from_date' => 'Activa desde la fecha',
+        'until_date' => 'Activa hasta la fecha',
+        'sitemap' => 'Mapa del sitio',
+        'not_live' => 'Desactivada (Oculta)',
+        'live' => 'Activa (Ignora fechas)',
+        'live_in_dates' => 'Activa entre las fechas',
+        'excluded_sitemap' => 'Excluida del mapa del sitio',
+        'included_sitemap' => 'Incluida en el mapa del sitio (Si la página esta activa)'
+    ],
+    'page_details' => [
+        'header' => 'Detalles de página',
+        'parent_page' => 'Página padre',
+        'not_versioned' => 'nombre y url NO estan versionados, los cambios en ellos se activaran al guardarlos.',
+        'beacons' => 'Beacons de página',
+        'name' => 'Nombre de página',
+        'url' => 'Url de página:',
+        'select_doc' => 'Seleccionar Documento',
+        'or' => 'o',
+        'link_or_doc' => '¿Es un enlace directo o un documento?',
+        'top_level_page' => 'Página de nivel superior',
+        'code' => 'Código de la página',
+        'none_page'=>'Sin página padre'
+    ],
+    'required' => [
+        'page_name' => 'Nombre de página requerido',
+        'page_url' => 'Url de página requerido',
+        'page_code' => 'Código de página requerido'
+    ],
+    'repeated_code' => 'Este código de página fue usado antes',
+    'errors' => [
+        'duplicate_url' => 'Error al duplicar, otra página esta usando la misma marca, país y lenguaje.',
+        'duplicate_code' => 'Error al duplicar, otra página esta usando el mismo código de página.'
+    ],
+];

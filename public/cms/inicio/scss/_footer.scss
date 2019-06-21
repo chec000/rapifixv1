@@ -1,0 +1,92 @@
+
+/*=============================================
+=            12. Footer            =
+=============================================*/
+
+
+/*----------  12.1 Footer top  ----------*/
+
+
+/*----------  footer description with logo  ----------*/
+
+
+.footer-description{
+
+	@media #{$large-mobile}{
+		margin-bottom: 1rem;
+	}
+
+	.footer-logo{
+		margin-bottom: 1rem;
+	}
+
+	p{
+		padding-right: 4rem;
+		@media #{$tablet-device}{
+			padding-right: 0;
+		}
+		@media #{$large-mobile}{
+			padding-right: 0;
+		}
+	}
+}
+
+
+/*----------  footer nav block  ----------*/
+
+
+.single-footer-nav-block{
+
+	@media #{$tablet-device}{
+		margin-bottom: 1rem;
+	}
+	@media #{$large-mobile}{
+		margin-bottom: 1rem;
+	}
+	ul.footer-nav-links{
+		li{
+			margin-bottom: 10px;
+			a{
+				display: inline-block;
+				padding-left: 15px;
+				background: url('../images/icon-footer.png') 0 6px no-repeat;
+				&:hover{
+					background-position: 0 -40px;
+					padding-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+/*---------- End of 12.1 Footer top  ----------*/
+
+
+
+/*----------  12.2 Footer Bottom  ----------*/
+
+
+/*----------  copyright section  ----------*/
+
+
+.copyright-section{
+	padding: 10px 0;
+	border-top: 3px solid #f4f4f4;
+	p{
+		margin-top: 5px;
+		@media #{$large-mobile}{
+			margin-bottom: 10px;
+		}
+	}
+
+
+}
+
+/*----------  12.2 End of Footer Bottom  ----------*/
+
+
+/*=====  End of Footer  ======*/
+
+
+
+

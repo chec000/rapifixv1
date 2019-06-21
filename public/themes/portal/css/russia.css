@@ -1,0 +1,76 @@
+.testimonial__frase {
+  font-size: 2.5rem;
+  font-family: 'Roboto', Verdana, Arial;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.products-desc .tabs__item a {
+  font-size: 1.1rem;
+}
+
+h1.products-desc__title.purple {
+  font-size: 1.5rem;
+}
+
+.button {
+  font-size: .8rem;
+}
+
+.brand__item p {
+  text-align: left !important;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .business__main-title .products-maintitle, .events__main-title .events-maintitle {
+    font-size: 1.3rem;
+    padding: 0 .5rem;
+  }
+
+  .business__item .business__title {
+    padding: 1rem;
+  }
+
+  h1.products-desc__title.purple {
+    font-size: 1.3rem;
+    padding: 1.5rem 0;
+  }
+
+  .product__description {
+    padding: 0 .5rem;
+  }
+
+  .products-page .products-maintitle {
+    padding: 0 1rem;
+    font-size: 1.4rem;
+  }
+
+  .bottom-banner__content .button {
+    width: 100%;
+    max-width: 70%;
+  }
+
+  .business__item-icon {
+    margin: 0 auto;
+  }
+
+  .business__slider {
+    margin-top: 140px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .business-slider .mainslider__desc {
+    text-shadow: 1px 1px 2px #333;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .product__name {
+    font-size: 1.2em;
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+

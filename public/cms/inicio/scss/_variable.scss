@@ -1,0 +1,44 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+$theme-color : #395562;
+$hover-color : #f36b63;
+$facebook-color: #3c5b9b;
+$rss-color: #fd761f;
+$twitter-color: #56d7ff;
+$skype-color: #00aeef;
+$dribbble-color: #f54f91;
+$google-plus-color: rgb(224, 75, 52);
+$pinterest-color: rgb(206, 31, 33);
+
+
+
+
+// ee variables
+
+// Colors ---------------
+
+$white: #ffffff;
+$black: #000000;
+$grey: #f6f7f8;
+
+// Body Color
+$body-color: #444444;
+$body-color-dark: #cbcbcb;
+
+// Heading Color
+$heading-color: #202020;
+$heading-color-dark: #cccccc;
+
+// Theme Color
+$tc-extra-light: #fefcef;
+
+
+// Responsive Variables
+$extraBig-device : 'only screen and (min-width: 1600px)';
+$laptop-device : 'only screen and (min-width: 1200px) and (max-width: 1599px)';
+$desktop-device : 'only screen and (min-width: 992px) and (max-width: 1200px)';
+$tablet-device:'only screen and (min-width: 768px) and (max-width: 991px)';
+$large-mobile:'only screen and (max-width: 767px)';
+$small-mobile: 'only screen and (max-width: 479px)';

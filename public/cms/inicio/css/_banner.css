@@ -1,0 +1,81 @@
+/*=============================================
+=            05. Banner            =
+=============================================*/
+/*----------  05.1 Sidebar banner  ----------*/
+.sidebar-banner-bg-1 {
+  background-image: url("../images/banners/banner-left.jpg"); }
+
+.homepage-sidebar-banner-container {
+  width: 100%;
+  max-height: 385px;
+  overflow: hidden; }
+  .homepage-sidebar-banner-container a {
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s; }
+    .homepage-sidebar-banner-container a:hover img {
+      -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+      transform: scale(1.1); }
+
+/*----------  05.1 End of Sidebar banner  ----------*/
+/*----------  05.2 Double banner  ----------*/
+.banner-bg-1 {
+  background-image: url("../images/banners/banner1.png"); }
+
+.banner-bg-2 {
+  background-image: url("../images/banners/banner2.png"); }
+
+.banner-bg-3 {
+  background-image: url("../images/banners/banner3.jpg"); }
+
+.banner-bg-4 {
+  background-image: url("../images/banners/banner4.jpg"); }
+
+.single-banner-container {
+  max-height: 170px;
+  overflow: hidden;
+  width: 100%; }
+  .single-banner-container a {
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s; }
+    .single-banner-container a:hover img {
+      -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+      transform: scale(1.1); }
+
+/*----------  05.2 End of Double banner  ----------*/
+/*----------  05.3 Single wide banner  ----------*/
+.wide-banner-bg-1 {
+  background-image: url("../images/banners/banner-wide.jpg"); }
+
+.home-wide-bg-container {
+  max-height: 230px;
+  overflow: hidden;
+  width: 100%; }
+  .home-wide-bg-container a {
+    display: block;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s; }
+    .home-wide-bg-container a:hover img {
+      -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+      transform: scale(1.1); }
+    .home-wide-bg-container a img {
+      width: 100%; }
+
+/*----------  05.3 End of Single wide banner  ----------*/
+/*----------  05.4 wide text banner  ----------*/
+.home-text-banner-container {
+  background-color: #f4f4f4;
+  padding: 15px; }
+  .home-text-banner-container .text-banner-content {
+    border: 1px solid #ddd;
+    padding: 20px; }
+    .home-text-banner-container .text-banner-content h2 {
+      text-transform: uppercase; }
+
+/*----------  05.4 End of wide text banner  ----------*/
+/*=====  End of 05. banner  ======*/

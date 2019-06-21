@@ -1,0 +1,385 @@
+
+/*=============================================
+=            04. Hero            =
+=============================================*/
+
+/*----------  04.1 Slider one  ----------*/
+
+.hero-bg-1{
+    background-image: url('../images/sliders/1.jpg');
+}
+
+
+.hero-bg-2{
+	background-image: url('../images/sliders/2.jpg');
+}
+
+.hero-bg-3{ 
+	background-image: url('../images/sliders/3.jpg');
+}
+
+.hero-bg-4{
+	background-image: url('../images/sliders/4.jpg');
+}
+
+
+/*-- Hero Slider --*/
+.hero-slider-one {
+    margin-bottom: 15px;
+    
+    /*-- Arrow --*/
+    & .slick-arrow {
+        display: none !important;
+        width: 44px;
+        height: 44px;
+        border: 1px solid #959595;
+        color: $heading-color;
+        border-radius: 50px;
+        background-color: transparent;
+        position: absolute;
+        padding: 0;
+        top: 50%;
+        margin-top: -22px;
+        z-index: 9;
+        opacity: 0;
+        
+        & i {
+            font-size: 28px;
+            line-height: 42px;
+            display: block;
+        }
+        &.slick-prev {
+            left: 30px;   
+        }
+        &.slick-next {
+            right: 30px;
+        }
+        
+        &:hover {
+            border-color: $heading-color;
+        }
+    }
+    
+    /*-- Dots --*/
+    & .slick-dots {
+        position: absolute;
+        left: 50%;
+        bottom: 50px;
+        margin-left: -10px;
+        
+        
+        // Responsive
+        @media #{$tablet-device}{
+            left: 50%;
+        }
+        @media #{$large-mobile}{
+            left: 50%;
+            bottom: 30px;
+        }
+        @media #{$small-mobile}{
+            left: 50%;
+        }
+        
+        & li {
+            float: left;
+            margin-right: 5px;
+            
+            & button {
+                border: 1px solid #959595;
+                background-color: #ddd;
+                text-indent: -99999px;
+                width: 12px;
+                height: 12px;
+                border-radius: 50px;
+                display: block;
+                padding: 0;
+                
+                // Hover
+                &:hover {
+                    border-color: $heading-color;
+                }
+            }
+            
+            &.slick-active {
+                & button {
+                    border-color: #ddd;
+                    background-color: #22dd77;
+                }
+            }
+            
+        }
+    }
+    
+    &:hover {
+        & .slick-arrow {
+            opacity: 1;
+        }
+    }
+}
+
+/*-- Hero Item --*/
+.hero-item {
+    padding: 150px 10px 60px 180px;
+	background-color: #eee;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+    text-align: center;
+    position: relative;
+    
+
+    &:after{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        background-color: #000;
+        opacity: 0.5;
+        content: ""; 
+        z-index: -1;
+
+
+        @media #{$large-mobile}{
+            height: 100%;
+            width: 100%;
+        }
+
+
+    }
+    
+    @media #{$large-mobile}{
+        // background-image: none;
+        padding: 0;
+        
+    }
+        
+    // Responsive
+    @media #{$desktop-device}{
+        padding: 150px 10px 60px 180px;
+    }
+    @media #{$tablet-device}{
+        padding: 150px 50px 40px 50px;
+    }
+    @media #{$large-mobile}{
+        padding: 70px 50px;
+    }
+    @media #{$small-mobile}{
+        padding: 50px 40px;
+    }
+    
+    & .col, & [class*="col-"] {
+        flex: 0 0 auto;
+        width: auto;
+
+        @media #{$large-mobile}{
+            flex-basis: 100%;
+        }
+    }
+}
+    
+/*-- Hero Image --*/
+.hero-image {
+        
+    // Responsive
+    @media #{$tablet-device}{
+        max-width: 240px;
+    }
+    @media #{$large-mobile}{
+        order: 1;
+        max-width: 200px;
+        margin: auto;
+    }
+    @media #{$small-mobile}{
+        max-width: 160px;
+    }
+    
+    & img {
+        max-width: 100%;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: fadeOutUp;
+    }
+}
+
+/*-- Hero Content --*/
+.hero-content {
+
+    z-index: 1;
+    
+    @media #{$large-mobile}{
+        order: 2;
+        margin-top: 30px;
+        text-align: center;
+    }
+    
+    // All Element Selector
+    & > * {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: fadeOutUp;
+        
+    }
+    
+    & h2 {
+        font-size: 20px;
+        line-height: 1;
+		margin: 0;
+		color: #333;
+        margin-bottom: 1rem;
+        
+        @media #{$large-mobile}{
+            color: #fff;
+        }
+        
+        // Responsive
+        @media #{$tablet-device}{
+            font-size: 24px;
+        }
+        @media #{$large-mobile}{
+            font-size: 22px;
+            text-align: center;
+        }
+        @media #{$small-mobile}{
+            font-size: 18px;
+        }
+    }
+    
+    & h1 {
+        font-size: 30px;
+        font-weight: 900;
+        line-height: 40px;
+		margin: 0;
+		color: #333;
+        margin-bottom: 10px;
+        
+        @media #{$large-mobile}{
+            color: #fff;
+        }
+        & span {
+            font-weight: 900;
+
+		}
+		
+
+        
+        // Responsive
+        @media #{$desktop-device}{
+            font-size: 30px;
+        font-weight: 900;
+        line-height: 40px;
+        }
+        @media #{$tablet-device}{
+            font-size: 30px;
+        font-weight: 900;
+        line-height: 40px;
+        }
+        @media #{$large-mobile}{
+            font-size: 26px;
+        font-weight: 900;
+        line-height: 40px;
+        }
+        @media #{$small-mobile}{
+            font-size: 26px;
+        font-weight: 900;
+        line-height: 40px;
+        }
+	}
+	
+	& P {
+		color: #333;
+        margin-bottom: 30px;
+        
+        @media #{$large-mobile}{
+            color: #fff;
+        }
+	}
+    
+    & a {
+        border: 1px solid #333;
+        line-height: 24px;
+        padding: 5px 20px;
+		font-size: 13px;
+		font-weight: 600;
+        text-transform: uppercase;
+        color: #333;
+        margin-top: 0px;
+        overflow: hidden;
+        position: relative;
+		z-index: 1;
+        display: inline-block;
+        
+        @media #{$large-mobile}{
+            color: #fff;
+            border: 1px solid #fff;
+        }
+        
+       
+        
+        // Hover
+        &:hover {
+			color: $white;
+			background-color: #333;
+            
+        }
+        
+        // Responsive
+        @media #{$large-mobile}{
+            font-size: 12px;
+            padding: 7px 25px;
+        }
+        @media #{$small-mobile}{
+            font-size: 11px;
+            padding: 5px 20px;
+            margin-top: 15px;
+        }
+    }
+}
+
+/*-- Slide Content In Animation --*/
+.slick-active {
+    
+    /*-- Hero Image --*/
+    & .hero-image {
+
+        & img {
+            animation-name: fadeInUp;
+            animation-delay: 0.5s;
+        }
+    }
+
+    /*-- Hero Content --*/
+    & .hero-content {
+
+        // All Element Selector
+        & > * {
+            animation-name: fadeInUp;
+            
+            // Child Selector
+            &:nth-child(1) {
+                animation-delay: 0.5s;
+            }
+            &:nth-child(2) {
+                animation-delay: 1s;
+            }
+            &:nth-child(3) {
+                animation-delay: 1.5s;
+            }
+            &:nth-child(4) {
+                animation-delay: 2s;
+            }
+            &:nth-child(5) {
+                animation-delay: 2.5s;
+            }
+            &:nth-child(6) {
+                animation-delay: 3s;
+            }
+            
+        }
+    }
+    
+}
+
+
+
+/*----------  End of 04.1 Slider one  ----------*/
