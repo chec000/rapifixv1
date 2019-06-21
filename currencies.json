@@ -1,0 +1,202 @@
+{
+  "ARS": {
+    "name": "Peso Argentino",
+    "code": "ARS",
+    "symbol": "$",
+    "format": "$1.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:38",
+    "updated_at": "2018-06-06 11:52:38"
+  },
+  "BOB": {
+    "name": "Boliviano de Bolivia",
+    "code": "BOB",
+    "symbol": "Bs",
+    "format": "Bs1.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:38",
+    "updated_at": "2018-06-06 11:52:38"
+  },
+  "BRL": {
+    "name": "Real Brasile\u00f1o",
+    "code": "BRL",
+    "symbol": "R$",
+    "format": "R$1.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "CLP": {
+    "name": "Peso Chileno",
+    "code": "CLP",
+    "symbol": "$",
+    "format": "$1.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "COP": {
+    "name": "Peso Colombiano",
+    "code": "COP",
+    "symbol": "$",
+    "format": "$1.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "CRC": {
+    "name": "Col\u00f3n Costarricense",
+    "code": "CRC",
+    "symbol": "\u20a1",
+    "format": "\u20a11.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "GTQ": {
+    "name": "Quetzal Guatemalteco",
+    "code": "GTQ",
+    "symbol": "Q",
+    "format": "Q1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "USD": {
+    "name": "U.S. Dollar",
+    "code": "USD",
+    "symbol": "$",
+    "format": "$1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "SVC": {
+    "name": "Col\u00f3n Salvadore\u00f1o",
+    "code": "SVC",
+    "symbol": "$",
+    "format": "$1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "EUR": {
+    "name": "Euro",
+    "code": "EUR",
+    "symbol": "\u20ac",
+    "format": "\u20ac1.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "MXN": {
+    "name": "Peso Mexicano",
+    "code": "MXN",
+    "symbol": "$",
+    "format": "$1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "NIO": {
+    "name": "C\u00f3rdoba Nicarag\u00fcense",
+    "code": "NIO",
+    "symbol": "C$",
+    "format": "C$1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "PAB": {
+    "name": "Balboa Paname\u00f1o",
+    "code": "PAB",
+    "symbol": "B\/",
+    "format": "B\/1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "PYG": {
+    "name": "Guaran\u00ed Paraguayo",
+    "code": "PYG",
+    "symbol": "\u20b2",
+    "format": "\u20b21.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "PEN": {
+    "name": "Sol Per\u00fa",
+    "code": "PEN",
+    "symbol": "S\/",
+    "format": "S\/1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:39",
+    "updated_at": "2018-06-06 11:52:39"
+  },
+  "DOP": {
+    "name": "Peso Dominicano",
+    "code": "DOP",
+    "symbol": "RD$",
+    "format": "RD$1,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:40",
+    "updated_at": "2018-06-06 11:52:40"
+  },
+  "UYU": {
+    "name": "Peso Uruguayo",
+    "code": "UYU",
+    "symbol": "$U",
+    "format": "$U1.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:40",
+    "updated_at": "2018-06-06 11:52:40"
+  },
+  "RUB": {
+    "name": "Rublo Ruso",
+    "code": "RUB",
+    "symbol": "\u0440\u0443\u0431",
+    "format": "\u0440\u0443\u04311.0,00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:40",
+    "updated_at": "2018-06-06 11:52:40"
+  },
+  "NGN": {
+    "name": "Naira Nigeria",
+    "code": "NGN",
+    "symbol": "\u20a6",
+    "format": "\u20a61,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:40",
+    "updated_at": "2018-06-06 11:52:40"
+  },
+  "CNY": {
+    "name": "Yuan Chino",
+    "code": "CNY",
+    "symbol": "\u00a5",
+    "format": "\u00a51,0.00",
+    "exchange_rate": 1,
+    "active": 1,
+    "created_at": "2018-06-06 11:52:40",
+    "updated_at": "2018-06-06 11:52:40"
+  }
+}

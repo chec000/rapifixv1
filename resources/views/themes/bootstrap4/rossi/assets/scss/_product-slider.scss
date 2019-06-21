@@ -1,0 +1,208 @@
+/*=============================================
+=            07. Product Slider            =
+=============================================*/
+
+
+
+
+/*----------  07.1 Horizontal product slider  ----------*/
+
+.horizontal-product-slider {
+	position: relative;
+
+	.slick-track{
+		padding: 5px 0;
+		.slick-active{
+			.single-product-content{
+				margin: 0 5px;
+			}
+		}
+	}
+
+	.slick-slide img {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.slick-arrow {
+		position: absolute;
+		top: -40px;
+		-webkit-transform: translateY(-50%);
+		transform: translateY(-50%);
+		right: 0;
+		width: 20px;
+		height: 20px;
+		background: #fff;
+		color: #333;
+		border: 1px solid #e5e5e5;
+		border-radius: 3px;
+		line-height: 20px;
+		font-size: 14px;
+		cursor: pointer;
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		text-align: center;
+		z-index: 8;
+	}
+
+
+
+	.slick-next-btn.slick-arrow {
+		left: auto;
+		right: 0;
+	}
+
+	.slick-prev-btn.slick-arrow {
+		left: auto;
+		right: 35px;
+	}
+
+
+	.slick-arrow:hover {
+		background: $hover-color;
+		color: #fff;
+		border-color: $hover-color;
+	}
+
+
+}
+
+/*----------  07.1 End of Horizontal product slider  ----------*/
+
+
+
+/*----------  07.2 Tab horizontal product slider  ----------*/
+
+.horizontal-tab-section {
+	overflow: hidden;
+
+	.nav-tabs {
+		border-bottom: 3px solid #ddd;
+
+		a {
+			&.nav-link.active {
+				background: none;
+				border: none;
+				color: $hover-color;
+			}
+
+			&.nav-link {
+				font-weight: 800;
+				border: none;
+				font-size: 18px;
+
+				@media #{$large-mobile} {
+					font-size: 16px;
+				}
+
+				&:hover {
+					background: none;
+					border: none;
+				}
+			}
+
+		}
+
+
+
+	}
+
+	.horizontal-product-slider {
+		.slick-arrow {
+			top: -60px;
+		}
+	}
+
+}
+
+/*----------  07.2 End of Tab horizontal product slider  ----------*/
+
+
+/*----------  07.3 Two column horizontal product slider  ----------*/
+
+.horizontal-double-row-product-list{
+	.single-product{
+		margin-right: 10px;
+		&.slick-active{
+			margin-right: 0;
+		}
+		&.slick-current{
+			margin-right: 10px;
+		}
+	}
+}
+/*----------  07.3 End of Two column horizontal product slider  ----------*/
+
+/*----------  07.4 Vertical product slider  ----------*/
+
+.single-vertical-slider {
+	position: relative;
+
+	@media #{$tablet-device} {
+		margin-bottom: 2rem;
+	}
+
+	@media #{$large-mobile} {
+		margin-bottom: 2rem;
+	}
+
+	h2.vertical-slider-block-title {
+		font-size: 15px;
+		font-weight: 800;
+	}
+
+
+	.slick-arrow {
+		position: absolute;
+		top: -40px;
+		-webkit-transform: translateY(-50%);
+		transform: translateY(-50%);
+		right: 0;
+		width: 20px;
+		height: 20px;
+		background: #fff;
+		color: #333;
+		border: 1px solid #e5e5e5;
+		border-radius: 3px;
+		line-height: 20px;
+		font-size: 14px;
+		cursor: pointer;
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		text-align: center;
+		z-index: 8;
+	}
+
+
+
+	.slick-next-btn.slick-arrow {
+		left: auto;
+		right: 0;
+	}
+
+	.slick-prev-btn.slick-arrow {
+		left: auto;
+		right: 35px;
+	}
+
+
+	.slick-arrow:hover {
+		background: $hover-color;
+		color: #fff;
+		border-color: $hover-color;
+	}
+
+
+}
+
+/*----------  07.4 End of Vertical product slider  ----------*/
+
+
+/*----------  07.5 Vertical auto product slider  ----------*/
+
+
+/*----------  same as 07.4  ----------*/
+
+
+
+/*----------  07.5 End of Vertical auto product slider  ----------*/

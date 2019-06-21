@@ -1,0 +1,810 @@
+/*=============================================
+=            08. Product            =
+=============================================*/
+
+
+/*----------  Product badge style  ----------*/
+
+
+.new-badge {
+	position: relative;
+
+	&:before {
+		position: absolute;
+		top: 4%;
+		left: 4%;
+		color: white;
+		text-transform: uppercase;
+		width: 47px;
+		height: 47px;
+		text-align: center;
+		display: block;
+		line-height: 47px;
+		z-index: 1;
+		background: rgb(106, 212, 255);
+		border-radius: 70px;
+		content: "NEW";
+		font-weight: 800;
+	}
+}
+
+.sale-badge {
+	position: relative;
+
+	&:after {
+		position: absolute;
+		top: 4%;
+		right: 4%;
+		color: white;
+		text-transform: uppercase;
+		width: 47px;
+		height: 47px;
+		text-align: center;
+		display: block;
+		line-height: 47px;
+		z-index: 1;
+		background: rgb(255, 174, 0);
+		border-radius: 70px;
+		content: "SALE!";
+		font-weight: 800;
+	}
+}
+
+
+/*----------  08.1 Horizontal slider product  ----------*/
+
+.single-product-content {
+	text-align: center;
+	transition: 0.3s;
+	border: 1px solid transparent;
+	padding: 15px 15px 10px 15px;
+
+	.product-image {
+		position: relative;
+		margin-bottom: 15px;
+
+		a {
+			img {
+				margin: 0 auto;
+
+				&:nth-child(2) {
+					visibility: hidden;
+					opacity: 0;
+					display: none;
+
+				}
+			}
+
+			&:hover {
+				img {
+					&:nth-child(1) {
+						visibility: hidden;
+						opacity: 0;
+						display: none;
+						animation: changeImage 600ms ease;
+					}
+
+					&:nth-child(2) {
+						display: block;
+						visibility: visible;
+						opacity: 1;
+						animation: changeImage 600ms ease;
+
+					}
+				}
+			}
+		}
+
+		.image-btn {
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			margin-left: -30px;
+			visibility: hidden;
+			opacity: 0;
+			transition: 0.3s;
+
+			@media #{$tablet-device}{
+				visibility: hidden; 
+				opacity: 0;
+			}
+
+			@media #{$large-mobile}{
+				visibility: hidden;
+				opacity: 0;
+			}
+
+			a {
+				display: inline-block;
+				background-color: #eee;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				line-height: 30px;
+
+				&:hover {
+					background-color: $hover-color;
+					color: #ffffff;
+				}
+			}
+		}
+	}
+
+	.price-box {
+		border-bottom: 1px solid #ddd;
+		h4 {
+			color: #333;
+			font-weight: 600;
+		}
+	}
+
+	a.add-to-cart-btn {
+		display: block;
+		padding-top: 8px;
+		font-weight: 600;
+		color: #333;
+		visibility: hidden;
+		opacity: 0;
+
+
+		@media #{$tablet-device} {
+			visibility: hidden;
+			opacity: 0;
+		}
+
+		@media #{$large-mobile} {
+			visibility: hidden;
+			opacity: 0;
+		}
+
+		&:hover {
+			color: $hover-color;
+		}
+	}
+
+	&:hover {
+		box-shadow: 0 0 10px rgba(104, 89, 89, 0.2);
+		border: 1px solid #eee;
+
+		.image-btn {
+			visibility: visible;
+			opacity: 1;
+			animation: zoomIn 300ms ease;
+		}
+
+		a.add-to-cart-btn {
+			visibility: visible;
+			opacity: 1;
+			animation: zoomIn 300ms ease;
+		}
+	}
+}
+
+/*----------  08.1 End of Horizontal slider product  ----------*/
+
+
+/*----------  08.2 Vertical slider product  ----------*/
+
+.single-vertical-product {
+	background-color: #f4f4f4;
+	padding: 8px;
+	margin-bottom: 10px;
+	min-height: 110px; 
+
+	.product-image {
+		width: 40%;
+		margin-right: 8px;
+
+		@media #{$tablet-device} {
+			width: 30%;
+		}
+
+		@media #{$large-mobile} {
+			width: 30%;
+		}
+	}
+
+	.product-description h5 {
+		color: #333;
+		font-weight: 600;
+		margin-bottom: 5px;
+	}
+
+	.price-box h4 {
+		color: #333;
+		font-weight: 600;
+		margin-bottom: 5px;
+	}
+
+
+	.product-description {
+		a.add-to-cart-btn {
+			color: #333;
+			font-weight: 600;
+
+			&:hover {
+				color: $hover-color;
+			}
+		}
+
+		span.add-to-cart-disable-btn {
+			background-color: #ffffff;
+			border-color: #cccccc;
+			padding: 5px;
+			display: inline-block;
+			margin-top: 5px;
+			cursor: pointer;
+			font-weight: 600;
+			opacity: 0.3;
+		}
+	}
+
+
+}
+
+/*----------  08.2 End of Vertical slider product  ----------*/
+
+
+/*----------  08.3 Vertical auto slider product  ----------*/
+
+.single-auto-vertical-product {
+	min-height: 110px;
+	.product-image {
+		width: 40%;
+		margin-right: 10px;
+		a{
+			display: block;
+			border: 1px solid #eee;
+		}
+	}
+
+	.price-box {
+		h4 {
+			font-weight: 600;
+			color: #333;
+		}
+	}
+
+	h5.product-name {
+		a {
+			font-weight: 600;
+			color: #333;
+
+			&:hover {
+				color: $hover-color;
+			}
+		}
+	}
+}
+
+/*----------  End of  08.3 Vertical auto slider product   ----------*/
+
+
+/*----------  08.4 Latest product  ----------*/
+
+.single-latest-product {
+	background-color: #f4f4f4;
+	padding: 10px;
+	text-align: center;
+	position: relative;
+	transition: 0.3s;
+
+	@media #{$tablet-device} {
+		margin-bottom: 4rem;
+	}
+
+	@media #{$large-mobile} {
+		margin-bottom: 4rem;
+		padding: 20px;
+	}
+
+	.product-image {
+
+		margin-bottom: 10px;
+
+
+		a {
+			img {
+				&:nth-child(2) {
+					visibility: hidden;
+					opacity: 0;
+					display: none;
+				}
+			}
+
+			&:hover {
+				img {
+					&:nth-child(1) {
+						visibility: hidden;
+						opacity: 0;
+						display: none;
+						animation: changeImage 600ms ease;
+					}
+
+					&:nth-child(2) {
+						display: block;
+						visibility: visible;
+						opacity: 1;
+						animation: changeImage 600ms ease;
+
+					}
+				}
+			}
+		}
+	}
+
+	.product-description {
+		h5 {
+			color: #333;
+			margin-bottom: 10px;
+		}
+
+	}
+
+	.price-box {
+		h4 {
+			color: #333;
+			margin-bottom: 0;
+		}
+
+	}
+
+	.latest-product-hover-content {
+		position: absolute;
+		bottom: 20px;
+		left: 0;
+		width: 100%;
+		background: #f4f4f4;
+		padding: 5px;
+		visibility: hidden;
+		opacity: 0;
+		transition: 0.3s;
+
+		@media #{$tablet-device} {
+			visibility: hidden;
+			opacity: 0;
+			bottom: -40px;
+		}
+
+		@media #{$large-mobile} {
+			visibility: hidden;
+			opacity: 0;
+			bottom: -40px;
+		}
+
+		a {
+			font-weight: 600;
+			color: #333;
+			display: inline-block;
+			;
+			margin-bottom: 5px;
+
+			&:hover {
+				color: $hover-color;
+			}
+		}
+
+		p {
+			a {
+				font-weight: 400;
+
+				&:hover {
+					color: $hover-color;
+				}
+			}
+
+
+		}
+	}
+
+	&:hover {
+
+
+		.latest-product-hover-content {
+			visibility: visible;
+			opacity: 1;
+			bottom: 10px;
+
+			@media #{$tablet-device} {
+				visibility: hidden;
+				opacity: 0;
+				bottom: -40px;
+			}
+
+			@media #{$large-mobile} {
+				visibility: hidden;
+				opacity: 0;
+				bottom: -40px;
+			}
+		}
+
+	}
+}
+
+/*----------  08.4 End of Latest product  ----------*/
+
+
+/*----------  08.5 Related product  ----------*/
+
+.single-related-product-content {
+	text-align: center;
+	transition: 0.3s;
+	border: 1px solid transparent;
+	padding: 15px 15px 10px 15px;
+
+	.product-image {
+		position: relative;
+		margin-bottom: 15px;
+
+		a {
+			img {
+				&:nth-child(2) {
+					visibility: hidden;
+					opacity: 0;
+					display: none;
+
+				}
+			}
+
+			&:hover {
+				img {
+					&:nth-child(1) {
+						visibility: visible;
+						opacity: 1;
+						display: block;
+						animation: none;
+					}
+
+					&:nth-child(2) {
+						display: none;
+						visibility: hidden;
+						opacity: 0;
+						animation: none;
+
+					}
+				}
+			}
+		}
+
+		.image-btn {
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			margin-left: -30px;
+			visibility: hidden;
+			opacity: 0;
+			transition: 0.3s;
+
+			@media #{$tablet-device} {
+				visibility: hidden;
+				opacity: 0;
+			}
+
+			@media #{$large-mobile} {
+				visibility: hidden;
+				opacity: 0;
+			}
+
+			a {
+				display: inline-block;
+				background-color: #eee;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				line-height: 30px;
+
+				&:hover {
+					background-color: $hover-color;
+					color: #ffffff;
+				}
+			}
+		}
+	}
+
+	.price-box {
+		h4 {
+			color: #333;
+			font-weight: 600;
+		}
+	}
+
+	a.add-to-cart-btn {
+		display: block; 
+		padding-top: 8px;
+		font-weight: 600;
+		color: #333;
+		visibility: visible;
+		opacity: 1;
+		
+
+		@media #{$tablet-device} {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		@media #{$large-mobile} {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		&:hover {
+			color: $hover-color;
+		}
+	}
+
+	&:hover {
+		box-shadow: 0 0 10px rgba(104, 89, 89, 0.2);
+		border: 1px solid #eee;
+ 
+		.image-btn {
+			visibility: hidden;
+			opacity: 0;
+			animation: zoomIn 300ms ease;
+		}
+
+		a.add-to-cart-btn {
+			visibility: visible;
+			opacity: 1;
+			animation: none;
+		}
+	}
+}
+
+/*----------  End of 08.5 Related product  ----------*/
+
+
+/*=============================================
+=            08.6 Shop page grid product            =
+=============================================*/
+
+.shop-page-product {
+
+	.single-product-content {
+		.product-image {
+			@media #{$large-mobile} {
+				width: 80%;
+				margin: auto;
+			}
+
+			.image-btn {
+				@media #{$large-mobile} {
+					bottom: 15px;
+				}
+
+				width: 100px;
+				margin-left: -50px;
+			}
+		}
+
+	}
+
+
+
+}
+
+/*=====  End of 08.6 Shop page grid product  ======*/
+
+
+/*=============================================
+=            08.7 Shop page list product            =
+=============================================*/
+
+.single-list-product {
+
+	padding: 20px;
+	background: #f4f4f4;
+	border: 1px solid #eee;
+	display: flex;
+	align-items: flex-start;
+
+	@media #{$large-mobile} {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.list-product-image {
+		position: relative;
+		margin-bottom: 15px;
+		width: 410px;
+
+
+
+		@media #{$desktop-device} {
+			width: 350px;
+		}
+
+		@media #{$tablet-device} {
+			width: 650px;
+		}
+
+		@media #{$large-mobile} {
+			width: 100%;
+			margin: auto;
+			margin-bottom: 20px;
+		}
+
+		a {
+			img {
+				width: 100%;
+
+				&:nth-child(2) {
+					visibility: hidden;
+					opacity: 0;
+					display: none;
+				}
+			}
+
+			&:hover {
+				img {
+					&:nth-child(1) {
+						visibility: hidden;
+						opacity: 0;
+						display: none;
+						animation: changeImage 600ms ease;
+					}
+
+					&:nth-child(2) {
+						display: block;
+						visibility: visible;
+						opacity: 1;
+						animation: changeImage 600ms ease;
+
+					}
+				}
+			}
+		}
+
+		.image-btn {
+			position: absolute;
+			bottom: 20px;
+
+			
+
+			left: 50%;
+			width: 100px;
+			margin-left: -50px;
+			visibility: visible;
+			opacity: 1;
+			transition: 0.3s;
+
+
+			@media #{$tablet-device} {
+				visibility: visible;
+				opacity: 1;
+			}
+
+			@media #{$large-mobile} {
+				visibility: visible;
+				opacity: 1;
+			}
+
+			a {
+				display: inline-block;
+				background-color: #eee;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				line-height: 30px;
+				text-align: center;
+
+				&:hover {
+					background-color: $hover-color;
+					color: #ffffff;
+				}
+			}
+		}
+	}
+
+	.list-product-desc {
+		padding-left: 20px;
+
+
+		.price-box {
+			h4 {
+				color: #333;
+				font-weight: 600;
+			}
+		}
+
+		p.product-description {
+			margin-bottom: 0;
+		}
+
+		p.stock-status {
+			font-weight: 800;
+			color: #333;
+			margin-bottom: 15px;
+
+			span {
+
+				color: #fff;
+				padding: 5px 10px;
+				display: inline-block;
+			}
+
+			span.in-stock {
+				background-color: rgb(85, 198, 94);
+			}
+
+			span.out-of-stock {
+				background-color: red;
+			}
+		}
+
+		p.color {
+			font-weight: 800;
+			color: #333;
+
+			span.color-block {
+				width: 30px;
+				height: 30px;
+				display: inline-block;
+				margin-right: 5px;
+				margin-top: 10px;
+			}
+
+			span.color-choice-1{
+				background-color: rgb(214, 98, 56);
+			}
+			span.color-choice-2{
+				background-color: rgb(63, 196, 63);
+			}
+			span.color-choice-3{
+				background-color: rgb(67, 67, 204);
+			}
+
+			span.active {
+				border: 2px solid #ddd;
+				width: 32px;
+				height: 32px;
+			}
+		}
+
+		a.add-to-cart-btn {
+			color: #fff;
+			background-color: rgb(102, 102, 102);
+			display: inline-block;
+			padding: 10px 20px;
+			font-weight: 800;
+			text-transform: uppercase;
+			margin-bottom: 20px;
+
+			&:hover {
+				background-color: $hover-color;
+			}
+		}
+	}
+
+
+
+}
+
+/*=====  End of 08.7 Shop page list product  ======*/
+
+
+/* product animations */
+
+@keyframes zoomIn {
+	0% {
+		opacity: 0;
+		transform: scale(.3);
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes changeImage {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+/* End of product animations */
+
+/*=====  End of 08. Product  ======*/

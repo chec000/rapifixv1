@@ -1,0 +1,21 @@
+
+/*=============================================
+=            18. Store page            =
+=============================================*/
+
+.single-store{
+    max-width: 80%;
+    @media #{$large-mobile}{
+        max-width: 100%;
+    }
+    h3{
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+    p{
+        margin-bottom: 5px;
+    }
+}
+
+/*=====  End of 18. Store page  ======*/
+

@@ -1,0 +1,398 @@
+
+/*=============================================
+=            Modal            =
+=============================================*/
+
+/*----------  quick view modal style  ----------*/
+.quick-view-modal-container, .add-to-cart-modal-container{
+	.modal-header{
+		border-bottom: 0;
+		padding: 0.5rem 1rem 0 0;
+	}
+	.modal-dialog{
+		max-width: 900px;
+	}
+}
+
+/*=============================================
+=          01.  Quick view modal            =
+=============================================*/
+
+/*----------  product image slider  ----------*/
+
+
+.nav.single-slide-menu a {
+	display: block;
+	border: 1px solid #ededed;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.nav.single-slide-menu a img {
+	width: 100%;
+	border: 3px solid transparent;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.nav.single-slide-menu a.active img,
+.nav.single-slide-menu a:hover img{
+	border-color: #dbdbdb;
+}
+.single-product-menu {
+	margin: 15px 0;
+}
+.nav.single-slide-menu {
+	padding: 0 26px;
+}
+.single-tab-menu {
+	padding: 0 10px;
+}
+.single-slide-menu .slick-list {
+	width: 100%;
+}
+.slick-arrow {
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	left: 0;
+	width: 28px;
+	height: 28px;
+	background: #fff;
+	color: #333;
+	border: 1px solid #e5e5e5;
+	border-radius: 3px;
+	line-height: 26px;
+	font-size: 14px;
+	cursor: pointer;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	text-align: center;
+	z-index: 99;
+}
+
+.slick-next-btn.slick-arrow {
+	left: auto;
+	right: 0;
+}
+
+.slick-arrow:hover{
+	background: $hover-color;
+	color: #fff;
+	border-color: $hover-color;
+}
+
+
+/*----------  product option style  ----------*/
+
+.product-options{
+	h2.product-title{
+		text-transform: uppercase;
+		font-weight: 800;
+		color: #333;
+	}
+	p.condition{
+		margin-bottom: 10px;
+		span{
+			font-weight: 800;
+			color: #333;
+		}
+	}
+
+	h2.product-price{
+		font-weight: 800;
+		color: #333;
+	}
+
+	.social-share-buttons{
+		ul{
+			margin-bottom: 15px;
+			li{
+				display: inline-block;
+				@media #{$large-mobile}{
+                    margin-bottom: 5px;
+                }
+
+				a{
+					display: block;
+					border: 1px solid #ddd;
+					padding: 5px 10px;
+
+					@media #{$tablet-device}{
+						margin-bottom: 5px;
+					}
+					@media #{$large-mobile}{
+						margin-bottom: 5px;
+					}
+
+					i.fa{
+						margin-right: 5px;
+					}
+
+					i.fa-twitter{
+						color: $twitter-color;
+					}
+					i.fa-facebook{
+						color: $facebook-color;
+					}
+					i.fa-google-plus{
+						color: $google-plus-color;
+					}
+					i.fa-pinterest{
+						color: $pinterest-color;
+					}
+
+
+				}
+
+				&:hover{
+					a{
+						color: #fff;
+
+						i.fa{
+							color: #fff;
+						}
+					}
+					a.twitter{
+						background-color: $twitter-color;
+					}
+					a.facebook{
+						background-color: $facebook-color;
+					}
+					a.google-plus{
+						background-color: $google-plus-color;
+					}
+					a.pinterest{
+						background-color: $pinterest-color;
+					}
+				}
+			}
+		}
+	}
+
+	p.stock-details{
+		font-weight: 800;
+		color: #333;
+		margin-bottom: 15px;
+
+		span{
+			
+			color: #fff;
+			padding: 5px 10px;
+			display: inline-block;
+			margin-left: 15px;
+		}
+
+		span.in-stock{
+			background-color: rgb(85, 198, 94);
+		}
+		span.out-of-stock{
+			background-color: red;
+		}
+	}
+
+	p.quantity{
+		font-weight: 800;
+		color: #333;
+		margin-bottom: 15px;
+
+		input{
+			margin-left: 10px;
+			width: 20%;
+			padding: 5px;
+			border: 1px solid #ddd;
+		}
+
+		span.counter{
+			margin-left: 5px;
+			a{
+				border: 1px solid #ddd;
+				padding: 5px 10px;
+				color: #bbb;
+				&:hover{
+					background-color: #bbb;
+					color: #333;
+				}
+			}
+		}
+	}
+
+	p.size{
+		font-weight: 800;
+		color: #333;
+
+		select{
+			width: 45%;
+			border: 1px solid #ddd;
+			padding: 5px;
+			margin-top: 5px;
+		}
+	}
+
+	p.color{
+		font-weight: 800;
+		color: #333;
+
+		span.color-block{
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			margin-right: 5px;
+			margin-top: 10px;
+		}
+
+		span.color-choice-1{
+			background-color: rgb(214, 98, 56);
+		}
+		span.color-choice-2{
+			background-color: rgb(63, 196, 63);
+		}
+		span.color-choice-3{
+			background-color: rgb(67, 67, 204);
+		}
+
+		span.active{
+			border: 2px solid #ddd;
+			width: 32px;
+			height: 32px;
+		}
+	}
+
+	a.add-to-cart-btn{
+		color: #fff;
+		background-color: rgb(102, 102, 102);
+		display: inline-block;
+		padding: 10px 20px;
+		font-weight: 800;
+		text-transform: uppercase;
+		margin-bottom: 20px;
+
+		&:hover{
+			background-color: $hover-color;
+		}
+	}
+
+
+}
+/*=====  End of 01. Quick view modal  ======*/
+
+
+
+/*=============================================
+=          02.  Add to cart modal            =
+=============================================*/
+
+
+.cart-product-short-desc{
+	border-right: 1px solid #ddd;
+
+	@media #{$large-mobile}{
+		border-right: 0;
+		margin-bottom: 15px; 
+	}
+	width: 100%;
+	h2.cart-success-message{
+		color: #46a74e;
+		position: relative;
+		padding-left: 30px;
+		margin-bottom: 25px;
+		font-size: 25px;
+
+		&:before{
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-family: fontAwesome;
+			content: "\f00c";
+		}
+	}
+
+	.product-image{
+		border: 1px solid #ddd;
+		max-width: 160px;
+		margin-right: 1rem;
+	}
+
+	.product-desc{
+		padding-top: 30px;
+		h4, p{
+			margin-bottom: 10px;
+		}
+
+		p.color-size{
+			margin-bottom: 0;
+		}
+
+		p.quantity, p.total-amount{
+			span{
+				font-weight: 800;
+				color: #333;
+			}
+		}
+	}
+}
+
+.cart-product-calculation{
+	h2.cart-info-message{
+		margin-bottom: 25px;
+		font-size: 25px;
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 25px;
+	}
+
+	p{
+		span{
+			font-weight: 800;
+			color: #333;
+		}
+	}
+
+	.product-calculations{
+		margin-bottom: 30px;
+	}
+
+
+}
+
+.cart-modal-buttons {
+	a{
+		font-size: 14px;
+		font-weight: 800;
+		display: inline-block;
+		padding: 10px 20px;
+
+		@media #{$tablet-device}{
+			margin-bottom: 15px;
+		}
+
+		@media #{$large-mobile}{
+			margin-bottom: 15px;
+		}
+
+	}
+
+	a.continue-shopping-btn{
+		border: 1px solid #ddd;
+		color: #333;
+		margin-right: 5px;
+		&:hover{
+			box-shadow: 0 0 10px #ddd;
+		}
+	}
+
+	a.proceed-checkout-btn{
+		background-color: #666666;
+		color: #fff;
+		&:hover{
+			background-color: $hover-color;
+
+		}
+	}
+}
+
+
+/*=====  02. End of Add to cart modal  ======*/
+
+
+
+/*=====  End of modal styles  ======*/
+

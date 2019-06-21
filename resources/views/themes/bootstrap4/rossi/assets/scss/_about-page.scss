@@ -1,0 +1,96 @@
+
+/*=============================================
+=            14.about page            =
+=============================================*/
+
+.about-single-block{
+
+    @media #{$large-mobile}{
+        margin-bottom: 30px;
+    }
+    h2{
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    p.bold-text{
+        font-weight: 800;
+        color: #333;
+    }
+
+    .featured-points{
+        ul{
+            li{
+                font-weight: 800;
+                border-bottom: 1px solid #46a74e;
+                color: #46a74e;
+                padding-bottom: 10px;
+                padding-left: 20px;
+                margin-bottom: 5px;
+                position: relative;
+
+                &:before{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: "\f00c";
+                    font-family: fontAwesome;
+                    color: #46a74e;
+
+                }
+            }
+        }
+    }
+
+    .about-team-image{
+        margin-bottom: 15px;
+    }
+
+    .single-testimonial{
+        margin-bottom: 30px;
+        
+
+        p{
+            border: 1px solid #ddd;
+            background: linear-gradient(to bottom,#fbfbfb 0,#fefefe 100%);
+            padding: 10px;
+            position: relative;
+            margin-bottom: 5px;;
+
+            i.fa{
+                color: #ddd;
+                font-size: 12px;
+            }
+
+            &:before{
+                position: absolute;
+                bottom: -10px;
+                left: 10px;
+                background: url('../images/testimon-after.gif');
+                content: "";
+                width: 10px;
+                height: 10px;
+                background-repeat: no-repeat;
+                background-size: cover;
+
+            }
+
+            &.customer-name{
+                border: none;
+                background: none;
+                font-weight: 800;
+                padding-left: 25px;
+                &:before{
+                    background: none;
+                }
+            }
+        }
+    }
+}
+
+/*=====  End of 14.about page   ======*/
+
+
+
+
+

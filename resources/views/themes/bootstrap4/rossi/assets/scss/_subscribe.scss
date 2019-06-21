@@ -1,0 +1,225 @@
+
+/*=============================================
+=            11. Subscribe            =
+=============================================*/
+
+.newsletter-container{
+	padding: 20px 10px;
+}
+
+
+/*----------  Newsletter input box  ----------*/
+
+
+.newsletter-text{
+
+	@media #{$large-mobile}{
+		margin-bottom: 1rem;
+	}
+
+	h2{
+		color: #ffffff;
+		text-transform: uppercase;
+		margin-right: 20px;
+		margin-bottom:0;
+		span{
+			display: block;
+			font-size: 13px;
+			text-transform: capitalize;
+			font-weight: 400;
+
+		}
+	}
+}
+
+.newsletter-input{
+	.subscribe-form {
+		width: 100%;
+	}
+	@media #{$large-mobile}{
+		margin-bottom: 1rem;
+	}
+
+	
+	width: 65%;
+
+	@media #{$large-mobile}{
+		width: 100%;
+	}
+
+	.input-group{
+		height: 50px;
+
+		@media #{$large-mobile}{
+			height: 50px;
+		}
+
+		.input-group-append{
+			width: 100%;
+			border: 2px solid #ddd;
+
+			input[type="email"]{
+				border: none;
+				background: none;
+				color: #ffffff;
+				width: 75%;
+				border-right: 2px solid #ddd;
+				height: 100%;
+				padding-left: 15px;
+				padding-right: 15px;
+
+				@media #{$small-mobile}{
+					width: 60%;
+					padding-left: 10px;
+				}
+
+		&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: #ffffff;
+    		opacity: 1; /* Firefox */
+    	}
+    }
+
+    button{
+    	width: 24%;
+    	background: none;
+    	border: none;
+    	color: #ffffff;
+    	font-weight: 600;
+
+    	&:hover{
+    		color: $hover-color;
+    	}
+    }
+
+}
+}
+
+
+
+}
+
+
+/*----------  newsletter social icon list  ----------*/
+
+
+.social-icons{
+
+	ul{
+
+		@media #{$large-mobile}{
+			text-align: left;
+		}
+
+
+		@media #{$tablet-device}{
+			text-align: left;
+			margin-top: 15px;
+		}
+		li{
+			display: inline-block;
+			margin-left: 5px;
+			@media #{$tablet-device}{
+				&:first-child{
+					margin-left: 0;
+				}
+			}
+			position: relative;
+			a{
+				display: block;
+				width: 40px;
+				height: 40px;
+				background-color: #cdcdcd;
+				color: #ffffff;
+				font-size: 20px;
+				text-align: center;
+				line-height: 40px;
+				transition: 0.3s;
+
+				@media #{$small-mobile}{
+					width: 30px;
+					height: 30px;
+					font-size: 15px;
+					line-height: 30px;
+				}
+			}
+
+			span{
+				position: absolute;
+				top:0;
+				left: 50%;
+				background: $hover-color;
+				color: #ffffff;
+				padding: 2px 3px;
+				width: 70px;
+				text-align: center;
+				margin-left: -40px;
+				text-transform: capitalize;
+				visibility: hidden;
+				opacity: 0;
+				transition: 0.3s;
+
+				&:after{
+					position: absolute;
+					width: 0; 
+					height: 0; 
+					border-left: 6px solid transparent;
+					border-right: 6px solid transparent;
+					border-top: 6px solid $hover-color;
+					bottom:-5px;
+					left: 50%;
+					margin-left: -3px;
+					content: "";
+				}
+			}
+
+			a.facebook-link{
+				&:hover{
+					background: $facebook-color;
+				}
+			}
+			a.twitter-link{
+				&:hover{
+					background: $twitter-color;
+				}
+			}
+			a.rss-link{
+				&:hover{
+					background: $rss-color;
+				}
+			}
+			a.skype-link{
+				&:hover{
+					background: $skype-color;
+				}
+			}
+			a.dribbble-link{
+				&:hover{
+					background: $dribbble-color;
+				}
+			}
+
+			&:hover{
+				span{
+					visibility: visible;
+					opacity: 1;
+					top: -30px;
+				}
+			}
+		}
+	}
+
+
+}
+
+
+.mailchimp-alerts {
+    color: #fff;
+    margin: 5px 0;
+}
+
+
+
+/*=====  End of 11. Subscribe  ======*/
+
+
+

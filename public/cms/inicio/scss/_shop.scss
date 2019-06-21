@@ -1,0 +1,320 @@
+/*=============================================
+=            17. Shop page            =
+=============================================*/
+
+.shop-page-header {
+    margin-bottom: 15px;
+
+    h2 {
+        text-transform: uppercase;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-weight: 800;
+        color: #333;
+        margin-bottom: 0;
+        margin-right: 15px;
+
+        @media #{$large-mobile}{
+            margin-bottom: 15px;
+        }
+
+        span {
+            font-weight: 400;
+        }
+    }
+
+    .view-mode-icons {
+        a {
+            display: inline-block;
+            margin-right: 10px;
+
+            i.fa {
+                font-size: 25px;
+            }
+
+            span {
+                display: block;
+                font-size: 10px;
+                text-align: center;
+            }
+
+            &.active {
+                color: #333;
+            }
+
+            &:hover {
+                color: #333;
+            }
+        }
+    }
+
+    .product-showing {
+        select {
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+    }
+
+    .product-sort {
+        p {
+            margin-right: 0;
+        }
+
+        select {
+            width: 150px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            margin-right: 0;
+        }
+    }
+}
+
+
+.shop-page-pagination-section {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+
+    @media #{$tablet-device} {
+        flex-direction: column;
+        justify-content: left;
+
+    }
+
+    @media #{$large-mobile} {
+        flex-direction: column;
+        justify-content: left;
+
+    }
+}
+
+.search-result {
+    width: 20%;
+
+    @media #{$tablet-device} {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    @media #{$large-mobile} {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+}
+
+.pagination-container {
+    width: 50%;
+
+    @media #{$tablet-device} {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    @media #{$large-mobile} {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    ul {
+        li {
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            margin-right: 2px;
+
+            &.previous,
+            &.next {
+                font-weight: 800;
+                font-size: 14px;
+                border: none;
+                padding: 0;
+                margin-top: 5px;
+
+                i.fa {
+                    font-weight: 800;
+                    font-size: 16px;
+                    padding: 0 5px;
+                }
+            }
+
+            &.previous {
+                margin-right: 15px;
+
+                @media #{$small-mobile} {
+                    margin-right: 5px;
+                }
+            }
+
+            &.next {
+                margin-left: 15px;
+
+                @media #{$small-mobile} {
+                    margin-right: 5px;
+                }
+            }
+
+            &.active {
+                background-color: #f6f6f6;
+
+                a {
+                    color: #333;
+                }
+
+            }
+
+            &.dots {
+                border: none;
+            }
+
+            &.disabled {
+                a {
+                    color: #b1b1b1;
+                }
+
+            }
+        }
+    }
+}
+
+.pagination-buttons {
+    text-align: right;
+
+    width: 32%;
+
+    @media #{$tablet-device} {
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: left;
+    }
+
+    @media #{$large-mobile} {
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: left;
+    }
+
+    a {
+        width: auto;
+    }
+
+    a.show-all-btn {
+        color: #333333;
+        font-weight: bold;
+        border: 1px solid;
+        border-color: #cacaca #b7b7b7 #9a9a9a #b7b7b7;
+        text-shadow: 1px 1px white;
+        font-size: 13px;
+        padding: 3px 5px 4px 5px;
+        line-height: normal;
+        background: linear-gradient(to bottom, #f7f7f7 0, #ededed 100%);
+
+        margin-right: 40px;
+
+        @media #{$desktop-device} {
+            margin-right: 0;
+        }
+
+        &:hover {
+            border-color: #9e9e9e #c2c2c2 #c8c8c8 #c2c2c2;
+        }
+    }
+
+    a.compare-btn {
+        font-size: 17px;
+        line-height: 21px;
+        color: white;
+        font-weight: bold;
+        background: #666666;
+        border: 1px solid;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        -webkit-transition: all 300ms ease;
+        -moz-transition: all 300ms ease;
+        -ms-transition: all 300ms ease;
+        -o-transition: all 300ms ease;
+        transition: all 300ms ease;
+        display: inline-block;
+        padding: 10px 10px 10px 14px;
+        border-color: #fff;
+        outline: 2px solid #666666;
+
+
+    }
+}
+
+.shop-product-wrap {
+    &.grid {
+        .single-list-product {
+            display: none;
+        }
+    }
+
+    &.list {
+        .single-grid-product {
+            display: none;
+        }
+    }
+}
+
+
+.shop-product-wrap.list {
+
+    [class*="col"],
+    [class*="col-"] {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 0 100%;
+        flex: 1 0 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+
+.shop-product-wrap.five-column {
+
+    [class*="col-xl-five"] {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 0 20%;
+        flex: 1 0 20%;
+        width: 20%;
+        max-width: 20%;
+
+        @media #{$tablet-device} {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 0 33.3333%;
+            flex: 1 0 33.3333%;
+            width: 33.3333%;
+            max-width: 33.3333%;
+        }
+
+        @media #{$large-mobile} {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 0 100%;
+            flex: 1 0 100%;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+
+}
+
+
+a.store-btn {
+    background: #6f6f6f;
+    color: #fff;
+    padding: 10px 10px;
+    display: inline-block;
+    font-weight: 800;
+
+    &:hover {
+        background: #333;
+    }
+}
+
+
+/*=====  End of 17. Shop page  ======*/

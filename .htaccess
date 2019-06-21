@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine On
+   RewriteRule ^(.*)$ public/$1 [L]
+
+</IfModule>
+ServerSignature Off
+#ServerTokens PROD
+<ifmodule mod_headers.c>
+   Header unset Server
+   Header unset X-Powered-By
+</ifmodule>

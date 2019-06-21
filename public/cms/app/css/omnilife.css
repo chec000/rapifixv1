@@ -1,0 +1,37 @@
+.products-page.inner {
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    margin-bottom: -3px;
+    margin-left: 5px;
+    border-radius: 2px;
+    background-image: radial-gradient(circle at 33% 0, #8aeeff, #24c0db 40%);
+}
+
+/* Omnilife */
+
+.products-page.inner.theme--balancedLife {
+    background: #39bdac !important;
+}
+
+.products-page.inner.theme--activeLife {
+    background: #ed1d25 !important;
+}
+
+.products-page.inner.theme--strongLife {
+    background: #f7941e !important;
+}
+
+.products-page.inner.theme--complement {
+    background: #00afcb !important;
+}
+
+.products-page.inner.theme--systems {
+    background: #00afcb;
+}
+
+/* General */
+
+.products-page.inner.theme--neutral {
+    background: #fff !important;
+}
