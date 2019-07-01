@@ -21,6 +21,7 @@ class ShoppingCartController extends Controller {
     }
 
     public function addOneItem(Request $request) {
+    //hola
         ShoppingCart::createSession();
         $item    = $request->all();
         $newItem = ShoppingCart::addItem($item);
