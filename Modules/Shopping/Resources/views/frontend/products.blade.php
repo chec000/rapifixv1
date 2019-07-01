@@ -1,218 +1,729 @@
 {!! PageBuilder::section('head', [
-    'title' => trans('shopping::products.products')
+    'categories' => $categories,
+    'cart'=>$cart
 ]) !!}
+<div class="homepage-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-50">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4">
+                        <!-- Header category list -->
+                        <div class="hero-side-category">
+                            <!-- Category Toggle Wrap -->
+                            <div class="category-toggle-wrap">
+                                <!-- Category Toggle -->
+                                <button class="category-toggle">Categories <i class="ti-menu"></i></button>
+                            </div>
+                            <!-- Category Menu -->
+                            <nav class="category-menu mb-40">
+                                <ul>
+                                    @foreach ($categories as $c)
+                                        <li><a href="{{route('category.products', ['id' => $c->id])}}">{{$c->name}}</a></li>
 
-<div class="products-page general">
-    <div class="wrapper full-size-mobile"><h1 class="products-maintitle">@lang('shopping::products.categories.title')</h1>
-        <!-- products -->
-        @php $i = 1; @endphp
-        @foreach ($categories as $category)
-            <div class="products-block">
-                <div class="products-desc wrapper">
-                    @php
-                        $categoryRoute = '#';
-                        if (!empty($category->slug)) {
-                            $categoryRoute = route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'category']), $category->slug);
-                        }
-                    @endphp
+                                @endforeach
+                                <!--
+                                                        <li class="menu-item-has-children"><a href="shop-left-sidebar.html">Tennis</a>
 
-                    <a href="{{ $categoryRoute }}"><h1 class="products-desc__title purple">{{ $category->name }}</h1></a>
-                    <p class="products-desc__description">{{ $category->description }}</p>
+                                                            <ul class="category-mega-menu">
+                                                                <li class="menu-item-has-children">
+                                                                    <a class="megamenu-head" href="shop-left-sidebar.html">Dresses</a>
+                                                                    <ul>
+                                                                        <li><a href="shop-left-sidebar.html">Coctail</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Day</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Evening</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Sports</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li class="menu-item-has-children">
+                                                                    <a class="megamenu-head" href="shop-left-sidebar.html">Shoes</a>
+                                                                    <ul>
+                                                                        <li><a href="shop-left-sidebar.html">Coctail</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Day</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Evening</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Sports</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li class="menu-item-has-children">
+                                                                    <a class="megamenu-head" href="shop-left-sidebar.html">Handbags</a>
+                                                                    <ul>
+                                                                        <li><a href="shop-left-sidebar.html">Coctail</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Day</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Evening</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Sports</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
 
-                    <a class="button small" href="{{ $categoryRoute }}">@lang('shopping::products.see_all')</a>
-                </div>
 
-                <div class="products slider" id="products-slider{{ $i }}">
-                    <div class="products__wrap slider__wrap">
-                        @foreach ($products[$category->id] as $countryProduct)
-                            @if (($countryProduct->product->is_kit == 0 && showCountryProduct($countryProduct)) || showCountryProductByIP($countryProduct))
-                                <div class="product slider__item">
-                                    @php
-                                        $productRoute = '#';
-                                        if (!empty($countryProduct->slug)) {
-                                            $productRoute = route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'detail']), [($countryProduct->slug . '-' . $countryProduct->product->sku)]);
-                                        }
-                                    @endphp
+                                                        </li>
+                                                        <li class="menu-item-has-children"><a href="shop-left-sidebar.html">Basketball</a>
 
-                                    <a class="product__link" href="{{ $productRoute }}">
-                                        <h3 class="product__name">{{ $countryProduct->name }}</h3>
-                                        <figure class="product__image">
-                                            <img src="{{ asset($countryProduct->image) }}" alt=""/>
-                                        </figure>
-                                        <p class="product__description">{{ str_limit2($countryProduct->description, 74) }}</p>
-                                        <span class="product__nums">
-                                            @if (show_price())
-                                                <span class="product__price">{{ currency_format($countryProduct->price, $currency) }}</span>
-                                            @endif
+                                                            <ul class="category-mega-menu">
+                                                                <li class="menu-item-has-children">
+                                                                    <a class="megamenu-head" href="shop-left-sidebar.html">Dresses</a>
+                                                                    <ul>
+                                                                        <li><a href="shop-left-sidebar.html">Coctail</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Day</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Evening</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Sports</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li class="menu-item-has-children">
+                                                                    <a class="megamenu-head" href="shop-left-sidebar.html">Shoes</a>
+                                                                    <ul>
+                                                                        <li><a href="shop-left-sidebar.html">Coctail</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Day</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Evening</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Sports</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li class="menu-item-has-children">
+                                                                    <a class="megamenu-head" href="shop-left-sidebar.html">Handbags</a>
+                                                                    <ul>
+                                                                        <li><a href="shop-left-sidebar.html">Coctail</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Day</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Evening</a></li>
+                                                                        <li><a href="shop-left-sidebar.html">Sports</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
 
-                                            @if (show_points())
-                                                <span class="product__pts">{{ $countryProduct->points }} @lang('shopping::products.pts')</span>
-                                            @endif
-                                        </span>
-                                    </a>
+                                                        </li>
+                                                        <li><a href="shop-left-sidebar.html">Cricket</a></li>
+                                                        <li><a href="shop-left-sidebar.html">Baseball</a></li>
+                                                        <li><a href="shop-left-sidebar.html">Skateboarding</a></li>
+                                                        <li><a href="shop-left-sidebar.html">Accessories</a></li>
+                                                        <li><a href="shop-left-sidebar.html">Footwear</a></li>
+                                                        <li><a href="shop-left-sidebar.html">Badminton</a></li>
+                            -->
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- end of Header category list -->
+                    </div>
+                    <div class="col-lg-9 col-md-8">
+                        <!-- ======  Hero slider content  ======= -->
 
-                                    @if (show_add_to_car())
-                                        <footer class="product__f">
-                                            <div class="product__sep"></div>
-                                            <button class="button clean" type="button" onclick="ShoppingCart.add('{{ $countryProduct->id }}', 1)">@lang('shopping::products.add_to_car')</button>
-                                        </footer>
-                                    @endif
+                        <div class="hero-slider hero-slider-one">
+                            <!-- Hero Item Start -->
+                            <div class="hero-item hero-bg-1">
+                                <div class="row align-items-center justify-content-between">
+                                    <!-- Hero Content -->
+                                    <div class="hero-content col-md-8 offset-md-4 col-sm-12 offset-sm-0">
+                                        <h1>THE WINTER</h1>
+                                        <h2><span>SPORT WINTER</span></h2>
+                                        <p>This is Photoshops version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean
+                                            sollicitudin, lorem quis</p>
+                                        <a href="shop-left-sidebar.html">shop now</a>
+                                    </div>
                                 </div>
-                            @endif
+                            </div><!-- Hero Item End -->
+
+                            <!-- Hero Item Start -->
+                            <div class="hero-item hero-bg-2">
+                                <div class="row align-items-center justify-content-between">
+                                    <!-- Hero Content -->
+                                    <div class="hero-content col-md-8 offset-md-4 col-sm-12 offset-sm-0">
+                                        <h1>THE WINTER</h1>
+                                        <h2><span>SPORT WINTER</span></h2>
+                                        <p>This is Photoshops version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean
+                                            sollicitudin, lorem quis</p>
+                                        <a href="shop-left-sidebar.html">shop now</a>
+                                    </div>
+                                </div>
+                            </div><!-- Hero Item End -->
+                        </div>
+
+                        <!-- ====  End of Hero slider content  ==== -->
+
+                        <!-- ======  Featured service content  ======= -->
+
+                        <div class="featured-service-container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6">
+                                    <!-- single-feature -->
+                                    <div class="single-featured-service featured-service-bg-1">
+                                        <div class="single-featured-service-content">
+                                            <h3>Lorem ipsum dolor.</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing </p>
+                                            <a href="shop-left-sidebar.html">View Collection</a>
+                                        </div>
+                                    </div>
+                                    <!-- end of single feature -->
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <!-- single-feature -->
+                                    <div class="single-featured-service featured-service-bg-2">
+                                        <div class="single-featured-service-content">
+                                            <h3>Lorem ipsum dolor.</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing </p>
+                                            <a href="shop-left-sidebar.html">View Collection</a>
+                                        </div>
+                                    </div>
+                                    <!-- end of single feature -->
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <!-- single-feature -->
+                                    <div class="single-featured-service featured-service-bg-3">
+                                        <div class="single-featured-service-content">
+                                            <h3>Lorem ipsum dolor.</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing </p>
+                                            <a href="shop-left-sidebar.html">View Collection</a>
+                                        </div>
+                                    </div>
+                                    <!-- end of single feature -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- ====  End of Featured service content  ==== -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 mb-50">
+
+                        <!-- ======  Homepage sidebar  ======= -->
+
+                        <div class="homepage-sidebar">
+                            <!-- vertical auto slider container -->
+                            @foreach ($categories as $c)
+                                <div class="sidebar">
+                                    <h2 class="block-title">{{$c->name}}</h2>
+                                    <div class="vertical-product-slider-container">
+                                        <div class="single-vertical-slider">
+                                            <div class="vertical-auto-slider-product-list">
+                                                <!-- single vertical product -->
+
+
+                                                @foreach ($c->products as $p)
+
+                                                    <div class="single-auto-vertical-product d-flex">
+                                                        <div class="product-image">
+                                                            <a href="single-product-variable.html">
+                                                                <img src="{{$p->image}}" class="img-fluid" alt=""></a>
+                                                        </div>
+                                                        <div class="product-description">
+                                                            <h5 class="product-name">
+                                                                <a href="single-product-variable.html">
+                                                                    {{$p->name}}
+                                                                </a></h5>
+                                                            <div class="price-box">
+                                                                <h4>{{$p->price}}</h4>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                            @endforeach
+
+                                            <!-- end of single vertical product -->
+                                                <!-- single vertical product -->
+
+                                                <!-- end of single vertical product -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         @endforeach
 
-                        @if (show_disclaimer())
-                            @if (\App\Helpers\SessionHdl::hasEo())
-                                <p class="disclaimer theme--white">@lang('shopping::products.disclaimer_eo')</p>
-                            @else
-                                <p class="disclaimer theme--white">@lang('shopping::products.disclaimer')</p>
-                            @endif
-                        @endif
+
+                        <!-- end of vertical auto slider container -->
+
+                            <!-- homepage sidebar banner -->
+                            <div class="sidebar">
+                                <div class="homepage-sidebar-banner-container">
+                                    <a href="shop-left-sidebar.html">
+                                        <img src="assets/images/banners/banner-left.jpg" class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end of homepage sidebar banner -->
+
+                            <!-- vertical auto slider container -->
+                            <div class="sidebar">
+                                <h2 class="block-title">LATEST PRODUCTS</h2>
+                                <div class="vertical-product-slider-container">
+                                    <div class="single-vertical-slider">
+                                        <div class="vertical-auto-slider-product-list">
+                                            <!-- single vertical product -->
+                                            <div class="single-auto-vertical-product d-flex">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html"><img src="assets/images/products/1.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end of single vertical product -->
+                                            <!-- single vertical product -->
+                                            <div class="single-auto-vertical-product d-flex">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html"><img src="assets/images/products/2.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- end of single vertical product -->
+                                            <!-- single vertical product -->
+                                            <div class="single-auto-vertical-product d-flex">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html"><img src="assets/images/products/3.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- end of single vertical product -->
+                                            <!-- single vertical product -->
+                                            <div class="single-auto-vertical-product d-flex">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html"><img src="assets/images/products/4.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- end of single vertical product -->
+                                            <!-- single vertical product -->
+                                            <div class="single-auto-vertical-product d-flex">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- end of single vertical product -->
+                                            <!-- single vertical product -->
+                                            <div class="single-auto-vertical-product d-flex">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- end of single vertical product -->
+                                            <!-- single vertical product -->
+                                            <div class="single-auto-vertical-product d-flex">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html"><img src="assets/images/products/7.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- end of single vertical product -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of vertical auto slider container -->
+                        </div>
+
+                        <!-- ====  End of Homepage sidebar  ==== -->
+
+                    </div>
+                    <div class="col-lg-9 col-md-8 mb-50">
+
+                        <div class="homepage-main-content">
+                            <!-- horizontal product slider -->
+
+                            @foreach ($categories as $c)
+
+                                <div class="horizontal-product-slider">
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <!-- Block title -->
+                                            <div class="block-title">
+                                                <h2><a href="#">{{$c->name}}</a></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <!-- horizontal product slider container -->
+                                            <div class="horizontal-product-list">
+                                                <!-- single product -->
+
+                                                @foreach ($c->products as $p)
+                                                    <div class="single-product">
+                                                        <div class="single-product-content">
+                                                            <div class="product-image new-badge">
+                                                                <a href="single-product-variable.html">
+                                                                    <img src="{{$p->image}}" class="img-fluid" alt="">
+
+                                                                </a>
+                                                                <div class="image-btn">
+
+
+                                                                    <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
+                                                                    <a href="#"><i class="fa fa-heart-o"></i></a>
+
+                                                                </div>
+                                                            </div>
+                                                            <h5 class="product-name"><a href="single-product-variable.html">{{$p->name}}</a></h5>
+                                                            <div class="price-box">
+                                                                <h4>{{$p->price}}</h4>
+                                                            </div>
+                                                            <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">                                                                    add to car
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </span>
+                                                            <!--
+                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
+                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                        -->
+                                                        </div>
+                                                    </div>
+                                            @endforeach
+
+
+                                            <!-- end of single product -->
+
+
+                                            </div>
+                                            <!-- end of horizontal product slider container -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of horizontal product slider -->
+
+                                <!-- homepage double banner section -->
+                                <div class="homepage-banners mb-50">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 mb-20 mb-lg-0">
+                                            <!-- ======  Homepage single split banner  ======= -->
+
+                                            <div class="single-banner-container">
+                                                <a href="shop-left-sidebar.html">
+                                                    <img src="assets/images/banners/banner1.png" class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+
+                                            <!-- ====  End of Homepage single split banner  ==== -->
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <!-- ======  Homepage single split banner  ======= -->
+
+                                            <div class="single-banner-container">
+                                                <a href="shop-left-sidebar.html">
+                                                    <img src="assets/images/banners/banner2.png" class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+
+                                            <!-- ====  End of Homepage single split banner  ==== -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                        @endforeach
+
+                        <!-- end of homepage double banner section -->
+
+                            <!-- horizontal product slider -->
+
+                            <!-- end of horizontal product slider -->
+
+                            <!-- vertical slider container -->
+                            <div class="vertical-product-slider-container">
+                                <div class="row">
+                                    @foreach ($categories as $c)
+                                        <div class="col-lg-4">
+                                            <!-- ======  single vertical product slider  ======= -->
+
+                                            <div class="single-vertical-slider">
+                                                <h2 class="block-title vertical-slider-block-title">{{$c->name}}</h2>
+                                                <div class="vertical-product-list">
+                                                    <!-- single vertical product -->
+
+                                                    @foreach ($c->products as $p)
+                                                        <div class="single-vertical-product d-flex">
+                                                            <div class="product-image">
+                                                                <a href="#"><img src="{{$p->image}}" class="img-fluid" alt=""></a>
+                                                            </div>
+                                                            <div class="product-description">
+                                                                <h5 class="product-name">
+                                                                    <a href="single-product-variable.html">{{$p->name}} </a></h5>
+                                                                <div class="price-box">
+                                                                    <h4>{{$p->price}}</h4>
+                                                                </div>
+                                                                <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">                                                                    add to car
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </span>
+
+                                                                <!-- end of single vertical product
+                                                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container">
+                                                                    Add to cart</a>
+
+
+                                                                -->
+
+                                                            </div>
+                                                        </div>
+                                                @endforeach
+                                                <!-- end of single vertical product -->
+                                                    <!-- single vertical product -->
+
+                                                    <!-- end of single vertical product -->
+                                                </div>
+                                            </div>
+
+                                            <!-- ====  End of single vertical product slider  ==== -->
+
+                                        </div>
+
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- end of vertical slider container -->
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- homepage wide banner section -->
 
-            @php $i++; @endphp
-        @endforeach
-        <!-- end products -->
-
-        @if ($systems->count() > 0)
-            <!-- system -->
-            @if ($systems->first() != null)
-                @php
-                    $hasFirstProduct = false;
-                @endphp
-                @foreach ($systems as $system)
-                    @php
-                        if ($system->hasProducts && !$hasFirstProduct) {
-                            $description = $system->description;
-                            $benefits    = $system->benefit;
-                            $banner      = $system->image;
-                            $link        = $system->link_banner_two;
-                            $price       = $system->systemPrice;
-                            $url         = route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'system']), $system->slug);
-                            $systemId    = $system->id;
-                            $hasFirstProduct = true;
-                        }
-                    @endphp
-                @endforeach
-            @endif
-
-            @if ($hasFirstProduct)
-            <div id="systems" class="products-block sistem has-dropdown">
-                <div id="productsCategory" class="products-desc banner withbg mid wrapper">
-                    <h1 class="products-desc__title">@lang('shopping::products.systems.systems')</h1>
-                    <div class="tools__form-group">
-                        <div class="select select--categories">
-                            <select class="form-control" name="system">
-                                @foreach ($systems as $system)
-                                    @if ($system->hasProducts)
-                                        <option data-id="{{ $system->id }}" value="{{ route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'system']), $system->slug) }}">{{ $system->name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <p id="description" class="products-desc__description">{{ $description }}</p>
-                    <a id="view-system" class="button small button--products" href="{{ $url }}">@lang('shopping::products.systems.view_system')</a>
+                <div class="home-wide-bg-container mb-50">
+                    <a class="banner-width-bg-link" href="#">
+                        <img src="assets/images/banners/banner-wide.jpg" alt="">
+                    </a>
                 </div>
 
-                <div class="products slider" id="products-slider{{ $i }}">
-                    <div class="products__wrap slider__wrap">
-                        <div class="product slider__item banner">
-                            @if (!empty($link)) <a class="product__link" href="{{ $link }}" target="_blank"> @endif
-                                <figure id="image_system" class="product__image">
-                                    <img id="banner" src="{{ asset($banner) }}" alt=""/>
-                                </figure>
-                            @if (!empty($link)) </a> @endif
-                        </div>
+                <!-- end of homepage wide banner section -->
+            </div>
+        </div>
 
-                        <div class="product product-sale banner">
-                            <p id="benefits" class="product-sale__text">{{ $benefits }}</p>
-                            @if (show_price())
-                                <p class="product-sale__price">@lang('shopping::products.systems.system_price'): <span id="price">{{ currency_format($price, $currency) }}</span></p>
-                            @endif
+        <!-- latest product section -->
 
-                            @if (show_add_to_car())
-                                <button onclick="ShoppingCart.add_system('{{ $systemId }}')" class="button small button--products" type="button">@lang('shopping::products.systems.buy')</button>
-                            @endif
-
-                            @if (show_disclaimer())
-                                @if (\App\Helpers\SessionHdl::hasEo())
-                                    <p class="disclaimer theme--purple">@lang('shopping::products.disclaimer_eo')</p>
-                                @else
-                                    <p class="disclaimer theme--purple">@lang('shopping::products.disclaimer')</p>
-                                @endif
-                            @endif
-                        </div>
+        <div class="latest-product-section  mb-50">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Block title -->
+                    <div class="block-title">
+                        <h2>LATEST PRODUCTS</h2>
                     </div>
                 </div>
             </div>
-            <!-- end system -->
-            @endif
-        @endif
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <!-- single latest product -->
+                    <div class="single-latest-product">
+                        <div class="product-image">
+                            <a href="single-product-variable.html">
+                                <img src="assets/images/products/1.jpg" class="img-fluid" alt="">
+                                <img src="assets/images/products/2.jpg" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="product-description">
+                            <h5 class="product-name"><a href="#">Faded Short Sleeve</a></h5>
+                            <div class="price-box">
+                                <h4>$ 12.00</h4>
+                            </div>
+                        </div>
+
+                        <div class="latest-product-hover-content">
+                            <a href="#" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i>
+                                Add to cart</a>
+                            <p>
+                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container">Quick View</a> | <a href="#">Wishlist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end of single latest product -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <!-- single latest product -->
+                    <div class="single-latest-product">
+                        <div class="product-image">
+                            <a href="single-product-variable.html">
+                                <img src="assets/images/products/3.jpg" class="img-fluid" alt="">
+                                <img src="assets/images/products/4.jpg" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="product-description">
+                            <h5 class="product-name"><a href="#">Faded Short Sleeve</a></h5>
+                            <div class="price-box">
+                                <h4>$ 12.00</h4>
+                            </div>
+                        </div>
+
+                        <div class="latest-product-hover-content">
+                            <a href="#" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i>
+                                Add to cart</a>
+                            <p>
+                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container">Quick View</a> | <a href="#">Wishlist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end of single latest product -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <!-- single latest product -->
+                    <div class="single-latest-product">
+                        <div class="product-image">
+                            <a href="single-product-variable.html">
+                                <img src="assets/images/products/5.jpg" class="img-fluid" alt="">
+                                <img src="assets/images/products/6.jpg" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="product-description">
+                            <h5 class="product-name"><a href="#">Faded Short Sleeve</a></h5>
+                            <div class="price-box">
+                                <h4>$ 12.00</h4>
+                            </div>
+                        </div>
+
+                        <div class="latest-product-hover-content">
+                            <a href="#" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i>
+                                Add to cart</a>
+                            <p>
+                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container">Quick View</a> | <a href="#">Wishlist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end of single latest product -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <!-- single latest product -->
+                    <div class="single-latest-product">
+                        <div class="product-image">
+                            <a href="single-product-variable.html">
+                                <img src="assets/images/products/7.jpg" class="img-fluid" alt="">
+                                <img src="assets/images/products/8.jpg" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="product-description">
+                            <h5 class="product-name"><a href="#">Faded Short Sleeve</a></h5>
+                            <div class="price-box">
+                                <h4>$ 12.00</h4>
+                            </div>
+                        </div>
+
+                        <div class="latest-product-hover-content">
+                            <a href="#" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i>
+                                Add to cart</a>
+                            <p>
+                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container">Quick View</a> | <a href="#">Wishlist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end of single latest product -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <!-- single latest product -->
+                    <div class="single-latest-product">
+                        <div class="product-image">
+                            <a href="single-product-variable.html">
+                                <img src="assets/images/products/9.jpg" class="img-fluid" alt="">
+                                <img src="assets/images/products/10.jpg" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="product-description">
+                            <h5 class="product-name"><a href="#">Faded Short Sleeve</a></h5>
+                            <div class="price-box">
+                                <h4>$ 12.00</h4>
+                            </div>
+                        </div>
+
+                        <div class="latest-product-hover-content">
+                            <a href="#" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i>
+                                Add to cart</a>
+                            <p>
+                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container">Quick View</a> | <a href="#">Wishlist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end of single latest product -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <!-- single latest product -->
+                    <div class="single-latest-product">
+                        <div class="product-image">
+                            <a href="single-product-variable.html">
+                                <img src="assets/images/products/1.jpg" class="img-fluid" alt="">
+                                <img src="assets/images/products/2.jpg" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="product-description">
+                            <h5 class="product-name"><a href="#">Faded Short Sleeve</a></h5>
+                            <div class="price-box">
+                                <h4>$ 12.00</h4>
+                            </div>
+                        </div>
+
+                        <div class="latest-product-hover-content">
+                            <a href="#" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i>
+                                Add to cart</a>
+                            <p>
+                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container">Quick View</a> | <a href="#">Wishlist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end of single latest product -->
+                </div>
+            </div>
+        </div>
+
+        <!-- end of latest product section -->
     </div>
 </div>
 
-{!! PageBuilder::section('footer') !!}
-<input type="hidden" id="shop_secret" value="{{ csrf_token() }}">
-<script type="application/javascript">
-    $(document).ready(function () {
-        var products;
-        document.products = {};
+<!--====  End of homepage content section  ====-->
 
-        @foreach ($categories as $category)
-            products = {!! ShoppingCart::productsToJson($category->groupProducts->where('active', 1)->where('product_category', 1)->where('delete', 0)) !!};
-            $.each(products, function (i, product) {
-                document.products[i] = product;
-            });
-        @endforeach
+<!--=======================================
+=            brand logo slider            =
+========================================-->
 
 
-        @if ($systems->count() > 0)
-            document.systems = {};
-            @foreach ($systems as $system)
-                @if ($system->hasProducts)
-                    document.systems['{{ $system->id }}'] = {};
-                    products = {!! ShoppingCart::productsToJson($system->groupProducts->where('active', 1)) !!};
-                    $.each(products, function (i, product) {
-                        document.systems['{{ $system->id }}'][i] = product;
-                    });
-                @endif
-            @endforeach
-        @endif
 
-        $('[name=system]').change(function () {
-            var id = $('[name=system]').find(':selected').data('id');
 
-            $.ajax({
-                url: '{{ route('products.getGroup') }}',
-                method: 'POST',
-                dataType: 'JSON',
-                data: {id: id, _token: '{{ csrf_token() }}'},
-                statusCode: { 419: function() {window.location.href = URL_PROJECT} }
-            }).done(function (response, textStatus, jqXHR) {
-                if (response.status) {
-                    $('#description').text(response.data.description);
-                    $('#benefits').text(response.data.benefits);
-                    @if (show_price())
-                        $('#price').text(response.data.total_price);
-                    @endif
 
-                    $('.product.product-sale.banner button').attr('onclick', 'ShoppingCart.add_system(\''+id+'\')');
 
-                    $('#view-system').attr('href', response.data.url_group);
 
-                    if (response.data.link != '' && response.data.link != undefined) {
-                        $('#image_system').html('<a target="_blank" class="product__link" href="'+response.data.link+'"><figure class="product__image"><img id="banner" src="'+response.data.banner+'" alt=""/></figure></a>');
-                    } else {
-                        $('#image_system').html('<figure class="product__image"><img id="banner" src="'+response.data.banner+'" alt=""/></figure>');
-                    }
-                }
-            }).fail(function (response, textStatus, errorThrown) {
-                console.log(response, textStatus, errorThrown);
-            });
-        });
-    });
-</script>
-{{-- <script src="{{ PageBuilder::js('inactivity') }}"></script> --}}
+{!! PageBuilder::section('footer',['categories'=>$categories]) !!}

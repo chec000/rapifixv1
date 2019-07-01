@@ -40,7 +40,9 @@ var ResumeCart = function () {
                         window.location.href = URL_PROJECT;
                     } }
             }).done(function (response, textStatus, jqXHR) {
-                $('[data-id=' + id + ']').remove();
+                var pro=$('[data-id=' + id + ']');
+                pro.remove();
+
                 ResumeCart.remove_item(id);
                 ResumeCart.getInitQuotation("checkout");
 

@@ -29,17 +29,7 @@ label{font-family: 'Helvetica', sans-serif !important; font-weight:500; font-siz
 .navbar-default{
     padding-top:5px !important;
     padding-bottom:0 !important;
-    /* Safari 4, Chrome 1-9, iOS 3.2-4.3, Android 2.1-3.0 */
-/*    background: -webkit-gradient(linear, left top, right top, from(#7f47a5), to(#fffafa));
-     Safari 5.1, iOS 5.0-6.1, Chrome 10-25, Android 4.0-4.3 
-    background: -webkit-linear-gradient(left, #7f47a5, #fffafa);
-     Firefox 3.6 - 15 
-    background: -moz-linear-gradient(left, #7f47a5, #fffafa);
-     Opera 11.1 - 12 
-    background: -o-linear-gradient(left, #7f47a5, #fffafa);*/
-    background: #52cc51!important;
-    /* Opera 15+, Chrome 25+, IE 10+, Firefox 16+, Safari 6.1+, iOS 7+, Android 4.4+ */
-    /*background: linear-gradient(to left, #7f47a5, #fffafa) !important;*/
+    background: #1b5376!important;;
     margin-bottom:0;
     border-bottom:1px solid rgba(0,0,0,0.1) !important;
     border-radius:0;

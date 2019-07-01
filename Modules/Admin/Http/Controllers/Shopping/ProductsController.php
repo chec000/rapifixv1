@@ -31,6 +31,8 @@ class ProductsController extends Controller
      * @return Response
      */
     public function index() {
+
+
         $countryProducts = CountryProduct::groupBy('product_id')->where('delete', 0)->get();
         $this->layoutData['modals']  = View::make('admin::shopping.products.modals.confirm').View::make('admin::shopping.products.modals.load_csv', ['countries' => Auth::user()->countries]);
         $this->layoutData['content'] = View::make('admin::shopping.products.index', compact('countryProducts'));

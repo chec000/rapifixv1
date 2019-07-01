@@ -5,7 +5,8 @@ namespace Modules\Shopping\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use App\Helpers\ShoppingCart;
+use PDF;
 class ShoppingController extends Controller
 {
     /**
@@ -16,6 +17,22 @@ class ShoppingController extends Controller
     {
         return view('shopping::index');
     }
+        public function export_cart()
+    {
+
+               $subTotal=ShoppingCart::getSubtotal();
+                $cart=\session()->get('portal.cart');
+
+        $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal]);
+        
+        //$pdf->save(storage_path().'_filename.pdf');
+      
+
+            // return $pdf->stream('cart_products.pdf');
+        return $pdf->download('cart_products.pdf');
+  
+
+  }
 
     /**
      * Show the form for creating a new resource.

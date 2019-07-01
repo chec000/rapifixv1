@@ -3724,9 +3724,14 @@ h2.block-title, .block-title h2 {
     .single-product-content .product-image a img {
       margin: 0 auto; }
       .single-product-content .product-image a img:nth-child(2) {
+      /*
         visibility: hidden;
         opacity: 0;
-        display: none; }
+        display: none;
+
+      */
+      }
+   /*
     .single-product-content .product-image a:hover img:nth-child(1) {
       visibility: hidden;
       opacity: 0;
@@ -3739,6 +3744,7 @@ h2.block-title, .block-title h2 {
       opacity: 1;
       -webkit-animation: changeImage 600ms ease;
       animation: changeImage 600ms ease; }
+   */
     .single-product-content .product-image .image-btn {
       position: absolute;
       bottom: -10px;
@@ -3778,7 +3784,15 @@ h2.block-title, .block-title h2 {
     font-weight: 600;
     color: #333;
     visibility: hidden;
-    opacity: 0; }
+    opacity: 0;
+    background-color: rgb(7, 55, 99);
+    color: white;
+    cursor: pointer;
+    padding: 2px 12px 3px 12px;
+    text-decoration: none;
+    border-radius: 12px;
+  }
+
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .single-product-content a.add-to-cart-btn {
         visibility: hidden;
@@ -4101,11 +4115,15 @@ h2.block-title, .block-title h2 {
         opacity: 0;
         display: none; }
     .single-list-product .list-product-image a:hover img:nth-child(1) {
+      /*
       visibility: hidden;
       opacity: 0;
       display: none;
       -webkit-animation: changeImage 600ms ease;
-      animation: changeImage 600ms ease; }
+      animation: changeImage 600ms ease; 
+      */
+      }
+    
     .single-list-product .list-product-image a:hover img:nth-child(2) {
       display: block;
       visibility: visible;
@@ -4122,7 +4140,8 @@ h2.block-title, .block-title h2 {
       opacity: 1;
       -webkit-transition: 0.3s;
       -o-transition: 0.3s;
-      transition: 0.3s; }
+      transition: 0.3s;
+       }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .single-list-product .list-product-image .image-btn {
           visibility: visible;
@@ -6912,3 +6931,22 @@ a.store-btn {
       font-size: 13px;
       z-index: 18;
       color: #444444; }
+
+
+    .add-to-cart-btn{
+      display: block;
+      padding-top: 8px;
+      font-weight: 600;
+      color: #333;
+      background-color: rgb(7, 55, 99);
+      color: white;
+      cursor: pointer;
+      padding: 2px 12px 3px 12px;
+      text-decoration: none;
+      border-radius: 12px;
+    }
+
+.add-to-cart-btn span:hover {
+  color: #f36b63;
+
+}

@@ -32,19 +32,24 @@ class ShoppingCart {
         $isWSActive       = $config['webservices_active'];
         $warehouse        = SessionHdl::getWarehouse();
 
-        foreach ($groupProducts as $groupProduct) {
-            if ( ($isShoppingActive and $groupProduct->countryProduct->belongsToWarehouse($warehouse) and $isWSActive) xor (!$isShoppingActive or !$isWSActive) ) {
-                $product = new \stdClass();
-                $product->id          = $groupProduct->countryProduct->id;
-                $product->sku         = $groupProduct->countryProduct->product->sku;
-                $product->name        = $groupProduct->countryProduct->name;
-                $product->description = $groupProduct->countryProduct->description;
-                $product->image       = asset($groupProduct->countryProduct->image);
-                $product->price       = $groupProduct->countryProduct->price;
-                $product->points      = $groupProduct->countryProduct->points;
-                $product->quantity    = 1;
+        if(count($groupProducts)>0){
+            foreach ($groupProducts as $groupProduct) {
+                if ( ($isShoppingActive and $groupProduct->countryProduct->belongsToWarehouse($warehouse) and $isWSActive) xor (!$isShoppingActive or !$isWSActive) ) {
 
-                $products[$product->id] = $product;
+                    $product = new \stdClass();
+                    if($groupProduct->countryProduct!=null){
+                        $product->id          = $groupProduct->countryProduct->id;
+                        $product->sku         = $groupProduct->countryProduct->product->sku;
+                        $product->name        = $groupProduct->countryProduct->name;
+                        $product->description = $groupProduct->countryProduct->description;
+                        $product->image       = asset($groupProduct->countryProduct->image);
+                        $product->price       = $groupProduct->countryProduct->price;
+                        $product->points      = $groupProduct->countryProduct->points;
+                        $product->quantity    = 1;
+                        $products[$product->id] = $product;
+                    }
+
+                }
             }
         }
 
@@ -96,7 +101,7 @@ class ShoppingCart {
     public static function sessionToJson(string $countryKey) : string {
         $products = [];
 
-        if (Session::has("portal.cart.{$countryKey}.items") && sizeof(Session::get("portal.cart.{$countryKey}.items")) > 0) {
+        if (Session::has("portal.cart.items") && sizeof(Session::get("portal.cart.items")) > 0) {
             foreach (self::getItems($countryKey) as $sessionProduct) {
                 $product = new \stdClass();
                 $product->id          = $sessionProduct['id'];
@@ -123,18 +128,18 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return bool
      */
-    public static function createSession(string $countryKey) : bool {
-        if (!Session::has("portal.cart.{$countryKey}")) {
-            Session::put("portal.cart.{$countryKey}", [
+    public static function createSession() : bool {
+        \session()->put('portal.main.currency_key','DOP');
+        if (!Session::has("portal.cart")) {
+            Session::put("portal.cart", [
                 'items'    => [],
                 'subtotal' => 0.0,
                 'points'   => 0
             ]);
 
-            return true;
         }
 
-        return false;
+            return true;
     }
 
 
@@ -145,9 +150,9 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return bool
      */
-    public static function deleteSession(string $countryKey) : bool {
-        if (Session::has("portal.cart.{$countryKey}")) {
-            Session::forget("portal.cart.{$countryKey}");
+    public static function deleteSession() : bool {
+        if (Session::has("portal.cart")) {
+           // Session::forget("portal.cart");
             return true;
         }
 
@@ -163,7 +168,7 @@ class ShoppingCart {
      */
     public static function deleteAllSessions() : bool {
         if (Session::has("portal.cart")) {
-            Session::forget("portal.cart");
+            //Session::forget("portal.cart");
             return true;
         }
 
@@ -179,9 +184,9 @@ class ShoppingCart {
      * @param string $sku           SKU del producto a buscar
      * @return bool
      */
-    public static function hasItem(string $countryKey, string $sku) : bool {
-        if (!is_null(Session::get("portal.cart.{$countryKey}.items"))) {
-            foreach (Session::get("portal.cart.{$countryKey}.items") as $sessionItem) {
+    public static function hasItem(string $sku) : bool {
+        if (!is_null(Session::get("portal.cart.items"))) {
+            foreach (Session::get("portal.cart.items") as $sessionItem) {
                 if ($sessionItem['sku'] == $sku) {
                     return true;
                 }
@@ -200,32 +205,32 @@ class ShoppingCart {
      * @param array $item           Item o producto para agregar al carrito
      * @return array
      */
-    public static function addItem(string $countryKey, array $item) : array {
-        $items = Session::get("portal.cart.{$countryKey}.items");
+    public static function addItem(array $item) : array {
+        $items = Session::get("portal.cart.items");
 
-        if (self::hasItem($countryKey, $item['sku'])) {
+        if (self::hasItem( $item['sku'])) {
             for ($i = 0; $i < sizeof($items); $i++) {
                 if ($item['sku'] == $items[$i]['sku']) {
                     $items[$i]['quantity'] += $item['quantity'];
 
-                    Session::put("portal.cart.{$countryKey}.items", $items);
+                    Session::put("portal.cart.items", $items);
 
-                    self::calculatePoints($countryKey);
-                    self::calculateSubtotal($countryKey);
+                    self::calculatePoints();
+                    self::calculateSubtotal();
 
                     return $items[$i];
                 }
             }
         } else {
-            $items            = Session::get("portal.cart.{$countryKey}.items");
+            $items            = Session::get("portal.cart.items");
             $item['price']    = (float) $item['price'];
             $item['points']   = (int) $item['points'];
             $items[]          = $item;
 
-            Session::put("portal.cart.{$countryKey}.items", $items);
+            Session::put("portal.cart.items", $items);
 
-            self::calculatePoints($countryKey);
-            self::calculateSubtotal($countryKey);
+            self::calculatePoints();
+            self::calculateSubtotal();
 
             return $item;
         }
@@ -243,9 +248,8 @@ class ShoppingCart {
      * @param bool $removeAll       Bandera para eliminar todos los elementos del item
      * @return bool
      */
-    public static function removeItem(string $countryKey, string $sku, bool $removeAll = false) : bool {
-        $items = Session::get("portal.cart.{$countryKey}.items");
-
+    public static function removeItem(string $sku, bool $removeAll = false) : bool {
+        $items = Session::get("portal.cart.items");
         for ($i = 0; $i < sizeof($items); $i++) {
             if ($sku == $items[$i]['sku']) {
 
@@ -259,10 +263,10 @@ class ShoppingCart {
                     }
                 }
 
-                Session::put("portal.cart.{$countryKey}.items", $items);
+                Session::put("portal.cart.items", $items);
 
-                self::calculatePoints($countryKey);
-                self::calculateSubtotal($countryKey);
+                self::calculatePoints();
+                self::calculateSubtotal();
 
                 return true;
             }
@@ -281,10 +285,10 @@ class ShoppingCart {
      * @param array $item           Array con los nuevos datos del producto
      * @return array
      */
-    public static function updateItem(string $countryKey, string $sku, array $item = []) : array {
-        $items = Session::get("portal.cart.{$countryKey}.items");
+    public static function updateItem(string $sku, array $item = []) : array {
+        $items = Session::get("portal.cart.items");
 
-        if (self::hasItem($countryKey, $sku)) {
+        if (self::hasItem($sku)) {
             for ($i = 0; $i < sizeof($items); $i++) {
                 if ($sku == $items[$i]['sku']) {
 
@@ -292,10 +296,10 @@ class ShoppingCart {
                         $items[$i][$key] = $value;
                     }
 
-                    Session::put("portal.cart.{$countryKey}.items", $items);
+                    Session::put("portal.cart.items", $items);
 
-                    self::calculatePoints($countryKey);
-                    self::calculateSubtotal($countryKey);
+                    self::calculatePoints();
+                    self::calculateSubtotal();
 
                     return $items[$i];
                 }
@@ -313,9 +317,9 @@ class ShoppingCart {
      * @param string $countryKey Llave de corbiz del país a crear la sesión
      * @return array
      */
-    public static function getItems(string $countryKey) : array {
-        if (Session::has("portal.cart.{$countryKey}.items")) {
-            return Session::get("portal.cart.{$countryKey}.items");
+    public static function getItems() : array {
+        if (Session::has("portal.cart.items")) {
+            return Session::get("portal.cart.items");
         }
 
         return [];
@@ -329,16 +333,16 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return int
      */
-    public static function calculatePoints(string $countryKey) : int {
+    public static function calculatePoints() : int {
         $points = 0;
 
-        if (Session::has("portal.cart.{$countryKey}.items") && sizeof(Session::get("portal.cart.{$countryKey}.items")) > 0) {
-            foreach (Session::get("portal.cart.{$countryKey}.items") as $item) {
+        if (Session::has("portal.cart.items") && sizeof(Session::get("portal.cart.items")) > 0) {
+            foreach (Session::get("portal.cart.items") as $item) {
                 $points += $item['points'] * $item['quantity'];
             };
         }
 
-        Session::put("portal.cart.{$countryKey}.points", $points);
+        Session::put("portal.cart.points", $points);
 
         return $points;
     }
@@ -351,16 +355,16 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return float
      */
-    public static function calculateSubtotal(string $countryKey) : float {
+    public static function calculateSubtotal() : float {
         $subtotal = 0.0;
 
-        if (Session::has("portal.cart.{$countryKey}.items") && sizeof(Session::get("portal.cart.{$countryKey}.items")) > 0) {
-            foreach (Session::get("portal.cart.{$countryKey}.items") as $item) {
+        if (Session::has("portal.cart.items") && sizeof(Session::get("portal.cart.items")) > 0) {
+            foreach (Session::get("portal.cart.items") as $item) {
                 $subtotal += $item['price'] * $item['quantity'];
             };
         }
 
-        Session::put("portal.cart.{$countryKey}.subtotal", $subtotal);
+        Session::put("portal.cart.subtotal", $subtotal);
 
         return $subtotal;
     }
@@ -373,8 +377,8 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return int
      */
-    public static function getPoints(string $countryKey) : int {
-        return Session::has("portal.cart.{$countryKey}.points") ? Session::get("portal.cart.{$countryKey}.points") : 0;
+    public static function getPoints() : int {
+        return Session::has("portal.cart.points") ? Session::get("portal.cart.points") : 0;
     }
 
 
@@ -385,8 +389,8 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return float
      */
-    public static function getSubtotal(string $countryKey) : float {
-        return Session::has("portal.cart.{$countryKey}.subtotal") ? Session::get("portal.cart.{$countryKey}.subtotal") : 0.0;
+    public static function getSubtotal() : float {
+        return Session::has("portal.cart.subtotal") ? Session::get("portal.cart.subtotal") : 0.0;
     }
 
 
@@ -398,8 +402,8 @@ class ShoppingCart {
      * @param string $currencyKey   Clave de la moneda
      * @return string
      */
-    public static function getSubtotalFormatted(string $countryKey, string $currencyKey) : string {
-        return Session::has("portal.cart.{$countryKey}.subtotal") ? currency_format(Session::get("portal.cart.{$countryKey}.subtotal"), $currencyKey)  : currency_format(0, $currencyKey);
+    public static function getSubtotalFormatted(string $currencyKey) : string {
+        return Session::has("portal.cart.subtotal") ? currency_format(Session::get("portal.cart.subtotal"), $currencyKey)  : currency_format(0, $currencyKey);
     }
 
 
@@ -431,11 +435,11 @@ class ShoppingCart {
      * @param string $currencyKey   Clave de la moneda
      * @return string
      */
-    public static function getPriceFormatted(string $countryKey, string $sku, string $currencyKey) : string {
+    public static function getPriceFormatted(string $sku, string $currencyKey) : string {
         $price = currency_format(0, $currencyKey);
 
-        if (Session::has("portal.cart.{$countryKey}.items") && sizeof(Session::get("portal.cart.{$countryKey}.items")) > 0) {
-            foreach (Session::get("portal.cart.{$countryKey}.items") as $item) {
+        if (Session::has("portal.cart.items") && sizeof(Session::get("portal.cart.items")) > 0) {
+            foreach (Session::get("portal.cart.items") as $item) {
                 if ($item['sku'] == $sku) {
                     $price = currency_format($item['price'], $currencyKey);
                 }
@@ -453,8 +457,8 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @param string $warehouse     Clave del almacén
      */
-    public static function validateProductWarehouse(string $countryKey, string $warehouse) {
-        $items       = self::getItems($countryKey);
+    public static function validateProductWarehouse(string $warehouse) {
+        $items       = self::getItems();
         $deleteItems = false;
         $strDeleteItems = "";
         foreach ($items as $i => $item) {
@@ -470,12 +474,12 @@ class ShoppingCart {
         $items = array_values($items);
 
         if (sizeof($items) == 0) {
-            self::deleteSession($countryKey);
+            self::deleteSession();
         } else {
-            Session::put("portal.cart.{$countryKey}.items", $items);
+            Session::put("portal.cart.items", $items);
 
-            self::calculatePoints($countryKey);
-            self::calculateSubtotal($countryKey);
+            self::calculatePoints();
+            self::calculateSubtotal();
 
             if ($deleteItems) {
 
@@ -497,8 +501,8 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @param string $stateKey     Clave del estado de la dirección a validar
      */
-    public static function validateProductRestrictionState(string $countryKey, string $stateKey) {
-        $items       = self::getItems($countryKey);
+    public static function validateProductRestrictionState(string $stateKey) {
+        $items       = self::getItems();
         $deleteItems = false;
 
         $countryProduct = ProductRestriction::from('shop_product_restrictions as pr')
@@ -527,12 +531,12 @@ class ShoppingCart {
         $items = array_values($items);
 
         if (sizeof($items) == 0) {
-            self::deleteSession($countryKey);
+            self::deleteSession();
         } else {
-            Session::put("portal.cart.{$countryKey}.items", $items);
+            Session::put("portal.cart..items", $items);
 
-            self::calculatePoints($countryKey);
-            self::calculateSubtotal($countryKey);
+            self::calculatePoints();
+            self::calculateSubtotal();
 
             if ($deleteItems) {
                 if(session()->has('delete-items')) {
@@ -552,17 +556,17 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return array
      */
-    public static function getSession(string $countryKey) {
+    public static function getSession() {
         $session = [];
 
-        if (Session::has("portal.cart.{$countryKey}")) {
-            $session = Session::get("portal.cart.{$countryKey}");
+        if (Session::has("portal.cart")) {
+            $session = Session::get("portal.cart");
 
             for ($i = 0; $i < sizeof($session['items']); $i++) {
-                $session['items'][$i]['price'] = self::getPriceFormatted($countryKey, $session['items'][$i]['sku'], Session::get('portal.main.currency_key'));
+                $session['items'][$i]['price'] = self::getPriceFormatted($session['items'][$i]['sku'], Session::get('portal.main.currency_key'));
             }
 
-            $session['subtotal'] = self::getSubtotalFormatted($countryKey, Session::get('portal.main.currency_key'));
+            $session['subtotal'] = self::getSubtotalFormatted(Session::get('portal.main.currency_key'));
         }
 
         return $session;
@@ -686,12 +690,12 @@ class ShoppingCart {
         $items = array_values($items);
 
         if (sizeof($items) == 0) {
-            self::deleteSession($countryKey);
+            self::deleteSession();
         } else {
-            Session::put("portal.cart.{$countryKey}.items", $items);
+            Session::put("portal.cart.items", $items);
 
-            self::calculatePoints($countryKey);
-            self::calculateSubtotal($countryKey);
+            self::calculatePoints();
+            self::calculateSubtotal();
 
             if ($deleteItems) {
                 session()->flash('delete-items', trans('cms::cart_aside.delete_items'));
@@ -909,10 +913,10 @@ class ShoppingCart {
      * @param string $countryKey    Llave de corbiz del país a crear la sesión
      * @return bool
      */
-    public static function deleteSessionResumeCart(string $countryKey) : bool {
-        if (Session::has("portal.cart.{$countryKey}")) {
-            Session::forget("portal.cart.{$countryKey}");
-            Session::forget("portal.checkout.{$countryKey}.quotation");
+    public static function deleteSessionResumeCart() : bool {
+        if (Session::has("portal.cart")) {
+            //Session::forget("portal.cart");
+            Session::forget("portal.checkout.quotation");
             return true;
         }
 

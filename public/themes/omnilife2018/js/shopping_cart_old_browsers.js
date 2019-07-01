@@ -324,7 +324,7 @@ var ShoppingCart = function () {
     }, {
         key: 'remove_item',
         value: function remove_item(id) {
-            $('[data-id=' + id + ']').remove();
+             
             delete document.shopping_cart[id];
         }
 
