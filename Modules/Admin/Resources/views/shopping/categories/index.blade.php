@@ -73,9 +73,11 @@
                             @endif
                         </div>
                         <div class="col-xs-4 text-center">
-                            @if (Auth::action('categories.edit'))
-                                <a class="fa fa-pencil itemTooltip" href="{{ route('admin.categories.edit', ['id' => $cat->code]) }}"
+                            <a class="fa fa-pencil itemTooltip" href="{{ route('admin.categories.edit', ['id' => $cat->code]) }}"
                                title="{{ trans('admin::shopping.categories.index.edit_category') }}" style="color: black"></a>
+
+                        @if (Auth::action('categories.edit'))
+
                             @endif
                         </div>
                         <div class="col-xs-4 text-center">

@@ -8,6 +8,7 @@ use App\Helpers\ShoppingCart;
 use App\Helpers\TranslatableUrlPrefix;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Modules\Admin\Entities\Brand;
 use Modules\Admin\Entities\Country;
 use Modules\Admin\Http\Controllers\AdminController as Controller;
 use Modules\Shopping\Entities\CategoryFilter;
@@ -24,126 +25,126 @@ class ProductController extends Controller {
     public function __construct() {
         parent::__construct();
     }
+    private function getProductByCategory($category_id){
 
-    public function products(Request $request) {
-       var_dump(3);
-       die();
-        $config = country_config(SessionHdl::getCorbizCountryKey());
+        $category         = GroupCountry::find($category_id);
+        $warehouse        = SessionHdl::getWarehouse();
+        $sesionCorbiz="";
+        if(SessionHdl::getCorbizCountryKey()!=null){
+            $sesionCorbiz=SessionHdl::getCorbizCountryKey();
+        }
+        ShoppingCart::validateProductWarehouse($sesionCorbiz, $warehouse);
+        $products        = [];
+        $countryProducts = CountryProduct::getAllByCategory($category->id, $category->country_id, App()->getLocale(), true, false);
+        foreach ($countryProducts as $countryProduct) {
+            if ($countryProduct->product->is_kit == 0) {
+                $countryProduct->url         = $category->brandGroup->brand->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'detail']), [($countryProduct->slug . '-' . $countryProduct->product->sku)], false);
+                $countryProduct->price       = !hide_price() ? currency_format($countryProduct->price, Session::get('portal.main.currency_key')) : '';
+                $countryProduct->description = str_limit2($countryProduct->description, 74);
+                $products[] = $countryProduct;
 
-        ShoppingCart::validateProductWarehouse(SessionHdl::getCorbizCountryKey(), SessionHdl::getWarehouse());
-
-        # Validar marca
-        if (SessionHdl::getParentBrandID() != 0 && SessionHdl::hasParentBrands()) {
-            foreach (SessionHdl::getParentBrands() as $brand) {
-                if ($brand->is_main == 1) {
-                    return redirect($brand->domain.route(TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'index']), [], false));
-                }
             }
         }
 
-        # Categorías y sistemas por marca
-        $categories = GroupCountry::getByCountryAndBrand(SessionHdl::getCountryID(), SessionHdl::getBrandID(), 1, true);
-        $systems    = GroupCountry::getByCountryAndBrand(SessionHdl::getCountryID(), SessionHdl::getBrandID(), 2);
+        return $products;
+    }
 
-        # Productos destacados por categoría
-        $state    = $this->getState();
-        $products = [];
-        foreach ($categories as $cat) {
-            $productsByCat = CountryProduct::getAllByCategory($cat->id, $cat->country_id, SessionHdl::getLocale(), false, true);
-            foreach ($productsByCat as $i => $prod) {
-                if ($prod->isItRestrictedIn($state)) {
-                    $productsByCat->forget($i);
-                }
+
+    public function procuctsByCategory($category_id){
+
+        $category         = GroupCountry::find($category_id);
+
+        $warehouse        = SessionHdl::getWarehouse();
+        $sesionCorbiz="";
+        if(SessionHdl::getCorbizCountryKey()!=null){
+            $sesionCorbiz=SessionHdl::getCorbizCountryKey();
+        }
+        ShoppingCart::validateProductWarehouse($sesionCorbiz, $warehouse);
+        $products        = [];
+        $countryProducts = CountryProduct::getAllByCategory($category->id, $category->country_id, App()->getLocale(), true, false);
+
+        foreach ($countryProducts as $countryProduct) {
+            if ($countryProduct->product->is_kit == 0) {
+                $countryProduct->url         = $category->brandGroup->brand->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'detail']), [($countryProduct->slug . '-' . $countryProduct->product->sku)], false);
+                $countryProduct->price       = !hide_price() ? currency_format($countryProduct->price, Session::get('portal.main.currency_key')) : '';
+                $countryProduct->description = str_limit2($countryProduct->description, 74);
+                $products[] = $countryProduct;
+
             }
-
-            $products[$cat->id] = $productsByCat;
         }
 
-        foreach ($systems as $i => $system) {
-            if (!$system->areAllProductsActive($state)) {
-                $systems->forget($i);
-            }
-        }
+        $categories=$this->category();
+        $categories=$categories->original['brandCategories'][0]['categories'];
+        $cart=\session()->get('portal.cart');
 
-        return View::make('shopping::frontend.products', [
-            'brand'            => SessionHdl::getBrandName(),
-            'categories'       => $categories,
-            'countryId'        => SessionHdl::getCountryID(),
-            'currency'         => SessionHdl::getCurrencyKey(),
-            'isShoppingActive' => $config['shopping_active'],
-            'isWSActive'       => $config['webservices_active'],
-            'systems'          => $systems,
-            'products'         => $products
+        return View::make('shopping::frontend.products_category', [
+            'categories'=> $categories,
+            'cart'=>$cart,
+            'category'=>$category,
+            'products'=>$products
         ]);
     }
 
-    public function category(Request $request, $category_slug) {
-        $config      = country_config(SessionHdl::getCorbizCountryKey());
-        $categories  = GroupCountry::whereTranslation('slug', $category_slug)->where('country_id', SessionHdl::getCountryID())->where('group_id', 1)->get();
+    public function products() {
+        session()->put('portal.main.varsChangeLangStart.changeStartLocale', 0);
+        $cart=\session()->get('portal.cart');
 
-        $category = null;
-        if ($categories->count() > 1) {
-            foreach ($categories as $cat) {
-                if ($cat->brandGroup->brand_id == SessionHdl::getBrandID()) {
-                    $category = $cat;
+        $categories=$this->category();
+        $categories=$categories->original['brandCategories'][0]['categories'];
+        return View::make('shopping::frontend.products',['categories'=>$categories,
+            'cart'=>$cart
+        ]);
+
+    }
+
+        public  function getSession(){
+                return json_encode(session()->all());
+        }
+    public function category($category_slug=null) {
+        $brand = Brand::find(1);
+        $country_id=17;
+        if ($brand->parent_brand_id != 0) {
+            $brands = $brand->getParents();
+        } else {
+            $brands = [$brand];
+        }
+
+        $brandCategories = [];
+        for ($i=0; $i < count($brands); $i++) {
+            $categories         = GroupCountry::getByCountryAndBrand($country_id, $brands[$i]->id, 1, true);
+            $categoriesFiltered = collect([]);
+
+            foreach ($categories as $j => $category) {
+                $categories[$j]['products']=$this->getProductByCategory($category->id);
+                if ($categories[$j]->countHomeProducts > 0) {
+                    $categories[$j]->url = $brands[$i]->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'category']), $category->slug, false);
+                    $categories[$j]->home_products = $categories[$j]->countHomeProducts;
+
+                    $categoriesFiltered->push($categories[$j]);
                 }
             }
-        } else {
-            $category = $categories->first();
-        }
 
-        ShoppingCart::validateProductWarehouse(SessionHdl::getCorbizCountryKey(), SessionHdl::getWarehouse());
-
-        $isShoppingActive = $config['shopping_active'];
-        $isWSActive       = $config['webservices_active'];
-        $locale           = SessionHdl::getLocale();
-
-        if ($category == null || $category->active == 0 || $category->group_id != 1) {
-            return redirect()->route(TranslatableUrlPrefix::getRouteName($locale, ['products', 'index']));
-        }
-
-        if (SessionHdl::getBrandID() != $category->brandGroup->brand->id) {
-            return redirect(str_replace(SessionHdl::getBrandUrl(), $category->brandGroup->brand->domain, url()->current()));
-        }
-
-        $categories = GroupCountry::getByCountryAndBrand(SessionHdl::getCountryID(), SessionHdl::getBrandID(), 1, true);
-
-        $countryGroupId = $category->id;
-        if ($request->has('f')) {
-            $filter = CategoryFilter::find($request->input('f'));
-
-            if ($category->brandGroup->brand->id != $filter->filter->brandGroup->brand->id) {
-                return redirect()->route(TranslatableUrlPrefix::getRouteName($locale, ['products', 'index']));
-            }
-
-            if ($filter != null) {
-                $countryGroupId = $filter->filter_country_id;
+            if ($brands[$i]->belongsToCountry($country_id)) {
+                $brandCategories[] = [
+                    'brand'      => $brands[$i],
+                    'categories' => $categoriesFiltered
+                ];
             }
         }
 
-        # Valida el almacen y el estado de los productos
-        $products = CountryProduct::getFilteredByGroup($countryGroupId);
-        $state    = $this->getState();
-        foreach ($products as $i => $product) {
-            if (notShowRestrictedProduct($product->countryProduct, $state) || notShowRestrictedProductByIP($product->countryProduct)) {
-                $products->forget($i);
-            }
+        $corbiz=SessionHdl::getCorbizCountryKey();
+        if($corbiz==null){
+            $corbiz="";
         }
 
-        $filters  = CategoryFilter::where('category_country_id', $category->id)->where('active', 1)->get();
+        $json = array(
+            'brandCategories'    => $brandCategories,
+            'json_shopping_cart' => ShoppingCart::sessionToJson($corbiz),
+            'show_tabs'          => $brand->parent_brand_id != 0 ? true : false
+        );
 
-        $showSystemTab = GroupCountry::getByCountryAndBrand(SessionHdl::getCountryID(), SessionHdl::getBrandID(), 2)->count() > 0;
 
-        return View::make('shopping::frontend.categories', [
-            'categories'       => $categories,
-            'category'         => $category,
-            'products'         => $products,
-            'filters'          => $filters,
-            'currency'         => SessionHdl::getCurrencyKey(),
-            'isShoppingActive' => $isShoppingActive,
-            'isWSActive'       => $isWSActive,
-            'showSystemTab'    => $showSystemTab,
-        ]);
+        return response()->json($json);
     }
 
     public function system(Request $request, $system_slug) {
@@ -181,6 +182,7 @@ class ProductController extends Controller {
             'system'           => $system,
             'systems'          => $systems,
             'products'         => $products,
+            'url'=>"",
             'currency'         => SessionHdl::getCurrencyKey(),
             'isShoppingActive' => $isShoppingActive,
             'isWSActive'       => $isWSActive,
@@ -189,70 +191,46 @@ class ProductController extends Controller {
     }
 
     public function detail($product_slug) {
-        $config = country_config(SessionHdl::getCorbizCountryKey());
 
-        ShoppingCart::validateProductWarehouse(SessionHdl::getCorbizCountryKey(), SessionHdl::getWarehouse());
+        $locale= app()->getLocale();
+        $country_id=17;
+        $brand_id=1;
 
-        $isShoppingActive = $config['shopping_active'];
-        $isWSActive       = $config['webservices_active'];
-        $warehouse        = SessionHdl::getWarehouse();
-        $locale           = SessionHdl::getLocale();
+        $countryProducts=CountryProduct::where('country_id', $country_id)->get();
 
-        $divider        = strrpos($product_slug, '-');
-        $sku            = substr($product_slug, $divider+1);
-        $product_slug   = substr($product_slug, 0, $divider);
-
-        $state          = $this->getState();
-
-        $countryProducts = CountryProduct::whereTranslation('slug', $product_slug)->where('country_id', SessionHdl::getCountryID())->where('active', 1)->where('delete', 0)->get();
         $countryProduct  = null;
         foreach ($countryProducts as $cp) {
-            if ($cp->product->sku == $sku) {
+            if ($cp->slug == $product_slug) {
                 $countryProduct = $cp;
             }
         }
 
         if ($countryProduct == null) {
-            return redirect()->route(TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'index']));
-        } else {
-            if (notShowWarehouseProduct($countryProduct, $warehouse) || notShowRestrictedProductByIP($countryProduct, $warehouse)) {
-                return redirect()->route(TranslatableUrlPrefix::getRouteName($locale, ['products', 'index']));
-            }
-        }
-
-        $category = $countryProduct->productGroups->where('active', 1)->where('country_id', SessionHdl::getCountryID())->where('group_id', 1)->pop();
-        if ($countryProduct->product->sku != $sku || $countryProduct->product->is_kit != 0 || $countryProduct->isItRestrictedIn($state)) {
             return redirect()->route(TranslatableUrlPrefix::getRouteName($locale, ['products', 'index']));
         }
 
-        if (SessionHdl::getBrandID() != $countryProduct->product->brandProduct->brand->id) {
+
+        $category = $countryProduct->productGroups->where('active', 1)->where('country_id',$country_id)->where('group_id', 1)->pop();
+
+        if ($brand_id != $countryProduct->product->brandProduct->brand->id) {
             return redirect(str_replace(SessionHdl::getBrandUrl(), $countryProduct->product->brandProduct->brand->domain, url()->current()));
         }
 
         # Categorías y productos relacionados
-        $categories      = GroupCountry::getByCountryAndBrand(SessionHdl::getCountryID(), SessionHdl::getBrandID(), 1);
+        $categories      = GroupCountry::getByCountryAndBrand($country_id, $brand_id, 1);
         $relatedProducts = $countryProduct->getRelatedProducts();
-        $relatedProductsTmp = [];
-        foreach ($relatedProducts as $rp) {
-            if ($rp->relatedProduct->product->is_kit == 0 && $rp->relatedProduct->active == 1 && $rp->relatedProduct->delete == 0 && $rp->relatedProduct->product->delete == 0 && $rp->relatedProduct->product->active == 1) {
-                if (notRestrictedCountryProduct($rp->relatedProduct, $state, $warehouse) || notRestrictedCountryProductByIP($rp->relatedProduct, $state, $warehouse)) {
-                    $relatedProductsTmp[] = $rp;
-                }
-            }
-        }
-        $relatedProducts = collect($relatedProductsTmp);
 
         # Background color
         $backgroundColor = '';
         $segments = explode('/', url()->previous());
         if (isset($segments[4]) && isset($segments[5]) && in_array($segments[4], \App\Helpers\TranslatableUrlPrefix::getTranslatablePrefixesByIndex('system'))) {
-            $system = GroupCountry::whereTranslation('slug', $segments[5])->where('country_id', SessionHdl::getCountryID())->where('group_id', 2)->first();
+            $system = GroupCountry::whereTranslation('slug', $segments[5])->where('country_id', $country_id)->where('group_id', 2)->first();
             $backgroundColor = $system->color;
         } else {
             if (!is_null($category)) {
                 $backgroundColor = $category->color;
             } else {
-                $system = $countryProduct->productGroups->where('active', 1)->where('country_id', SessionHdl::getCountryID())->where('group_id', 2)->pop();
+                $system = $countryProduct->productGroups->where('active', 1)->where('country_id', $country_id)->where('group_id', 2)->pop();
                 if (!is_null($system)) {
                     $backgroundColor = $system->color;
                 }
@@ -260,13 +238,13 @@ class ProductController extends Controller {
         }
 
         # Social meta info
-        $urlSocialTag = \Request::url() . '?' . \App\Helpers\ShareSession::getShareArrayEncoded();
+        //$urlSocialTag = \Request::url() . '?' . \App\Helpers\ShareSession::getShareArrayEncoded();
         $socialTags = [
             'facebook' => [
                 'title'       => $countryProduct->name,
                 'type'        => 'website',
                 'description' => $countryProduct->description,
-                'url'         => $urlSocialTag,
+                'url'         => "",
                 'image'       => asset($countryProduct->image),
                 'site_name'   => $countryProduct->name,
             ],
@@ -276,23 +254,29 @@ class ProductController extends Controller {
                 'image'       => asset($countryProduct->image),
                 'site'        => 'https://twitter.com/omnilife',
                 'creator'     => 'Omnilife',
-                'url'         => $urlSocialTag,
+                'url'         => "",
                 'domain'      => \Request::root(),
                 'description' => $countryProduct->description,
             ]
         ];
-
         $showSystemTab = GroupCountry::getByCountryAndBrand(SessionHdl::getCountryID(), SessionHdl::getBrandID(), 2)->count() > 0;
         $nutritionalTableIds = !empty(config('settings::frontend.frontend.img_nutrimental')) ? explode(',', config('settings::frontend.frontend.img_nutrimental')) : [1];
 
+        $categories=$this->category();
+
+        $categories=$categories->original['brandCategories'][0]['categories'];
+
+        $categories=$this->category();
+        $categories=$categories->original['brandCategories'][0]['categories'];
+        $cart=\session()->get('portal.cart');
+
         return View::make('shopping::frontend.product_detail', [
             'categories'          => $categories,
+            'cart'=>$cart,
             'category'            => $category,
             'countryProduct'      => $countryProduct,
             'relatedProducts'     => $relatedProducts,
             'currency'            => SessionHdl::getCurrencyKey(),
-            'isShoppingActive'    => $isShoppingActive,
-            'isWSActive'          => $isWSActive,
             'socialTags'          => $socialTags,
             'showSystemTab'       => $showSystemTab,
             'nutritionalTableIds' => $nutritionalTableIds,

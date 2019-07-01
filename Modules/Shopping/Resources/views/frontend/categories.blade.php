@@ -130,6 +130,8 @@
 </div>
 
 {!! PageBuilder::section('footer') !!}
+
+
 <input type="hidden" id="shop_secret" value="{{ csrf_token() }}">
 <script>
     $(document).ready(function () {

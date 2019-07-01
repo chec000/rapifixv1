@@ -195,6 +195,7 @@ class CountryProduct extends Model
     }
 
     public static function getAllByCategory($categoryId, $countryId, $locale, $onlyHome = false, $onlyCat = false) {
+
         $products = CountryProduct::select('shop_country_products.*')
             ->join('shop_products as p', 'p.id', '=', 'shop_country_products.product_id')
             ->join('shop_group_products as gp', 'gp.product_id', '=', 'shop_country_products.id')

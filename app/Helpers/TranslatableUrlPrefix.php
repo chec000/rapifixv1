@@ -25,7 +25,9 @@ class TranslatableUrlPrefix {
     }
 
     public static function getTranslatablePrefixByIndexAndLang($index, $lang) {
+
         return Config::get('routes_prefixes')[$index][$lang];
+
     }
 
     public static function getRouteName($lang, $indexes) {

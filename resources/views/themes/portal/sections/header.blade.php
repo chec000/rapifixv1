@@ -1,141 +1,240 @@
-<!-- starts header-->
-<header class="main-h">
-    <div class="wrapper">
-        <div class="logo main-h__logo">
-            <a class="logo" {{ PageBuilder::block('header_logo_link') }}>
-                <figure class="icon-omnilife">
-                {!! PageBuilder::block('logo') !!}
-                </figure>
-            </a>
-        </div>
-        <nav class="main-nav">
-            <div class="main-nav__head mov">
-                @if (Session::get('portal.eo.auth') == true)
-                    <figure class="avatar small">
-                        <img class="icon-btn icon-user-logged-header" style="height: 100%;">
-                    </figure>
-                    <div class="main-nav__user">
-                        <div class="main-nav__name">
-                            {{Session::get('portal.eo.shortTitleName')}}
+<header>
+    <!-- header top nav -->
+    <div class="header-top-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 offset-lg-3 col-md-6 col-sm-12">
+                    <!-- language and currency changer -->
+                    <div class="language-currency-changer d-flex justify-content-center justify-content-md-start justify-content-lg-center">
+                        <div class="language-changer">
+                            <img src="" alt="">
+                            <a href="#" id="changeLanguage"><span id="languageName">English <i class="fa fa-caret-down"></i></span></a>
+                            <div class="language-currency-list hidden" id="languageList">
+                                <ul>
+                                    <li><a href="#"><img src="assets/images/flags/1.jpg" alt=""> English</a></li>
+                                    <li><a href="#"><img src="assets/images/flags/2.jpg" alt=""> Français</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="main-nav__level">
-                            <span>Nivel bronce</span>
-                            <span class="sep">|</span>
-                            <span class="points">3,000 pts</span>
+                        <div class="currency-changer">
+                            <a href="#" id="changeCurrency"><span id="currencyName">USD <i class="fa fa-caret-down"></i></span></a>
+                            <div class="language-currency-list hidden" id="currencyList">
+                                <ul>
+                                    <li><a href="#">USD</a></li>
+                                    <li><a href="#">EURO</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                @else
-                    @if(config('settings::frontend.webservices') == 1)
-                        @if((session()->get('portal.eo.auth') == true))
-                            <button class="icon-btn icon-user-logged-header" id="iuser-mobile"></button>
-                        @else
-                            <button class="icon-btn icon-user" id="iuser-mobile"></button>
-                        @endif
-                    <a class="main-nav__link" id="login-btn-mov" href="#">@lang('cms::header.log_in')</a>
-                    <a class="main-nav__link bold" href="#">@lang('cms::header.sign_in')</a>
-                    @endif
-                @endif
-                <button class="icon-btn icon-cross close"></button>
-            </div>
-            <div class="main-nav__body">
-                <input type="hidden" name="country_current_selected" value="{{session()->get('portal.main.country_id')}}" id="country_current_selected">
-                <ul class="nav-list top list-nostyle">
-                    @if(!empty(session()->get('portal.main.varsMenu.otherBrands')))
-                        @foreach(session()->get('portal.main.varsMenu.otherBrands') as $brandMenu)
-                            <li class="nav-item nav-item_hover_{{config('cms.brand_css.'.$brandMenu->id) }}"><a data-brandId="{{$brandMenu->id}}" href="{{$brandMenu->domain}}">{{$brandMenu->name}}</a></li>
-                        @endforeach
-                    @endif
+                    <!-- end of language and currency changer -->
+                </div>
 
-                    @if(session()->get('portal.main.brand.parent_brand_id') != 0 && !empty(session()->get('portal.main.varsMenu.parentBrands')))
-                        @if(is_object(session()->get('portal.main.varsMenu.parentBrands')) && count(session()->get('portal.main.varsMenu.parentBrands')) > 1)
-                            <li class="nav-item"><a href="#">@lang('cms::header.products')</a>
-                                <ul class="nav-item__list list-nostyle">
-                                    @foreach(session()->get('portal.main.varsMenu.parentBrands') as $parentBrand)
-                                        <li class="nav-item__item">
-                                            <a data-brandId="{{$parentBrand->id}}" href="{{$parentBrand->domain}}/{{ \App\Helpers\TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('products', session()->get('portal.main.app_locale')) }}">{{$parentBrand->alias}}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @else
-                                <li class="nav-item"><a href="{{session()->get('portal.main.varsMenu.parentBrands.0.domain')}}/{{ \App\Helpers\TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('products', session()->get('portal.main.app_locale')) }}"> @lang('cms::header.products')</a></li>
-                        @endif
-                    @else
-                    <!--<li class="nav-item"><a href="{{ route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'index'])) }}"> @lang('cms::header.products')</a></li>-->
-                    @endif
-                    {!! PageBuilder::menu('main_menu',['view' =>'main_menu']) !!}
-                </ul>
-                <ul class="nav-list list-nostyle">
-                    <li class="nav-item dropdown"><span class="dropdown-toggle">@lang('cms::header.country'):
-                            <figure class="flag"><img src="{{ asset(session()->get('portal.main.flag')) }}" alt=""></figure>{{session()->get('portal.main.country_name')}}</span>
-                        <ul class="dropdown-list list-nostyle">
-                            @if(!empty(session()->get('portal.main.brand.countries')))
-                                @foreach(session()->get('portal.main.brand.countries') as $countryMenu)
-                                    <li class="dropdown-item dropdown-item_change_country">
-                                        <a class="change_country_header" data-countryid="{{$countryMenu->id}}"
-                                           data-countryidcurrent="{{session()->get('portal.main.country_id')}}">
-                                            <figure class="flag">
-                                                <img src="{{ asset($countryMenu->flag) }}" alt="{{$countryMenu->name}}">
-                                            </figure>{{$countryMenu->name}}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @endif
+
+                <div class="col-md-6 col-sm-12">
+                    <!-- user information menu -->
+                    <div class="user-information-menu">
+                        <ul>
+                            <li><a href="wishlist.html">My Wishlist</a> <span class="separator">|</span></li>
+                            <li><a href="checkout.html">Check Out</a> <span class="separator">|</span></li>
+                            <li><a href="cart.html">Cart (<span id="cart-status">Empty</span>)</a> <span class="separator">|</span></li>
+                            <li><a href="login-register.html">Sign In</a></li>
                         </ul>
-                    </li>
-                    @if(!empty(session()->get('portal.main.varsMenu.countryLangs')) && count(session()->get('portal.main.varsMenu.countryLangs')) > 1)
-                    <li class="nav-item dropdown"> <span class="dropdown-toggle">@lang('cms::header.language'): {{session()->get('portal.main.language_name')}}</span>
+                    </div>
+                    <!-- end of user information menu -->
+                </div>
 
-                        <ul class="dropdown-list list-nostyle">
-                            @foreach(session()->get('portal.main.varsMenu.countryLangs') as $index => $langMenu)
-                                <li class="dropdown-item dropdown-item_change_lang"><a class="change_language_header" data-langid="{{$index}}"
-                                     data-langidcurrent="{{session()->get('portal.main.language_id')}}" type="button">{{$langMenu}}</a></li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    @endif
-                    @if(config('settings::frontend.webservices') == 1 && session()->get('portal.main.inscription_active') == 1 && !session()->has('portal.eo'))
-                    <li class="nav-item desk bold">
-                        <a href="{{route('register')}}">@lang('cms::header.register')</a>
-                    </li>
-                    @endif
-                    @if(config('settings::frontend.webservices') == 1 && !session()->has('portal.eo'))
-                        <li class="nav-item desk bold "><a href="#" id="login-btn">@lang('cms::header.sign_in')</a></li>
-                    @endif
-                </ul>
             </div>
-        </nav>
-        <ul class="main-h__icons list-nostyle">
-            <li class="main-h__icon">
-                <button class="icon-btn icon-search" id="isearch"></button>
-            </li>
-            @if (\App\Helpers\SessionHdl::isShoppingActive())
-                <li class="nav-item main-h__icon">
-                    <button class="icon-btn icon-cart" id="icart"></button>
-                    <span style="display: none;" class="notification">0</span>
-                </li>
-
-            @else
-                <li class="main-h__n-icon">
-                    <a target="_blank" href="https://www.omnilife.com/shopping/login.php?fidioma={{ strtolower(\App\Helpers\SessionHdl::getCorbizLanguage()) }}"><button class="icon-btn icon-cart"></button></a>
-                </li>
-            @endif
-            @if(config('settings::frontend.webservices') == 1)
-                <li class="main-h__icon">
-                    @if(session()->get('portal.eo.auth') == true)
-                        <button class="icon-btn icon-user-logged-header" id="iuser"></button>
-                    @else
-                        <button class="icon-btn icon-user" id="iuser"></button>
-                    @endif
-                </li>
-            @endif
-            <li class="main-h__icon mov">
-                <button class="icon-btn" id="imenu">
-                    <figure class="icon-menu"><img src="{{ asset('themes/omnilife2018/images/icons/menu-red.svg') }}" alt="OMNILIFE - menu">
-                    </figure>
-                </button>
-            </li>
-        </ul>
+        </div>
     </div>
+    <!-- end of header top nav -->
+
+    <!-- header bottom -->
+
+    <!-- header content -->
+    <div class="header-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 offset-lg-0 text-md-left text-sm-center">
+                    <!-- logo -->
+                    <div class="logo">
+                        <a href="/"><img src="{{asset('cms/app/img/logo.png')}}" class="img-fluid" alt="logo"></a>
+                    </div>
+                    <!-- end of logo -->
+                </div>
+                <div class="col-lg-6 col-md-8">
+                    <!-- header search bar -->
+                    <div class="header-search-bar">
+                        <div class="input-group">
+                            <select name="categoryName" id="categoryName">
+                                <option value="">Categories</option>
+                                @foreach ($categories as $c)
+                                    <option value="{{$c->id}}}"><a href="{{route('category.products', ['id' => $c->id])}}">{{$c->name}}</a></option>
+                                @endforeach
+                            </select>
+                            <div class="input-group-append">
+                                <input type="search" name="search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of header search bar -->
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <!-- shopping cart -->
+                    {!! PageBuilder::section('cart',['cart'=>$cart]) !!}
+
+                </div>
+        </div>
+    </div>
+    <!-- end of header content -->
+
+    <!-- header navigation section -->
+    <div class="header-navigation">
+        <div class="container">
+            <div class="navigation-container">
+                <div class="row">
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <!-- ======  Header menu left text  ======= -->
+                        <p class="call-us-text">Call us 24/7: (+66) 123-456-789</p>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+
+                        <!-- Header navigation right side-->
+
+                        <!-- main menu start -->
+                        <div class="main-menu">
+                            <nav>
+                                <ul>
+                                    <li class="active menu-item-has-children"><a href="#">Home</a>
+
+                                        <!-- ======  Submenu block  ======= -->
+
+                                        <ul style="display: none;" class="sub-menu">
+                                            <li class="active"><a href="index.html">Home One</a></li>
+                                            <li><a href="index-2.html">Home Two</a></li>
+                                            <li><a href="index-3.html">Home Three</a></li>
+                                        </ul>
+
+                                        <!-- ====  End of Submenu block  ==== -->
+
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="#">Shop</a>
+
+                                        <!-- ======  Submenu block  ======= -->
+
+                                        <ul style="display: none;" class="sub-menu">
+                                            <li class="menu-item-has-children"><a href="#">shop grid</a>
+                                                <ul class="sub-menu">
+                                                    <li class="active"><a href="shop-left-sidebar.html">shop left sidebar</a></li>
+                                                    <li><a href="shop-left-sidebar-wide.html">shop left sidebar wide</a></li>
+                                                    <li><a href="shop-right-sidebar.html">shop right sidebar</a></li>
+                                                    <li><a href="shop-right-sidebar-wide.html">shop right sidebar wide</a></li>
+                                                    <li><a href="shop-no-sidebar-3.html">shop no sidebar 3 column</a></li>
+                                                    <li><a href="shop-no-sidebar-3-wide.html">shop no sidebar 3 column wide</a></li>
+                                                    <li><a href="shop-no-sidebar-4.html">shop no sidebar 4 column</a></li>
+                                                    <li><a href="shop-no-sidebar-4-wide.html">shop no sidebar 4 column wide</a></li>
+                                                    <li><a href="shop-no-sidebar-5.html">shop no sidebar 5 column</a></li>
+                                                    <li><a href="shop-no-sidebar-5-wide.html">shop no sidebar 5 column wide</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="#">shop List</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="shop-list.html">shop list</a></li>
+                                                    <li><a href="shop-list-wide.html">shop list wide</a></li>
+                                                    <li><a href="shop-left-sidebar-list.html">shop left sidebar List</a></li>
+                                                    <li><a href="shop-left-sidebar-list-wide.html">shop left sidebar List wide</a></li>
+                                                    <li><a href="shop-right-sidebar-list.html">shop right sidebar List</a></li>
+                                                    <li><a href="shop-right-sidebar-list-wide.html">shop right sidebar List wide</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="#">Shop product</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="single-product.html">shop product</a></li>
+                                                    <li><a href="single-product-wide.html">shop product wide</a></li>
+                                                    <li><a href="single-product-external.html">shop product external</a></li>
+                                                    <li><a href="single-product-external-wide.html">shop product external wide</a></li>
+                                                    <li><a href="single-product-variable.html">shop product variable</a></li>
+                                                    <li><a href="single-product-variable-wide.html">shop product variable wide</a></li>
+                                                    <li><a href="single-product-group.html">shop product group</a></li>
+                                                    <li><a href="single-product-group-wide.html">shop product group wide</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!-- ====  End of Submenu block  ==== -->
+
+                                    </li>
+                                    <li style="display: none"  class="menu-item-has-children"><a href="#">Blog</a>
+                                        <!-- ======  Mega menu block  ======= -->
+                                        <ul class="mega-menu three-column">
+                                            <li><a href="#" class="d-none">Blog Box</a>
+                                                <ul>
+                                                    <li><a href="blog-1-column-left-sidebar.html">Blog 1 column left sidebar</a></li>
+                                                    <li><a href="blog-1-column-right-sidebar.html">Blog 1 column right sidebar</a></li>
+                                                    <li><a href="blog-2-column-left-sidebar.html">Blog 2 column left sidebar</a></li>
+                                                    <li><a href="blog-2-column-right-sidebar.html">Blog 2 column right sidebar</a></li>
+                                                    <li><a href="blog-3-column.html">Blog 3 column</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#" class="d-none">Blog Wide</a>
+                                                <ul>
+                                                    <li><a href="blog-1-column-left-sidebar-wide.html">Blog 1 column left sidebar wide</a></li>
+                                                    <li><a href="blog-1-column-right-sidebar-wide.html">Blog 1 column right sidebar wide</a></li>
+                                                    <li><a href="blog-2-column-left-sidebar-wide.html">Blog 2 column left sidebar wide</a></li>
+                                                    <li><a href="blog-2-column-right-sidebar-wide.html">Blog 2 column right sidebar wide</a></li>
+                                                    <li><a href="blog-3-column-wide.html">Blog 3 column wide</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#" class="d-none">Single Blog</a>
+                                                <ul>
+                                                    <li><a href="single-blog-left-sidebar.html">Single blog left sidebar</a></li>
+                                                    <li><a href="single-blog-left-sidebar-wide.html">Single blog left sidebar wide</a></li>
+                                                    <li><a href="single-blog-right-sidebar.html">Single blog right sidebar</a></li>
+                                                    <li><a href="single-blog-right-sidebar-wide.html">Single blog right sidebar wide</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!-- ====  End of Mega menu block  ==== -->
+                                    </li>
+
+                                    <li class="menu-item-has-children" ><a href="#">Pages</a>
+                                        <!-- ======  Submenu block  ======= -->
+
+                                        <ul class="sub-menu">
+                                            <li><a href="cart.html">cart</a></li>
+                                            <li><a href="cart-wide.html">cart wide</a></li>
+                                            <li><a href="checkout.html">checkout</a></li>
+                                            <li><a href="checkout-wide.html">checkout wide</a></li>
+                                            <li><a href="compare.html">compare</a></li>
+                                            <li><a href="compare-wide.html">compare wide</a></li>
+                                            <li><a href="store.html">store</a></li>
+                                            <li><a href="store-wide.html">store wide</a></li>
+                                            <li><a href="wishlist.html">wishlist</a></li>
+                                            <li><a href="wishlist-wide.html">wishlist wide</a></li>
+                                            <li><a href="my-account.html">My account</a></li>
+                                            <li><a href="my-account-wide.html">My account wide</a></li>
+                                            <li><a href="login-register.html">Login register</a></li>
+                                            <li><a href="login-register-wide.html">Login register wide</a></li>
+                                        </ul>
+
+                                        <!-- ====  End of Submenu block  ==== -->
+                                    </li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </nav>
+
+                            <!-- Mobile Menu -->
+                            <div class="mobile-menu order-12 d-block d-lg-none"></div>
+
+                        </div>
+
+                        <!-- end of Header navigation right side-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of header navigation section -->
+
+    <!-- end of header bottom -->
 </header>
-<!-- ends header-->

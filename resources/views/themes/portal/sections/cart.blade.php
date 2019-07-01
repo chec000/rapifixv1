@@ -1,36 +1,66 @@
-@php
-    $style = (isset($shoppingCart) && sizeof($shoppingCart) > 0) ? '' : 'display: none';
-@endphp
+<div class="shopping-cart float-lg-right d-flex justify-content-start" id="shopping-cart">
+    <div class="cart-icon">
+        <a href="cart.html"><img src="assets/images/icon-topcart.png" class="img-fluid" alt=""></a>
+    </div>
+    <div class="cart-content" id="shopping-cart">
+        <h2><span class="fa fa-shopping-cart" onmouseover="showCart()"> <span>
+                @if($cart['items']!=null)
+            <span id="cartStatus" style="display: none;">
+                (Empty)
 
-<!-- cart preview-->
-<div class="cart-preview aside">
-    <div class="cart-preview__head">
-        <p>@lang('cms::cart_aside.head')</p>
-        <button class="icon-btn icon-cross close" type="button"></button>
-        <p id="cart-remove-all" class="remove-all js-empty-cart" style="{{ $style }}"><a onclick="ShoppingCart.remove_all()" href="javascript:;">@lang('cms::cart_aside.remove_all')</a></p>
+                @endif
+        </span>
+    </span>
+                </a>
+</h2>
     </div>
 
-    <div class="cart-preview__content">
-        @if (session()->exists('delete-items'))
-            <div class="error__box theme__transparent" style="display: inline-block; font-size: 0.85em; padding: 10px; margin: 0 auto;width: 100%;text-align: center;border: 2px solid #fcb219;">
-                <ul style="list-style: none; padding: 0px;">
-                    <li>{{ session()->get('delete-items') }}</li>
-                </ul>
-            </div>
-        @endif
+
+    <div class="cart-floating-box" id="cart-floating-box">
+        <div class="cart-items">
+            @if($cart['items']!=null)
+                @foreach($cart['items'] as $p)
+                    <div data-id="{{$p['id']}}" class="cart-float-single-item d-flex">
+                        <span class="remove-item" onclick="ShoppingCart.remove_all_from_item({{$p['id']}})"><i class="fa fa-trash"></i></span>
+                        <div class="cart-float-single-item-image">
+                            <img src="{{$p['image']}}" class="img-fluid" alt="">
+
+                        </div>
+                        <div class="cart-float-single-item-desc item-id-{{$p['id']}}">
+                            <span class="product-title">
+                                <span class="count">{{$p['quantity']}}
+                                X
+                                 {{$p['name']}}   
+                            </span>
+                            </span>
+                            <input class="form-control" style="width: 34px" type="text" value="{{$p['quantity']}}" name="product-{{$p['id']}}"onkeypress="return isNumeric(event)" 
+                            >
+
+                            <p class="size"> <a href="shop-left-sidebar.html"></a></p>
+                            <p class="price" >{{$p['price']}}</p>
+                        </div>
+                    </div>
 
 
+                @endforeach
 
-        <div id="cart-resume" style="{{ $style }}" class="cart-preview__resume list-nostyle js-empty-cart">
-            <li id="subtotal" class="subtotal_checkout">@lang('cms::cart_aside.subtotal'): {{ isset($subtotal) ? $subtotal : '$00.00' }}</li>
-            <li id="points" class="points_checkout">@lang('cms::cart_aside.points'): {{ isset($points) ? $points : '0000' }}</li>
-            <li id="total" class="total total_checkout">@lang('cms::cart_aside.total'): {{ isset($subtotal) ? $subtotal : '$00.00' }}</li>
+            @endif
+
         </div>
 
-        <footer class="cart-preview__footer">
-            <a id="cart-finish" class="js-empty-cart" style="{{ $style }}" href="{{ route('checkout.index') }}"><button class="button default" type="button">@lang('cms::cart_aside.checkout_button')</button></a>
-            <a href="{{session()->get('portal.main.brand.domain')}}/{{ \App\Helpers\TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('products', session()->get('portal.main.app_locale')) }}"><button class="button transparent" type="button">@lang('cms::cart_aside.continue_shopping')</button></a>
-        </footer>
+            <div class="cart-calculation d-flex">
+                <div class="calculation-details">
+                   <!--
+                    <p class="shipping">Shipping <span>$2</span></p>
+                   -->
+                    <p class="total">Total <span id="subtotal">${{$cart['subtotal']}}</span></p>
+                </div>
+                <div class="checkout-button">
+                    <a href="checkout.html">Checkout</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- end of shopping cart -->
     </div>
 </div>
-<!-- end cart preview-->

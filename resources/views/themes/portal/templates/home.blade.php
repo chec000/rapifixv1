@@ -33,4 +33,5 @@
 </script>
 <input type="hidden" id="shop_secret" value="{{ csrf_token() }}">
 <script src="{{ PageBuilder::js('shopping_cart_old_browsers') }}"></script>
+
 <script type="text/javascript" src="{{ PageBuilder::js('home_products') }}"></script>

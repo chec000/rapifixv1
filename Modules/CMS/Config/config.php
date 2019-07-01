@@ -45,7 +45,7 @@ return [
         'aviary' => ''
     ],
     'site' => [
-        'name' => 'Gym CMS',
+        'name' => 'Rapyfix',
         'email' => 'info@example.com',
         'version' => 'v1.0.0',
         'pages' => '0',

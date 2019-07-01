@@ -295,8 +295,9 @@ class ShoppingCart  {
      */
     static show_resume_cart () {
         //$('#cart-list').empty();
-        $('.cart-list').empty();
-        $('.js-empty-cart').show();
+        $('#cart-floating-box').empty();
+        $("#cart-floating-box").show('slow');
+       // $('.js-empty-cart').show();
     }
 
     /**
