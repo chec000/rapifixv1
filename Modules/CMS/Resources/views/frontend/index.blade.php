@@ -7,10 +7,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="format-detection" content="telephone=yes">
 
-     <!-- Custom fonts for this template -->
+     <!-- Custom fonts for this template
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <!-- Plugin CSS -->
+    -->
+        <!-- Plugin CSS -->
     <!-- Custom fonts for this template -->
          <link href="{{asset('cms/inicio/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
           <link href="{{asset('cms/inicio/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
@@ -19,8 +20,9 @@
           <link href="{{asset('cms/inicio/css/plugins.css')}}" rel="stylesheet" type="text/css">
           <link href="{{asset('cms/inicio/css/main.css')}}" rel="stylesheet" type="text/css">
 
+
+        <script type="text/javascript" src="{{asset('cms/inicio/js/vendor/modernizr-2.8.3.min.js')}}"></script>
         <!-- Modernizer JS -->
-        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
 
     </head>
@@ -349,7 +351,6 @@
                                                         @foreach ($categories as $c)
                                                             <li><a href="shop-left-sidebar.html">{{$c->name}}</a></li>
 
-
                                                         @endforeach
                         <!--
 
@@ -521,121 +522,47 @@
 
                                             <div class="homepage-sidebar">
                                                 <!-- vertical auto slider container -->
-                                                <div class="sidebar">
-                                                    <h2 class="block-title">BESTSELLER</h2>
-                                                    <div class="vertical-product-slider-container">
-                                                        <div class="single-vertical-slider">
-                                                            <div class="vertical-auto-slider-product-list">
-                                                                <!-- single vertical product -->
-                                                                <div class="single-auto-vertical-product d-flex">
-                                                                    <div class="product-image">
-                                                                        <a href="single-product-variable.html"><img src="assets/images/products/1.jpg" class="img-fluid" alt=""></a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded
-                                                                                Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
+                                                @foreach ($categories as $c)
+                                                    <div class="sidebar">
+                                                        <h2 class="block-title">{{$c->name}}</h2>
+                                                        <div class="vertical-product-slider-container">
+                                                            <div class="single-vertical-slider">
+                                                                <div class="vertical-auto-slider-product-list">
+                                                                    <!-- single vertical product -->
+
+
+                                                                @foreach ($c->products as $p)
+
+                                                                        <div class="single-auto-vertical-product d-flex">
+                                                                            <div class="product-image">
+                                                                                <a href="single-product-variable.html">
+                                                                                    <img src="{{$p->image}}" class="img-fluid" alt=""></a>
+                                                                            </div>
+                                                                            <div class="product-description">
+                                                                                <h5 class="product-name">
+                                                                                    <a href="single-product-variable.html">
+                                                                                    {{$p->name}}
+                                                                                    </a></h5>
+                                                                                <div class="price-box">
+                                                                                    <h4>{{$p->price}}</h4>
+                                                                                </div>
+
+                                                                            </div>
                                                                         </div>
+                                                                    @endforeach
 
-                                                                    </div>
+                                                                    <!-- end of single vertical product -->
+                                                                    <!-- single vertical product -->
+
+                                                                    <!-- end of single vertical product -->
+
                                                                 </div>
-                                                                <!-- end of single vertical product -->
-                                                                <!-- single vertical product -->
-                                                                <div class="single-auto-vertical-product d-flex">
-                                                                    <div class="product-image">
-                                                                        <a href="single-product-variable.html"><img src="assets/images/products/2.jpg" class="img-fluid" alt=""></a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed
-                                                                                Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single vertical product -->
-                                                                <!-- single vertical product -->
-                                                                <div class="single-auto-vertical-product d-flex">
-                                                                    <div class="product-image">
-                                                                        <a href="single-product-variable.html"><img src="assets/images/products/3.jpg" class="img-fluid" alt=""></a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded
-                                                                                Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single vertical product -->
-                                                                <!-- single vertical product -->
-                                                                <div class="single-auto-vertical-product d-flex">
-                                                                    <div class="product-image">
-                                                                        <a href="single-product-variable.html"><img src="assets/images/products/4.jpg" class="img-fluid" alt=""></a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed
-                                                                                Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single vertical product -->
-                                                                <!-- single vertical product -->
-                                                                <div class="single-auto-vertical-product d-flex">
-                                                                    <div class="product-image">
-                                                                        <a href="single-product-variable.html"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded
-                                                                                Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single vertical product -->
-                                                                <!-- single vertical product -->
-                                                                <div class="single-auto-vertical-product d-flex">
-                                                                    <div class="product-image">
-                                                                        <a href="single-product-variable.html"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed
-                                                                                Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single vertical product -->
-                                                                <!-- single vertical product -->
-                                                                <div class="single-auto-vertical-product d-flex">
-                                                                    <div class="product-image">
-                                                                        <a href="single-product-variable.html"><img src="assets/images/products/7.jpg" class="img-fluid" alt=""></a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded
-                                                                                Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single vertical product -->
-
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    @endforeach
+
+
                                                 <!-- end of vertical auto slider container -->
 
                                                 <!-- homepage sidebar banner -->
@@ -773,627 +700,139 @@
 
                                             <div class="homepage-main-content">
                                                 <!-- horizontal product slider -->
-                                                <div class="horizontal-product-slider">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <!-- Block title -->
-                                                            <div class="block-title">
-                                                                <h2><a href="#">TENNIS</a></h2>
+
+                                                @foreach ($categories as $c)
+
+                                                    <div class="horizontal-product-slider">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <!-- Block title -->
+                                                                <div class="block-title">
+                                                                    <h2><a href="#">{{$c->name}}</a></h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <!-- horizontal product slider container -->
+                                                                <div class="horizontal-product-list">
+                                                                    <!-- single product -->
+
+                                                                    @foreach ($c->products as $p)
+                                                                        <div class="single-product">
+                                                                            <div class="single-product-content">
+                                                                                <div class="product-image new-badge">
+                                                                                    <a href="single-product-variable.html">
+                                                                                        <img src="{{$p->image}}" class="img-fluid" alt="">
+
+                                                                                    </a>
+                                                                                    <div class="image-btn">
+                                                                                        <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
+                                                                                        <a href="#"><i class="fa fa-heart-o"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <h5 class="product-name"><a href="single-product-variable.html">{{$p->name}}</a></h5>
+                                                                                <div class="price-box">
+                                                                                    <h4>{{$p->price}}</h4>
+                                                                                </div>
+
+                                                                                <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
+                                                                                            class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+
+
+                                                                    <!-- end of single product -->
+
+
+                                                                </div>
+                                                                <!-- end of horizontal product slider container -->
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <!-- horizontal product slider container -->
-                                                            <div class="horizontal-product-list">
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image new-badge">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/1.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/2.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
+                                                    <!-- end of horizontal product slider -->
 
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
+                                                    <!-- homepage double banner section -->
+                                                    <div class="homepage-banners mb-50">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-12 mb-20 mb-lg-0">
+                                                                <!-- ======  Homepage single split banner  ======= -->
+
+                                                                <div class="single-banner-container">
+                                                                    <a href="shop-left-sidebar.html">
+                                                                        <img src="assets/images/banners/banner1.png" class="img-fluid" alt="">
+                                                                    </a>
                                                                 </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image sale-badge">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/3.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/4.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
 
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/5.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/6.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/7.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/8.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image new-badge sale-badge">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/9.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/10.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-
+                                                                <!-- ====  End of Homepage single split banner  ==== -->
 
                                                             </div>
-                                                            <!-- end of horizontal product slider container -->
+                                                            <div class="col-lg-6 col-md-12">
+                                                                <!-- ======  Homepage single split banner  ======= -->
+
+                                                                <div class="single-banner-container">
+                                                                    <a href="shop-left-sidebar.html">
+                                                                        <img src="assets/images/banners/banner2.png" class="img-fluid" alt="">
+                                                                    </a>
+                                                                </div>
+
+                                                                <!-- ====  End of Homepage single split banner  ==== -->
+
+                                                            </div>
+
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!-- end of horizontal product slider -->
+                                                @endforeach
 
-                                                <!-- homepage double banner section -->
-                                                <div class="homepage-banners mb-50">
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-12 mb-20 mb-lg-0">
-                                                            <!-- ======  Homepage single split banner  ======= -->
-
-                                                            <div class="single-banner-container">
-                                                                <a href="shop-left-sidebar.html">
-                                                                    <img src="assets/images/banners/banner1.png" class="img-fluid" alt="">
-                                                                </a>
-                                                            </div>
-
-                                                            <!-- ====  End of Homepage single split banner  ==== -->
-
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-12">
-                                                            <!-- ======  Homepage single split banner  ======= -->
-
-                                                            <div class="single-banner-container">
-                                                                <a href="shop-left-sidebar.html">
-                                                                    <img src="assets/images/banners/banner2.png" class="img-fluid" alt="">
-                                                                </a>
-                                                            </div>
-
-                                                            <!-- ====  End of Homepage single split banner  ==== -->
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
                                                 <!-- end of homepage double banner section -->
 
                                                 <!-- horizontal product slider -->
-                                                <div class="horizontal-product-slider">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <!-- Block title -->
-                                                            <div class="block-title">
-                                                                <h2><a href="#">FOOTBALL</a></h2>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <!-- horizontal product slider container -->
-                                                            <div class="horizontal-product-list">
 
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/4.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/3.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/10.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/9.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/6.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/5.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/8.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/7.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-                                                                <!-- single product -->
-                                                                <div class="single-product">
-                                                                    <div class="single-product-content">
-                                                                        <div class="product-image">
-                                                                            <a href="single-product-variable.html">
-                                                                                <img src="assets/images/products/2.jpg" class="img-fluid" alt="">
-                                                                                <img src="assets/images/products/1.jpg" class="img-fluid" alt="">
-                                                                            </a>
-                                                                            <div class="image-btn">
-                                                                                <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
-                                                                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                        <div class="price-box">
-                                                                            <h4>$ 12.00</h4>
-                                                                        </div>
-
-                                                                        <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                    class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end of single product -->
-
-
-
-                                                            </div>
-                                                            <!-- end of horizontal product slider container -->
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!-- end of horizontal product slider -->
 
                                                 <!-- vertical slider container -->
                                                 <div class="vertical-product-slider-container">
                                                     <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <!-- ======  single vertical product slider  ======= -->
+                                                        @foreach ($categories as $c)
+                                                            <div class="col-lg-4">
+                                                                <!-- ======  single vertical product slider  ======= -->
 
-                                                            <div class="single-vertical-slider">
-                                                                <h2 class="block-title vertical-slider-block-title">NEW PRODUCTS</h2>
-                                                                <div class="vertical-product-list">
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/1.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
+                                                                <div class="single-vertical-slider">
+                                                                    <h2 class="block-title vertical-slider-block-title">{{$c->name}}</h2>
+                                                                    <div class="vertical-product-list">
+                                                                        <!-- single vertical product -->
+
+                                                                        @foreach ($c->products as $p)
+                                                                            <div class="single-vertical-product d-flex">
+                                                                                <div class="product-image">
+                                                                                    <a href="#"><img src="{{$p->image}}" class="img-fluid" alt=""></a>
+                                                                                </div>
+                                                                                <div class="product-description">
+                                                                                    <h5 class="product-name">
+                                                                                        <a href="single-product-variable.html">{{$p->name}} </a></h5>
+                                                                                    <div class="price-box">
+                                                                                        <h4>{{$p->price}}</h4>
+                                                                                    </div>
+                                                                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
+                                                                                                class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                                                </div>
                                                                             </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
+
+                                                                    @endforeach
+                                                                        <!-- end of single vertical product -->
+                                                                        <!-- single vertical product -->
+
+                                                                        <!-- end of single vertical product -->
                                                                     </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/2.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/3.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/4.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
                                                                 </div>
+
+                                                                <!-- ====  End of single vertical product slider  ==== -->
+
                                                             </div>
 
-                                                            <!-- ====  End of single vertical product slider  ==== -->
-
-                                                        </div>
-
-                                                        <div class="col-lg-4">
-                                                            <!-- ======  single vertical product slider  ======= -->
-
-                                                            <div class="single-vertical-slider">
-                                                                <h2 class="block-title vertical-slider-block-title">FEATURED PRODUCTS</h2>
-                                                                <div class="vertical-product-list">
-
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/2.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/1.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/3.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/4.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- ====  End of single vertical product slider  ==== -->
-
-                                                        </div>
-
-                                                        <div class="col-lg-4">
-                                                            <!-- ======  single vertical product slider  ======= -->
-
-                                                            <div class="single-vertical-slider">
-                                                                <h2 class="block-title vertical-slider-block-title">VIEWED PRODUCTS</h2>
-                                                                <div class="vertical-product-list">
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/1.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/2.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/3.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/4.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Printed Dress</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                    <!-- single vertical product -->
-                                                                    <div class="single-vertical-product d-flex">
-                                                                        <div class="product-image">
-                                                                            <a href="#"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
-                                                                        </div>
-                                                                        <div class="product-description">
-                                                                            <h5 class="product-name"><a href="single-product-variable.html">Faded Short Sleeve</a></h5>
-                                                                            <div class="price-box">
-                                                                                <h4>$ 12.00</h4>
-                                                                            </div>
-                                                                            <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i
-                                                                                        class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end of single vertical product -->
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- ====  End of single vertical product slider  ==== -->
-                                                        </div>
-
+                                                            @endforeach
                                                     </div>
                                                 </div>
                                                 <!-- end of vertical slider container -->
@@ -2057,19 +1496,14 @@
 
     <!-- ************************* JS ************************* -->
     <!-- jQuery JS -->
-    <script src="assets/js/vendor/jquery.min.js"></script>
 
-    <!-- Popper JS -->
-    <script src="assets/js/popper.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!-- Plugins JS -->
-    <script src="assets/js/plugins.js"></script>
-
-    <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+        <script type="text/javascript"  src="{{asset('cms/inicio/js/vendor/jquery.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('cms/inicio/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('cms/inicio/js/popper.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('cms/inicio/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('cms/inicio/js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('cms/inicio/js/plugins.js')}}"></script>
+        <script type="text/javascript" src="{{asset('cms/inicio/js/main.js')}}"></script>
 
     </body>
 

@@ -33,8 +33,8 @@ var ShoppingCart = function () {
 
             var item = from === 'products' ? JSON.parse(JSON.stringify(document.products[id])) : JSON.parse(JSON.stringify(document.shopping_cart[id]));
             item.quantity = quantity;
-
-            if ($('#cart-list').has('li#cart-empty').length > 0) {
+                var products_i=$(".cart-items");
+            if (products_i.children().length > 0) {
                 ShoppingCart.show_resume_cart();
             }
 
@@ -167,7 +167,8 @@ var ShoppingCart = function () {
                         window.location.href = URL_PROJECT;
                     } }
             }).done(function (response, textStatus, jqXHR) {
-                $('[data-id=' + id + ']').remove();
+              var pro=$('[data-id=' + id + ']');
+                pro.remove(); 
                 ShoppingCart.remove_item(id);
                 ShoppingCart.update_resume_cart(response.cart_resume, {
                     translates: response.translates
@@ -198,7 +199,7 @@ var ShoppingCart = function () {
             var quantity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
             var options = arguments[2];
 
-            var item_found = $('#cart-list').find('[data-id=' + item.id + ']');
+            var item_found = $('.cart-items').find('[data-id=' + item.id + ']');
 
             ShoppingCart.save_item(item);
 
@@ -220,7 +221,9 @@ var ShoppingCart = function () {
     }, {
         key: 'add_html_item_to_list',
         value: function add_html_item_to_list(item, options) {
-            $('#cart-list').append('<li data-id="' + item.id + '" class="cart-product__item">\n                <figure class="cart-product__img"><img src="' + item.image + '" alt=""></figure>\n                <div class="cart-product__content">\n                    <div class="cart-product__top">\n                        <div class="cart-product__title">' + item.name + '</div>\n                        <div class="cart-product__code">' + options.translates.code + ': ' + item.sku + '</div>\n                        <div class="bin"><figure class="icon-bin"><img src="/themes/omnilife2018/images/icons/bin.svg" alt="Eliminar"></figure></div>\n                    </div>\n                    <div class="cart-product__bottom">\n                        <div class="form-group numeric">\n                            <span class="minus r" style="margin-right: 10px"><svg height="14" width="14"><line x1="0" y1="8" x2="14" y2="8"></line></svg></span>\n                            <input class="form-control" type="numeric" name="qty" value="' + item.quantity + '">\n                            <span class="plus r" style="margin-left: 10px"><svg height="14" width="14"><line x1="0" y1="7" x2="14" y2="7"></line><line x1="7" y1="0" x2="7" y2="14"></line></svg></span>\n                        </div>\n                        <div class="cart-product__nums"><div class="cart-product__pts">' + item.points + ' ' + options.translates.pts + '</div><div class="cart-product__price">x ' + options.price + '</div></div>\n                    </div>\n                </div>\n            </li>');
+    
+           var product='<div data.id='+item.id+' class="cart-float-single-item d-flex"><span class="remove-item" onclick="ShoppingCart.remove_all_from_item('+item.id+')"><a href="#"><i class="fa fa-trash"></i></a></span><div class="cart-float-single-item-image"><img src=' + item.image + ' class="img-fluid" alt=""></div><div class="cart-float-single-item-desc"><p class="product-title"><span class="count">' + item.quantity + 'X</span><a href="single-product-variable.html">' + item.name + '</a></p><p class="size"> <a href="shop-left-sidebar.html">' + item.name + '</a></p></div></div>';
+            $('.cart-items').append(product);
         }
 
         /**
@@ -234,7 +237,7 @@ var ShoppingCart = function () {
     }, {
         key: 'add_to_item',
         value: function add_to_item(id, quantity) {
-            var item_found = $('#cart-list').find('[data-id=' + id + ']');
+            var item_found = $('.cart-items').find('[data-id=' + id + ']');
 
             if (item_found.length > 0) {
                 var input = item_found.find('input');
@@ -352,6 +355,7 @@ var ShoppingCart = function () {
         key: 'show_resume_cart',
         value: function show_resume_cart() {
             //$('#cart-list').empty();
+            $("#cart-floating-box").show();
             $('.cart-list').empty();
             $('.js-empty-cart').show();
         }
@@ -563,6 +567,8 @@ var ShoppingCart = function () {
 }();
 
 $(document).ready(function () {
+
+
     var car_list = $('.cart-list');
     var product_detail = $('#product-detail');
 

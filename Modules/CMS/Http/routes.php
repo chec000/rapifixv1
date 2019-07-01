@@ -130,13 +130,15 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Modules\CMS\Http\Controll
 
 });
 
-Route::group(['middleware' => ['web', 'cms.brand_middleware', 'exit.eo'], 'namespace' => 'Modules\CMS\Http\Controllers'], function()
+Route::group(['middleware' => ['web'], 'namespace' => 'Modules\CMS\Http\Controllers'], function()
 {
     # CEDIS ROUTES INIT
     Route::get('/cedis', 'CedisController@index')->name('cedis.index');
     Route::get('/cedis/{slug}', 'CedisController@detail')->name('cedis.detail')->where('slug', '[A-Za-z0-9-]+');
     # CEDIS ROUTES END
     Route::get('start', ['uses' => 'StartController@index','as'=>'index']);
+    Route::get('index_session', ['uses' => 'StartController@session','as'=>'index_session']);
+
     Route::post('save_read_cookies', ['uses' => 'StartController@saveReadCookies', 'as' => 'vars.save_read_cokies']);
 });
 

@@ -559,3 +559,9 @@
 
 
 })(jQuery);
+
+
+
+function showCart() {	    
+  $("#cart-floating-box").toggle();
+}

@@ -23,7 +23,10 @@ foreach (TranslatableUrlPrefix::getTranslatablePrefixesByIndex('shopping') as $l
     });
 }
 
-Route::group(['middleware' => ['web', 'cms.brand_middleware', 'auth.eo', 'exit.eo'], 'prefix' => 'shopping',
+
+
+
+Route::group(['middleware' => ['web'], 'prefix' => 'shopping',
     'namespace' => 'Modules\Shopping\Http\Controllers'], function () {
     Route::get('/checkout/getShippingAddress/{getFromWs}', ['as' => 'checkout.getShippingAddress', 'uses' => 'CheckoutController@getShippingAddress']);
     Route::post('/checkout/shippingAddress/states', ['as' => 'checkout.shippingAddress.states', 'uses' => 'CheckoutController@states']);
@@ -165,11 +168,15 @@ foreach (TranslatableUrlPrefix::getTranslatablePrefixesByIndex('products') as $l
     Route::group(['middleware' => ['web', 'cms.brand_middleware', 'prefix_translate', 'exit.eo'], 'prefix' => $prefix, 'namespace' => 'Modules\Shopping\Http\Controllers'], function () use ($prefix, $lang) {
 
         $prefixCat = TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('category', $lang);
+
         $prefixSys = TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('system', $lang);
 
         # Index
         Route::get('/', 'ProductController@products')
             ->name($prefix.'.'.'index');
+
+        Route::get('/'.$prefixCat.'/{id}', 'ProductController@category')
+            ->name($prefix.'.'.$prefixCat);
 
         # Category
         Route::get('/'.$prefixCat.'/{category_slug}', 'ProductController@category')
@@ -185,10 +192,46 @@ foreach (TranslatableUrlPrefix::getTranslatablePrefixesByIndex('products') as $l
         Route::get('/{product_slug}', 'ProductController@detail')
             ->name($prefix.'.'.'detail')
             ->where('product_slug', '[A-Za-z0-9-]+');
+
+        Route::get('/session', 'ProductController@session')
+            ->name($prefix.'.'.'session');
+
+
     });
 }
-Route::group(['middleware' => ['web', 'cms.brand_middleware'], 'prefix' => 'api', 'namespace' => 'Modules\Shopping\Http\Controllers'], function () {
+
+
+
+Route::group(['middleware' => ['web'], 'prefix' => 'products', 'namespace' => 'Modules\Shopping\Http\Controllers'], function () {
+
     Route::post('products/getGroup', 'ProductController@getCountryGroup')->name('products.getGroup');
+    # Index
+    Route::get('/', 'ProductController@products')
+        ->name('products.index');
+
+    Route::get('/', 'ProductController@products')
+        ->name('productos.index');
+
+    Route::get('/products/category/{id}', 'ProductController@procuctsByCategory')
+        ->name('products.category');
+
+
+
+    Route::get('/products/detail{id}', 'ProductController@detail')
+        ->name('detail');
+    Route::get('/products/session', 'ProductController@getSession')
+        ->name('detail');
+
+    Route::get('/{product_slug}', 'ProductController@detail')
+        ->name('products.detail')
+        ->where('product_slug', '[A-Za-z0-9-]+');
+
+
+    # Category
+    Route::get('/products/{category_slug}', 'ProductController@category')
+        ->name('products.category')
+        ->where('category_slug', '[A-Za-z0-9-]+');
+
 });
 
 Route::group(['middleware' => 'web', 'prefix' => 'shopping-cart', 'namespace' => 'Modules\Shopping\Http\Controllers'], function() {
@@ -199,6 +242,19 @@ Route::group(['middleware' => 'web', 'prefix' => 'shopping-cart', 'namespace' =>
     Route::post('/remove-all-from-item', 'ShoppingCartController@removeAllFromItem')->name('cart.remove_all_from_item');
     Route::post('/remove-all', 'ShoppingCartController@removeAll')->name('cart.remove_all');
     Route::post('/remove-all-resume-cart', 'ShoppingCartController@removeAllResumeCart')->name('cart.remove_all_resume_cart');
+
+    Route::post('/cart_list', ['as' => 'cart.list', 'uses' => 'ShoppingCartController@listProductsCart']);
+
+    Route::get('/cart_products', ['as' => 'cart.list_products', 'uses' => 'ShoppingCartController@getCarrito']);
+    Route::get('/categories/{id}', 'ProductController@procuctsByCategory')
+        ->name('category.products');
+
+        Route::get('/cart-report', 'ShoppingController@export_cart')
+        ->name('cart.report');
+
+
+
+
 });
 
 

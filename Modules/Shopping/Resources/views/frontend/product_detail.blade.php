@@ -1,261 +1,1165 @@
 {!! PageBuilder::section('head', [
-    'socialTags' => $socialTags,
-    'title'      => $countryProduct->name
+    'categories' => $categories,
+    'cart'=>$cart,
+
 ]) !!}
 
-<div class="products-page inner {{ $backgroundColor }} detail">
-    <!-- categories -->
-    <header class="products-page__h">
-        <div class="wrapper">
-            <ul class="products-page__tabs list-nostyle">
-                @foreach ($categories as $c)
-                    <li class="products-page__tab @if (!is_null($category) && $c->id == $category->id) active @endif"><a href="{{ route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'category']), $c->slug) }}">{{ $c->name }}</a></li>
-                @endforeach
-                @if ($showSystemTab)
-                    <li class="products-page__tab"><a href="{{ route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'index'])) }}#systems">@lang('shopping::products.systems.systems')</a></li>
-                @endif
-            </ul>
-        </div>
-    </header>
-    <!-- end categories -->
 
-    <!-- Product Main description -->
-    <div id="product-detail" class="wrapper">
-        <div class="principal">
-            <figure class="principal__fig">
-                <img src="{{ asset($countryProduct->image) }}">
-            </figure>
+<section class="single-product-page-content">
+    <div class="container">
+        <div class="row">
 
-            <div class="principal__desc">
-                <ul class="list-nostyle principal__breadcrumbs">
-                    <li><a href="{{ route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'index'])) }}">@lang('shopping::products.detail.back_products')</a></li>
-                    @if (!is_null($category))
-                        <li><a href="{{ route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'category']), $category->slug) }}">{{ $category->name }}</a></li>
-                    @endif
-                    <li><a href="#">{{ $countryProduct->name }}</a></li>
-                </ul>
+            <div class="col-lg-9 col-md-12">
+                <div class="row">
+                    <div class="col-lg-5 col-md-7">
 
-                <h1 class="principal__title">{{ $countryProduct->name }}</h1>
-                <h2 class="principal__subtitle">{{ $countryProduct->short_description }}</h2>
-                @if (show_price())
-                    <p class="principal__price">{{ currency_format($countryProduct->price, $currency) }}</p>
-                @endif
+                        <div class="single-product-page-image-gallery">
+                            <!-- product quickview image gallery -->
+                            <!--Modal Tab Content Start-->
+                            <div class="tab-content product-details-large  sale-badge new-badge">
+                                <div class="tab-pane fade show active" id="single-slide1" role="tabpanel" aria-labelledby="single-slide-tab-1">
+                                    <!--Single Product Image Start-->
+                                    <div class="single-product-img img-full sale-badge new-badge">
+                                        <img src="{{$countryProduct->name}}" class="img-fluid" alt="">
+                                        <a href="assets/images/product-slider-images/image1.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
+                                    </div>
+                                    <!--Single Product Image End-->
+                                </div>
+                                <div class="tab-pane fade" id="single-slide2" role="tabpanel" aria-labelledby="single-slide-tab-2">
+                                    <!--Single Product Image Start-->
+                                    <div class="single-product-img img-full">
+                                        <img src="assets/images/product-slider-images/image2.jpg" class="img-fluid" alt="">
+                                        <a href="assets/images/product-slider-images/image2.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
+                                    </div>
+                                    <!--Single Product Image End-->
+                                </div>
+                                <div class="tab-pane fade" id="single-slide3" role="tabpanel" aria-labelledby="single-slide-tab-3">
+                                    <!--Single Product Image Start-->
+                                    <div class="single-product-img img-full">
+                                        <img src="assets/images/product-slider-images/image3.jpg" class="img-fluid" alt="">
+                                        <a href="assets/images/product-slider-images/image3.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
+                                    </div>
+                                    <!--Single Product Image End-->
+                                </div>
+                                <div class="tab-pane fade" id="single-slide4" role="tabpanel" aria-labelledby="single-slide-tab-4">
+                                    <!--Single Product Image Start-->
+                                    <div class="single-product-img img-full">
+                                        <img src="assets/images/product-slider-images/image4.jpg" class="img-fluid" alt="">
+                                        <a href="assets/images/product-slider-images/image4.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
+                                    </div>
+                                    <!--Single Product Image End-->
+                                </div>
+                            </div>
+                            <!--Modal Content End-->
+                            <!--Modal Tab Menu Start-->
 
-                @if (show_points())
-                    <p class="principal__pts">{{ $countryProduct->points }} @lang('shopping::products.pts')</p>
-                @endif
+                            <div class="single-product-menu">
+                                <div class="nav single-slide-menu slick-initialized slick-slider" role="tablist"><i class="fa fa-angle-left slick-arrow" style=""></i>
+                                    <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 979px; transform: translate3d(-267px, 0px, 0px);"><div class="single-tab-menu img-full slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="" href="#single-slide2" tabindex="-1"><img src="assets/images/product-slider-images/image2.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="" href="#single-slide3" tabindex="-1"><img src="assets/images/product-slider-images/image3.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="" href="#single-slide4" tabindex="-1"><img src="assets/images/product-slider-images/image4.jpg" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 89px;">
+                                                <a data-toggle="tab" id="single-slide-tab-1" href="#single-slide1" tabindex="0"><img src="assets/images/product-slider-images/image1.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" style="width: 89px;">
+                                                <a data-toggle="tab" id="single-slide-tab-2" href="#single-slide2" tabindex="0"><img src="assets/images/product-slider-images/image2.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" style="width: 89px;">
+                                                <a data-toggle="tab" id="single-slide-tab-3" href="#single-slide3" tabindex="0"><img src="assets/images/product-slider-images/image3.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="single-slide-tab-4" href="#single-slide4" tabindex="-1"><img src="assets/images/product-slider-images/image4.jpg" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-cloned" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="" href="#single-slide1" tabindex="-1"><img src="assets/images/product-slider-images/image1.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="" href="#single-slide2" tabindex="-1"><img src="assets/images/product-slider-images/image2.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="" href="#single-slide3" tabindex="-1"><img src="assets/images/product-slider-images/image3.jpg" class="img-fluid" alt=""></a>
+                                            </div><div class="single-tab-menu img-full slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 89px;">
+                                                <a data-toggle="tab" id="" href="#single-slide4" tabindex="-1"><img src="assets/images/product-slider-images/image4.jpg" alt=""></a>
+                                            </div></div></div>
 
-                @if (show_add_to_car())
-                    <div class="principal__ctrls">
-                        <div class="form-group numeric transparent principal__quantity">
-                            <span class="minus">
-                                <svg height="14" width="14">
-                                    <line x1="0" y1="8" x2="14" y2="8"></line>
-                                </svg>
-                            </span>
-                            <input min="0" max="9999" oninput="maxLengthCheck(this)" onkeypress="return isNumeric(event)" class="form-control" type="numeric" name="qty#{val}" value="1">
-                            <span class="plus">
-                                <svg height="14" width="14">
-                                    <line x1="0" y1="7" x2="14" y2="7"></line>
-                                    <line x1="7" y1="0" x2="7" y2="14"></line>
-                                </svg>
-                            </span>
+
+
+                                    <i class="fa fa-angle-right slick-next-btn slick-arrow" style=""></i></div>
+                            </div>
+                            <!--Modal Tab Menu End-->
+                            <!-- end of product quickview image gallery -->
                         </div>
-                        <button data-id="{{ $countryProduct->id }}" id="add-product" class="button transparent small principal__addtocart">@lang('shopping::product_detail.add_to_cart')</button>
                     </div>
-                @endif
+                    <div class="col-lg-7 col-md-5">
+                        <!-- product quick view description -->
+                        <div class="product-options">
+                            <h2 class="product-title">{{$countryProduct->name}}</h2>
+                            <p class="condition"><span>Condition:</span> New</p>
+                            <h2 class="product-price">${{$countryProduct->price}}</h2>
+                            <p class="product-description">
+                                {{$countryProduct->description}}
+                            </p>
 
-                <p class="principal__text">{{ $countryProduct->description }}</p>
-                @if (show_disclaimer())
-                    @if (\App\Helpers\SessionHdl::hasEo())
-                        <p class="disclaimer">@lang('shopping::products.disclaimer_eo')</p>
-                    @else
-                        <p class="disclaimer">@lang('shopping::products.disclaimer')</p>
-                    @endif
-                @endif
-
-                <footer class="principal__footer">
-                    <div class="principal__social dropdown light hasicons">
-                        <span class="dropdown-toggle">
-                            @if (!empty($countryProduct->nutritional_table) && in_array($category->brandGroup->brand_id, $nutritionalTableIds))
-                                <a class="nutritional--btn" href="#nutritional" data-modal="true">
-                                    <img class="icon icon-list" src="{{ asset('themes/omnilife2018/images/list2.svg') }}" alt=""><span>@lang('shopping::products.detail.nutritional_table')</span>
-                                </a>
-                            @endif
-                            <svg class="icon icon-share" id="icon-share" viewBox="0 0 20 20" style="z-index: -1;">
-                                <title>@lang('shopping::product_detail.share')</title>
-                                <path fill-rule="nonzero" d="M16.575 13.034c-.977 0-1.855.418-2.479 1.086l-7.29-3.63a3.55 3.55 0 0 0 .043-.521 3.56 3.56 0 0 0-.04-.508l7.278-3.59a3.385 3.385 0 0 0 2.488 1.095c1.892 0 3.425-1.56 3.425-3.483C20 1.559 18.467 0 16.575 0c-1.891 0-3.424 1.559-3.424 3.483 0 .173.016.341.04.508L5.913 7.58a3.385 3.385 0 0 0-2.488-1.095C1.533 6.486 0 8.046 0 9.969c0 1.924 1.533 3.483 3.425 3.483.977 0 1.855-.418 2.479-1.085l7.29 3.63c-.026.17-.044.342-.044.52 0 1.924 1.533 3.483 3.425 3.483S20 18.441 20 16.517c0-1.924-1.533-3.483-3.425-3.483z"></path>
-                            </svg>@lang('shopping::product_detail.share')
-                            <div class="dropdown-list">
-                                <ul class="list-nostyle">
-                                    <li class="dropdown-item fb-share">
-                                        <figure class="flag"><img src="{{ asset('themes/omnilife2018/images/facebook.svg') }}" alt="Facebook"></figure>Facebook
-                                    </li>
-                                    <li class="dropdown-item tw-share">
-                                        <figure class="flag"><img src="{{ asset('themes/omnilife2018/images/twitter.svg') }}" alt="Twitter"></figure>Twitter
-                                    </li>
+                            <div class="single-product-user-action">
+                                <ul>
+                                    <li><a href="#"> <i class="fa fa-envelope-o"></i> Send to a
+                                            friend</a></li>
+                                    <li><a href="#"> <i class="fa fa-print"></i> Print</a></li>
+                                    <li><a href="#"> <i class="fa fa-heart-o"></i> Add to wishlist</a></li>
                                 </ul>
                             </div>
-                        </span>
-                    </div>
-                </footer>
-            </div>
-        </div>
-    </div>
-    <!-- end Main description -->
-
-    <!-- Detail body content -->
-    <div class="wrapper full-size-mobile products-body">
-        <!-- Info tabs -->
-        <div class="tabs expanded products-tabs">
-            <div class="tabs__header">
-                <div class="tabs__item active"><a href="#ben">@lang('shopping::products.detail.benefits')</a></div>
-                @if (!empty($countryProduct->ingredients))
-                    <div class="tabs__item"><a href="#ing">@lang('shopping::products.detail.ingredients')</a></div>
-                @endif
-                @if (!empty($countryProduct->comments))
-                    <div class="tabs__item"><a href="#com">@lang('shopping::products.detail.comments')</a></div>
-                @endif
-            </div>
-            <div class="tabs__content">
-                <div class="tabs__pane active" id="ben">
-                    <p>{{ $countryProduct->benefits }}</p>
-                </div>
-                @if (!empty($countryProduct->ingredients))
-                    <div class="tabs__pane" id="ing">
-                        <p>{{ $countryProduct->ingredients }}</p>
-                    </div>
-                @endif
-                @if (!empty($countryProduct->comments))
-                    <div class="tabs__pane" id="com">
-                        <p>{{ $countryProduct->comments }}</p>
-                    </div>
-                @endif
-            </div>
-        </div>
-        <!-- end Info tabs -->
-
-        @if ($relatedProducts->count() >= 2)
-            @php $cost = 0.0; @endphp
-
-            <!-- Products block complement -->
-            <div class="products-block complementary">
-                <div class="products slider" id="products-complementary">
-                    <div class="products__wrap slider__wrap">
-                        @for ($i = 0; $i < $relatedProducts->count(); $i++)
-                            @php $cost += $relatedProducts[$i]->relatedProduct->price; @endphp
-
-                            <div class="product slider__item">
-                                <a class="product__link" href="{{ route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'detail']), ($relatedProducts[$i]->relatedProduct->slug . '-' . $relatedProducts[$i]->relatedProduct->product->sku)) }}">
-                                    <h3 class="product__name">{{ $relatedProducts[$i]->relatedProduct->name }}</h3>
-                                    <figure class="product__image">
-                                        <img src="{{ asset($relatedProducts[$i]->relatedProduct->image) }}" alt=""/>
-                                    </figure>
-                                    <span class="product__nums">
-                                    @if (show_price())
-                                            <span class="product__price">{{ currency_format($relatedProducts[$i]->relatedProduct->price, $currency) }}</span>
-                                    @endif
-
-                                    @if (show_points())
-                                        <span class="product__pts">{{ $relatedProducts[$i]->relatedProduct->points }} @lang('shopping::products.pts')</span>
-                                    @endif
-                                </span>
-                                </a>
-                                @if (show_add_to_car())
-                                    <footer class="product__f">
-                                        <div class="product__sep"></div>
-                                        <button onclick="ShoppingCart.add_one('{{ $relatedProducts[$i]->relatedProduct->id }}')" class="button clean" type="button">@lang('shopping::product_detail.add_to_cart')</button>
-                                    </footer>
-                                @endif
+                            <div class="social-share-buttons">
+                                <ul>
+                                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i>
+                                            Tweet</a></li>
+                                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i>
+                                            Share</a></li>
+                                    <li><a class="google-plus" href="#"><i class="fa fa-google-plus"></i>
+                                            Google+</a></li>
+                                    <li><a class="pinterest" href="#"><i class="fa fa-pinterest"></i>
+                                            Pinterest</a></li>
+                                </ul>
                             </div>
-                        @endfor
+                            <p class="stock-details">288 items <span class="stock-status in-stock">In
+                                                        Stock</span></p>
+                            <p class="quantity">Quantity:
+
+                                <span class="pro-qty counter"><input type="text" value="1" class="mr-5"><a href="#" class="inc qty-btn mr-5"><i class="fa fa-plus"></i></a><a href="#" class="dec qty-btn"><i class="fa fa-minus"></i></a></span>
+
+                            </p>
+                            <p class="size">
+                                Size: <br>
+                                <select name="chooseSize" id="chooseSize">
+                                    <option value="0">XXL</option>
+                                    <option value="0">L</option>
+                                    <option value="0">M</option>
+                                    <option value="0">S</option>
+                                </select>
+                            </p>
+                            <p class="color">
+                                Color: <br>
+                                <a href="#"><span class="color-block color-choice-1"></span></a>
+                                <a href="#"><span class="color-block color-choice-2"></span></a>
+                                <a href="#"><span class="color-block color-choice-3 active"></span></a>
+                            </p>
+                        <span onclick="ShoppingCart.add('{{ $countryProduct->id }}', 1)" class="add-to-cart-btn">
+                                <i class="fa fa-shopping-cart"></i>
+                                Add to Cart
+                            </span>
+
+                        </div>
+                        <!-- end ofproduct quick view description -->
                     </div>
                 </div>
-                <div class="products-desc wrapper">
-                    <h1 class="products-desc__title purple">@lang('shopping::products.detail.complementary_products')</h1>
-                    <p class="products-desc__description visible">@lang('shopping::products.detail.complementary_des')</p>
-                    @if (show_price())
-                        <span class="products-desc__price">{{ currency_format($cost, $currency) }}</span>
-                    @endif
 
-                    @if (show_add_to_car())
-                        <a onclick="ShoppingCart.add_related_products('{{ $countryProduct->id }}')" class="button small visible" href="#">@lang('shopping::product_detail.add_to_cart')</a>
-                    @endif
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-description-tab-container section-padding">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#more-info" role="tab" aria-selected="true">MORE
+                                        INFO</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#data-sheet" role="tab" aria-selected="false">DATASHEET</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reviews" role="tab" aria-selected="false">REVIEWS</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="more-info" role="tabpanel" aria-labelledby="home-tab">
+                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                        Aliquam alias libero temporibus sit repellat delectus eos
+                                        velit odit natus fugiat porro tempora, dignissimos ex quo
+                                        laborum explicabo consequatur aperiam doloribus nostrum
+                                        quae? Eos, adipisci quisquam iusto ex quasi odit mollitia,
+                                        pariatur expedita eligendi necessitatibus hic voluptatum.
+                                        Nobis a dolor temporibus.</p>
+                                </div>
+                                <div class="tab-pane fade" id="data-sheet" role="tabpanel" aria-labelledby="profile-tab">
+                                    <table class="table-data-sheet">
+                                        <tbody>
+                                        <tr class="odd">
 
-                    @if (show_disclaimer())
-                        @if (\App\Helpers\SessionHdl::hasEo())
-                            <p class="disclaimer">@lang('shopping::products.disclaimer_eo')</p>
-                        @else
-                            <p class="disclaimer">@lang('shopping::products.disclaimer')</p>
-                        @endif
-                    @endif
+                                            <td>Compositions</td>
+                                            <td>Polyester</td>
+                                        </tr>
+                                        <tr class="even">
+
+                                            <td>Styles</td>
+                                            <td>Girly</td>
+                                        </tr>
+                                        <tr class="odd">
+
+                                            <td>Properties</td>
+                                            <td>Midi Dress</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="contact-tab">
+                                    <div class="product-ratting-wrap">
+                                        <div class="pro-avg-ratting">
+                                            <h4>4.5 <span>(Overall)</span></h4>
+                                            <span>Based on 9 Comments</span>
+                                        </div>
+                                        <div class="ratting-list">
+                                            <div class="sin-list float-left">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <span>(5)</span>
+                                            </div>
+                                            <div class="sin-list float-left">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <span>(3)</span>
+                                            </div>
+                                            <div class="sin-list float-left">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <span>(1)</span>
+                                            </div>
+                                            <div class="sin-list float-left">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <span>(0)</span>
+                                            </div>
+                                            <div class="sin-list float-left">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <span>(0)</span>
+                                            </div>
+                                        </div>
+                                        <div class="rattings-wrapper">
+
+                                            <div class="sin-rattings">
+                                                <div class="ratting-author">
+                                                    <h3>Cristopher Lee</h3>
+                                                    <div class="ratting-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <span>(5)</span>
+                                                    </div>
+                                                </div>
+                                                <p>enim ipsam voluptatem quia voluptas sit
+                                                    aspernatur aut odit aut fugit, sed quia res eos
+                                                    qui ratione voluptatem sequi Neque porro
+                                                    quisquam est, qui dolorem ipsum quia dolor sit
+                                                    amet, consectetur, adipisci veli</p>
+                                            </div>
+
+                                            <div class="sin-rattings">
+                                                <div class="ratting-author">
+                                                    <h3>Nirob Khan</h3>
+                                                    <div class="ratting-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <span>(5)</span>
+                                                    </div>
+                                                </div>
+                                                <p>enim ipsam voluptatem quia voluptas sit
+                                                    aspernatur aut odit aut fugit, sed quia res eos
+                                                    qui ratione voluptatem sequi Neque porro
+                                                    quisquam est, qui dolorem ipsum quia dolor sit
+                                                    amet, consectetur, adipisci veli</p>
+                                            </div>
+
+                                            <div class="sin-rattings">
+                                                <div class="ratting-author">
+                                                    <h3>MD.ZENAUL ISLAM</h3>
+                                                    <div class="ratting-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <span>(5)</span>
+                                                    </div>
+                                                </div>
+                                                <p>enim ipsam voluptatem quia voluptas sit
+                                                    aspernatur aut odit aut fugit, sed quia res eos
+                                                    qui ratione voluptatem sequi Neque porro
+                                                    quisquam est, qui dolorem ipsum quia dolor sit
+                                                    amet, consectetur, adipisci veli</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="ratting-form-wrapper fix">
+                                            <h3>Add your Comments</h3>
+                                            <form action="#">
+                                                <div class="ratting-form row">
+                                                    <div class="col-12 mb-15">
+                                                        <h5>Rating:</h5>
+                                                        <div class="ratting-star fix">
+                                                            <i class="fa fa-star-o"></i>
+                                                            <i class="fa fa-star-o"></i>
+                                                            <i class="fa fa-star-o"></i>
+                                                            <i class="fa fa-star-o"></i>
+                                                            <i class="fa fa-star-o"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12 mb-15">
+                                                        <label for="name">Name:</label>
+                                                        <input id="name" placeholder="Name" type="text">
+                                                    </div>
+                                                    <div class="col-md-6 col-12 mb-15">
+                                                        <label for="email">Email:</label>
+                                                        <input id="email" placeholder="Email" type="text">
+                                                    </div>
+                                                    <div class="col-12 mb-15">
+                                                        <label for="your-review">Your Review:</label>
+                                                        <textarea name="review" id="your-review" placeholder="Write a review"></textarea>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input value="add review" type="submit">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- related horizontal product slider -->
+                <div class="horizontal-product-slider">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="block-title">
+                                <h2><a href="#">RELATED PRODUCTS</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- horizontal product slider container -->
+                            <div class="horizontal-product-list slick-initialized slick-slider"><i class="fa fa-angle-left slick-prev-btn slick-arrow" style=""></i>
+                                <!-- single product -->
+                                <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 2814px; transform: translate3d(-804px, 0px, 0px);"><div class="single-product slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/3.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/4.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                        Dress</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <span onclick="ShoppingCart.add('{{ $countryProduct->id }}', 1)" class="add-to-cart-btn">
+                                <i class="fa fa-shopping-cart"></i>
+                                Add to Cart
+                            </span>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/5.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/6.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+                                                <span onclick="ShoppingCart.add('{{ $countryProduct->id }}', 1)" class="add-to-cart-btn">
+                                <i class="fa fa-shopping-cart"></i>
+                                Add to Cart
+                            </span>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/7.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/8.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                        Dress</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/9.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/10.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="0">
+                                                        <img src="assets/images/products/1.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/2.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="0"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="0"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="0">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="0"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="0">
+                                                        <img src="assets/images/products/3.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/4.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="0"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="0"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="0">Printed
+                                                        Dress</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="0"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="0">
+                                                        <img src="assets/images/products/5.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/6.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="0"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="0"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="0">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="0"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="0" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="0">
+                                                        <img src="assets/images/products/7.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/8.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="0"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="0"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="0">Printed
+                                                        Dress</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="0"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/9.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/10.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/1.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/2.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/3.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/4.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                        Dress</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/5.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/6.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="8" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/7.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/8.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                        Dress</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div><div class="single-product slick-slide slick-cloned" data-slick-index="9" aria-hidden="true" tabindex="-1" style="width: 201px;">
+                                            <div class="single-product-content single-related-product-content">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1">
+                                                        <img src="assets/images/products/9.jpg" class="img-fluid" alt="">
+                                                        <img src="assets/images/products/10.jpg" class="img-fluid" alt="">
+                                                    </a>
+                                                    <div class="image-btn">
+                                                        <a href="#" tabindex="-1"><i class="fa fa-search"></i></a>
+                                                        <a href="#" tabindex="-1"><i class="fa fa-heart-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                        Short Sleeve</a></h5>
+                                                <div class="price-box">
+                                                    <h4>$ 12.00</h4>
+                                                </div>
+
+                                                <a href="#" class="add-to-cart-btn" tabindex="-1"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                            </div>
+                                        </div></div></div>
+                                <!-- end of single product -->
+                                <!-- single product -->
+
+                                <!-- end of single product -->
+                                <!-- single product -->
+
+                                <!-- end of single product -->
+                                <!-- single product -->
+
+                                <!-- end of single product -->
+                                <!-- single product -->
+
+                                <!-- end of single product -->
+
+
+                                <i class="fa fa-angle-right slick-next-btn slick-arrow" style=""></i></div>
+                            <!-- end of horizontal product slider container -->
+                        </div>
+                    </div>
+                </div>
+                <!-- end of related horizontal product slider -->
             </div>
-            <!-- end Products block complement -->
-        @endif
+
+            <div class="col-lg-3 col-md-4">
+                <!-- ======  Single product sidebar  ====== -->
+
+                <div class="single-product-page-sidebar">
+                    <!-- vertical auto slider container -->
+                    <div class="sidebar">
+                        <h2 class="block-title">BESTSELLER</h2>
+                        <div class="vertical-product-slider-container mb-50">
+
+                            <div class="single-vertical-slider">
+
+                                <div class="vertical-auto-slider-product-list slick-initialized slick-slider slick-vertical">
+                                    <!-- single vertical product -->
+                                    <div class="slick-list draggable" style="height: 330px;"><div class="slick-track" style="opacity: 1; height: 1870px; transform: translate3d(0px, -770px, 0px); transition: transform 500ms ease 0s;"><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/7.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide" data-slick-index="0" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/1.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/2.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/3.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide" data-slick-index="3" aria-hidden="true" tabindex="0" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="0"><img src="assets/images/products/4.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="0">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-active" data-slick-index="4" aria-hidden="false" tabindex="0" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="0"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="0">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-active" data-slick-index="5" aria-hidden="false" tabindex="0" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="0"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="0">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-current slick-active" data-slick-index="6" aria-hidden="false" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/7.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/1.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="8" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/2.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="9" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/3.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="10" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/4.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="11" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/5.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="12" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/6.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Printed
+                                                            Dress</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div><div class="single-auto-vertical-product d-flex slick-slide slick-cloned" data-slick-index="13" aria-hidden="true" tabindex="-1" style="width: 248px;">
+                                                <div class="product-image">
+                                                    <a href="single-product-variable.html" tabindex="-1"><img src="assets/images/products/7.jpg" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h5 class="product-name"><a href="single-product-variable.html" tabindex="-1">Faded
+                                                            Short Sleeve</a></h5>
+                                                    <div class="price-box">
+                                                        <h4>$ 12.00</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div></div></div>
+                                    <!-- end of single vertical product -->
+                                    <!-- single vertical product -->
+
+                                    <!-- end of single vertical product -->
+                                    <!-- single vertical product -->
+
+                                    <!-- end of single vertical product -->
+                                    <!-- single vertical product -->
+
+                                    <!-- end of single vertical product -->
+                                    <!-- single vertical product -->
+
+                                    <!-- end of single vertical product -->
+                                    <!-- single vertical product -->
+
+                                    <!-- end of single vertical product -->
+                                    <!-- single vertical product -->
+
+                                    <!-- end of single vertical product -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of vertical auto slider container -->
+
+
+                    <!-- homepage sidebar banner -->
+                    <div class="sidebar">
+                        <div class="homepage-sidebar-banner-container mb-50">
+                            <a href="shop-left-sidebar.html">
+                                <img src="assets/images/banners/banner-left.jpg" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- end of homepage sidebar banner -->
+
+                    <!-- tag container -->
+                    <div class="sidebar">
+                        <h2 class="block-title">TAGS</h2>
+                        <div class="tag-container">
+                            <ul>
+                                <li><a href="shop-left-sidebar-wide.html">new</a> </li>
+                                <li><a href="shop-left-sidebar-wide.html">bags</a> </li>
+                                <li><a href="shop-left-sidebar-wide.html">new</a> </li>
+                                <li><a href="shop-left-sidebar-wide.html">kids</a> </li>
+                                <li><a href="shop-left-sidebar-wide.html">fashion</a> </li>
+                                <li><a href="shop-left-sidebar-wide.html">Accessories</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end of tag container -->
+
+
+                </div>
+
+                <!-- ====  End of Single product sidebar  ==== -->
+
+            </div>
+        </div>
     </div>
-    <!-- end Detail body content -->
+</section>
+
+
+<div class="brand-logo-slider mb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="brand-logo-list slick-initialized slick-slider"><i class="fa fa-angle-left slick-arrow" style=""></i>
+                    <!-- ======  single brand logo block  ====== -->
+
+                    <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 3600px; transform: translate3d(-2160px, 0px, 0px); transition: transform 500ms ease 0s;"><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="-6" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/2.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="-5" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/3.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/4.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/5.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/6.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/7.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide" data-slick-index="0" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/1.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/2.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/3.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/4.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/5.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide" data-slick-index="5" aria-hidden="true" tabindex="0" style="width: 180px;">
+                                <a href="#" tabindex="0">
+                                    <img src="assets/images/brand-logos/6.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-current slick-active" data-slick-index="6" aria-hidden="false" tabindex="0" style="width: 180px;">
+                                <a href="#" tabindex="0">
+                                    <img src="assets/images/brand-logos/7.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned slick-active" data-slick-index="7" aria-hidden="false" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="0">
+                                    <img src="assets/images/brand-logos/1.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned slick-active" data-slick-index="8" aria-hidden="false" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="0">
+                                    <img src="assets/images/brand-logos/2.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned slick-active" data-slick-index="9" aria-hidden="false" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="0">
+                                    <img src="assets/images/brand-logos/3.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned slick-active" data-slick-index="10" aria-hidden="false" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="0">
+                                    <img src="assets/images/brand-logos/4.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned slick-active" data-slick-index="11" aria-hidden="false" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/5.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="12" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/6.jpg" alt="">
+                                </a>
+                            </div><div class="single-brand-logo slick-slide slick-cloned" data-slick-index="13" aria-hidden="true" tabindex="-1" style="width: 180px;">
+                                <a href="#" tabindex="-1">
+                                    <img src="assets/images/brand-logos/7.jpg" alt="">
+                                </a>
+                            </div></div></div>
+
+                    <!-- ====  End of single brand logo block  ==== -->
+                    <!-- ======  single brand logo block  ====== -->
+
+
+
+                    <!-- ====  End of single brand logo block  ==== -->
+                    <!-- ======  single brand logo block  ====== -->
+
+
+
+                    <!-- ====  End of single brand logo block  ==== -->
+                    <!-- ======  single brand logo block  ====== -->
+
+
+
+                    <!-- ====  End of single brand logo block  ==== -->
+                    <!-- ======  single brand logo block  ====== -->
+
+
+
+                    <!-- ====  End of single brand logo block  ==== -->
+                    <!-- ======  single brand logo block  ====== -->
+
+
+
+                    <!-- ====  End of single brand logo block  ==== -->
+                    <!-- ======  single brand logo block  ====== -->
+
+
+
+                    <!-- ====  End of single brand logo block  ==== -->
+
+                    <i class="fa fa-angle-right slick-next-btn slick-arrow" style=""></i></div>
+            </div>
+        </div>
+    </div>
 </div>
 
-@if (!empty($countryProduct->nutritional_table) && $category->brandGroup->brand_id == 1)
-    <div class="modal alert" id="nutritional">
-        <div class="modal__inner ps-container ps">
-            <header class="modal__head">
-                <h5 class="modal__title highlight">@lang('shopping::products.detail.nutritional_table')</h5>
-            </header>
-            <div class="modal__body">
-                <p><img src="{{ asset($countryProduct->nutritional_table) }}" alt=""></p>
-            </div>
-            <footer class="modal__foot">
-                <div class="buttons-container">
-                    <button class="button secondary close" type="button">@lang('shopping::products.close_m')</button>
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-container dark-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12">
+
+                        <!-- ======  Newsletter input box  ======= -->
+
+                        <div class="newsletter-wrapper d-md-flex">
+                            <!-- newsletter text -->
+                            <div class="newsletter-text">
+                                <h2>newsletter <span>Sign up for our newsletter</span></h2>
+                            </div>
+                            <!-- end of newsletter text -->
+
+                            <!-- newsletter input -->
+                            <div class="newsletter-input">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <form id="mc-form" class="mc-form subscribe-form" novalidate="true">
+                                            <input type="email" id="mc-email" autocomplete="off" placeholder="Enter your e-mail" required="" name="EMAIL">
+                                            <button id="mc-submit" type="submit">Subscribe</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <!-- mailchimp-alerts Start -->
+                                <div class="mailchimp-alerts">
+                                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                                </div><!-- mailchimp-alerts end -->
+                            </div>
+                            <!-- end of newsletter input -->
+                        </div>
+
+                        <!-- ====  End of Newsletter input box  ==== -->
+
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <!-- ======  Social icon list  ======= -->
+
+                        <div class="social-icons text-right mt-5">
+                            <ul>
+                                <li><a class="facebook-link" href="//www.facebook.com"><i class="fa fa-facebook"></i></a>
+                                    <span class="popup">facebook</span>
+                                </li>
+                                <li><a class="rss-link" href="//rss.com"><i class="fa fa-rss"></i></a>
+                                    <span class="popup">rss</span>
+                                </li>
+                                <li><a class="twitter-link" href="//www.twitter.com"><i class="fa fa-twitter"></i></a>
+                                    <span class="popup">twitter</span>
+                                </li>
+                                <li><a class="skype-link" href="//www.skype.com"><i class="fa fa-skype"></i></a>
+                                    <span class="popup">Skype</span>
+                                </li>
+                                <li><a class="dribbble-link" href="//www.dribbble.com"><i class="fa fa-dribbble"></i></a>
+                                    <span class="popup">Dribbble</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- ====  End of Social icon list  ==== -->
+
+                    </div>
                 </div>
-            </footer>
-            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-            </div>
-            <div class="ps__rail-y" style="top: 0px; right: 0px;">
-                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
             </div>
         </div>
     </div>
-@endif
+</section>
 
-{!! PageBuilder::section('footer') !!}
-<input type="hidden" id="shop_secret" value="{{ csrf_token() }}">
-<script>
-    var SHARE_URL = "{{ $socialTags['facebook']['url'] ?: '' }}";
-    $(document).ready(function () {
-        $('.fb-share').click(function(e) {
-            e.preventDefault();
-            window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURI(SHARE_URL), 'shareWindow',
-                'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' +
-                ($(window).width() / 2 - 225) + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
-            return false;
-        });
 
-        $('.tw-share').click(function(e) {
-            e.preventDefault();
-            window.open('http://twitter.com/share?text={{ $countryProduct->name }}&url='+encodeURI(SHARE_URL), 'shareWindow',
-                'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225) +
-                ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
-            return false;
-        });
+<a href="#" class="scroll-top" style="display: inline;"></a>
 
-        document.products = {};
-        var products = {!! ShoppingCart::productsToJson(\Modules\Shopping\Entities\GroupProduct::where('product_id', $countryProduct->id)->get()) !!};
-        $.each(products, function (i, product) {
-            document.products[i] = product;
-        });
 
-        document.related_products = {};
-        @if ($relatedProducts->count() >= $relatedProducts->count())
-            document.related_products['{{ $countryProduct->id }}'] = {!! ShoppingCart::relatedProductsToJson($relatedProducts) !!};
-
-            var productsRel = {!! ShoppingCart::relatedProductsToJson($relatedProducts) !!};
-            $.each(productsRel, function (i, product) {
-                document.products[i] = product;
-            });
-        @endif
-    });
-</script>
+{!! PageBuilder::section('footer',['categories'=>$categories]) !!}
