@@ -105,12 +105,12 @@
                         <div class="main-menu">
                             <nav>
                                 <ul>
-                                    <li class="active menu-item-has-children"><a href="#">Home</a>
+                                    <li class="active menu-item-has-children"><a href="/">Home</a>
 
                                         <!-- ======  Submenu block  ======= -->
 
                                         <ul style="display: none;" class="sub-menu">
-                                            <li class="active"><a href="index.html">Home One</a></li>
+                                            <li class="active"><a href="/">Home One</a></li>
                                             <li><a href="index-2.html">Home Two</a></li>
                                             <li><a href="index-3.html">Home Three</a></li>
                                         </ul>
