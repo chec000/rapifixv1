@@ -26,7 +26,7 @@ class ShoppingCart {
      * @return string
      */
     public static function productsToJson(Collection $groupProducts) : string {
-        //hola
+    //ahsajshjh
         $products         = [];
         $config           = country_config(SessionHdl::getCorbizCountryKey());
         $isShoppingActive = $config['shopping_active'];
