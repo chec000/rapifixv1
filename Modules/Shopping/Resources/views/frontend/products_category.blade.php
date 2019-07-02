@@ -122,10 +122,9 @@
                                 <div class="single-product-content">
                                     <div class="product-image">
                                         
-
                                 <a href="{{route('products.detail', ['product_slug' => $p->slug])}}" >
 
-                                            <img src="{{$p->image}}" class="img-fluid" alt="">
+                        <img src="{{$p->image}}" class="img-fluid" alt="">
                                         </a>
                                         <div class="image-btn">
                                             <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>

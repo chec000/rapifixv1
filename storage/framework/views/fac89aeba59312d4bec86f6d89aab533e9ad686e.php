@@ -123,10 +123,9 @@
                                 <div class="single-product-content">
                                     <div class="product-image">
                                         
-
                                 <a href="<?php echo e(route('products.detail', ['product_slug' => $p->slug])); ?>" >
 
-                                            <img src="<?php echo e($p->image); ?>" class="img-fluid" alt="">
+                        <img src="<?php echo e($p->image); ?>" class="img-fluid" alt="">
                                         </a>
                                         <div class="image-btn">
                                             <a href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="fa fa-search"></i></a>
