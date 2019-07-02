@@ -17,18 +17,22 @@ class ShoppingController extends Controller
     {
         return view('shopping::index');
     }
-        public function export_cart()
+    
+ 
+
+        public function export_cart()    
     {
 
                $subTotal=ShoppingCart::getSubtotal();
                 $cart=\session()->get('portal.cart');
+            //return view('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal]);
 
         $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal]);
         
         //$pdf->save(storage_path().'_filename.pdf');
       
 
-            // return $pdf->stream('cart_products.pdf');
+         //return $pdf->stream('cart_products.pdf',array('Attachment'=>0));
         return $pdf->download('cart_products.pdf');
   
 

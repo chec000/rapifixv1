@@ -56,7 +56,7 @@
                     <p class="total">Total <span id="subtotal">${{$cart['subtotal']}}</span></p>
                 </div>
                 <div class="checkout-button">
-                    <a href="checkout.html">Checkout</a>
+                    <a href="{{route('cart.list_products')}}">Checkout</a>
                 </div>
             </div>
         </div>

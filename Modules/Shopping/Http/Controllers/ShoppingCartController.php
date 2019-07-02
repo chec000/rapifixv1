@@ -149,10 +149,15 @@ class ShoppingCartController extends Controller {
     }
 
     public function getCarrito(){
+
+        $categories=$this->category();
+        $categories=$categories->original['brandCategories'][0]['categories'];
+
         $cart=\session()->get('portal.cart');
 
        $cartList= View('shopping::frontend.shopping.cart_list', [
             'cart'=>$cart,
+            'categories'=>$categories,
         ]);
        return $cartList->render();
     }

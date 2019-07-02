@@ -222,7 +222,9 @@ var ShoppingCart = function () {
         key: 'add_html_item_to_list',
         value: function add_html_item_to_list(item, options) {
     
-           var product='<div data.id='+item.id+' class="cart-float-single-item d-flex"><span class="remove-item" onclick="ShoppingCart.remove_all_from_item('+item.id+')"><a href="#"><i class="fa fa-trash"></i></a></span><div class="cart-float-single-item-image"><img src=' + item.image + ' class="img-fluid" alt=""></div><div class="cart-float-single-item-desc"><p class="product-title"><span class="count">' + item.quantity + 'X</span><a href="single-product-variable.html">' + item.name + '</a></p><p class="size"> <a href="shop-left-sidebar.html">' + item.name + '</a></p></div></div>';
+            var product='<div data-id='+item.id+' class="cart-float-single-item d-flex"><span class="remove-item" onclick="ShoppingCart.remove_all_from_item('+item.id+')"><i class="fa fa-trash"></i></span>   <div class="cart-float-single-item-image">   <img src='+item.image+' class="img-fluid" alt=""></div><div class="cart-float-single-item-desc item-id-'+item.id+'><span class="product-title"><span class="count">'+item.quantity+' X '+item.name+' </span></span><input class="form-control" style="width: 34px" type="text" value='+item.quantity+' name="product-'+item.id+'" onkeypress="return isNumeric(event)"><p class="size"> <a href="shop-left-sidebar.html"></a></p><p class="price">'+item.price+'</p></div></div>';
+
+          // var product='<div data-id='+item.id+' class="cart-float-single-item d-flex"><span class="remove-item" onclick="ShoppingCart.remove_all_from_item('+item.id+')"><a href="#"><i class="fa fa-trash"></i></a></span><div class="cart-float-single-item-image"><img src=' + item.image + ' class="img-fluid" alt=""></div><div class="cart-float-single-item-desc"><p class="product-title"><span class="count">' + item.quantity + 'X</span><a href="single-product-variable.html">' + item.name + '</a></p><p class="size"> <a href="shop-left-sidebar.html">' + item.name + '</a></p></div></div>';
             $('.cart-items').append(product);
         }
 
