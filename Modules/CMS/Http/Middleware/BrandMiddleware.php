@@ -25,7 +25,8 @@ class BrandMiddleware
         //get current URL
 
         //session()->put('portal.main.shopping_active', !country_config(session()->get('portal.main.country_corbiz'))['shopping_active'] ? 0 : 1);
-
+        
+        
         return $next($request);
     }
 

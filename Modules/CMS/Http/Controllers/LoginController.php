@@ -16,6 +16,8 @@ class LoginController extends Controller
 {
     public function getLogin(Request $request)
     {
+
+      
         if ($request->eo && config('settings::frontend.webservices') == 1)
         {
             $decryptUser = Crypt::decryptString($request->input('eo'));

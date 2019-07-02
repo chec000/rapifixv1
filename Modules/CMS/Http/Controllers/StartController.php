@@ -43,6 +43,7 @@ class StartController extends Controller
 
     public function index()
     {
+    
         $this->getCountry(17);
 
         $brand_1 = session()->get('portal.main.brand');

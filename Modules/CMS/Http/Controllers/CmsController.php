@@ -71,7 +71,8 @@ class CmsController extends Controller {
      */
     public function generatePage() {
         $start= new StartController();
-        $start->saveCountryId(12);
+        //$start->saveCountryId(12);
+        return $start->index();
         PageVersionSchedule::checkPageVersionIds();        
         try {
 
