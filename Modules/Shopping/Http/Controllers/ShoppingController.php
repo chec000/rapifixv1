@@ -25,7 +25,7 @@ class ShoppingController extends Controller
 
                $subTotal=ShoppingCart::getSubtotal();
                 $cart=\session()->get('portal.cart');
-            //return view('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal]);
+            return view('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal]);
 
         $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal]);
         

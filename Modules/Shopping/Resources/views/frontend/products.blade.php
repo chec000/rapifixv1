@@ -2,6 +2,7 @@
     'categories' => $categories,
     'cart'=>$cart
 ]) !!}
+
 <div class="homepage-content">
     <div class="container">
         <div class="row">

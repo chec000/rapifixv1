@@ -1,118 +1,44 @@
-<!DOCTYPE html>
-<html>
 <head>
-  <title>Compras </title>    
+  <title> Report</title>  
+<link href="{{asset('cms/inicio/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
 <style type="text/css">
-body{
-      margin: 0;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: left;
-    background-color: #fff;
-}
-@media (min-width: 768px)
-{
-.col-md-12 {
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-}
-}
-@media (min-width: 992px){
-.container {
-    max-width: 960px;
-}  
-}
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
-}
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-}
-
-  .row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    }
-    .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-.bg-success {
-    background-color: #28a745!important;
-}
-.card {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-}
-.card-header {
-    padding: .75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: rgba(0,0,0,.03);
-    border-bottom: 1px solid rgba(0,0,0,.125);
-}
-.card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.25rem;
-}
-.table-bordered {
-    border: 1px solid #dee2e6;
-}
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-}
-.col-md-12{
-      position: relative;
-    width: 100%;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+  footer {
+  width: 100%;
+  height: 200px;
+  border-top: 2px solid #000;
+  position: absolute;
+  bottom: 0;
 }
 </style>
-
 </head>
 <body>
+<br>
 <div class="container">
-    <h1>Lista de productos </h1>
-      <div class="row">    
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header bg-success">
-            <h3 class="card-title">Productos agregados al carrito
-            </h3>
-          </div>
-          <div class="card-body">          
-          <br>
-          <br>
-          <br>
-          <br>
-          <table class="table table-bordered" id="task-table">
-            <thead>
-              <tr>
+  <div class="row">
+    <div class="col-md-4">
+    <img src="{{asset('cms/app/img/logo.png')}}" class="img-fluid" />
+    </div>
+<div class="col-md-4">
+    <h5><span style="text-align: center;">RAPIFIX</span>  </h5>
+    <p> Carretera Federico Basilis, Buena Vista. Jarabacoa, al lado de la Bomba Isla R. D</p>  
+</div>    
+ <div class="col-md-4">
+  <p style="font-weight: bold;font-size: 20px">Presupuesto</p>
+    <p>Número: <span style="font-weight: bold;">P1-<?php echo date('Y'); ?></span></p>
+    <p>Fecha: <span style="font-weight: bold;"><?php echo date('d-m-Y'); ?></span></p>
+  </div>
+</div>    
+<div class="row alert-success">
+  <div class="alert" role="alert">
+  <h5>Productos agregados a la cesta</h5>
+</div>
+</div>
+<hr style="border-color: black;">
+  <div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
                 <th>#</th>
                 <th>Código producto</th>
                 <th>Nombre</th>
@@ -120,36 +46,52 @@ body{
                 <th>Precio</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $var =1 ?>
+              </tr>      
+    </thead>
+    <tbody>
+
+ <?php $var =1 ?>
           @foreach($cart['items'] as $p)
               <tr>
                 <td>{{$var}}</td>
                 <td>{{$p['sku']}}</td>
                 <td>{{$p['name']}}</td>
                 <td>{{$p['description']}}</td>
-                <td>{{$p['price']}}</td>
+                <td>${{$p['price']}}</td>
                 <td>{{$p['quantity']}}</td>
                 <td>${{$p['price']*$p['quantity']}}</td>
               </tr>
               <?php $var =$var+1 ?>
           @endforeach
 
-
-            </tbody>
-         
-          </table>
-        <div>
-          <span>Total: </span><span>${{$subTotal}}</span>
-        </div>        
-        </div>
-
-        </div>
-      </div>
+    </tbody>
+      
+    
+  </table>
+   <div class="row">
+     <div class="col-md-4"></div>
+         <div class="col-md-4"></div>
+         <div class="col-md-4">
+            <span style="font-size: 21px;font-weight: bold;">Total:</span><span style="font-size: 21px;" class="badge badge-success">  ${{$subTotal}}</span>                      
+         </div>    
+      
+    
+   </div>
     </div>
   </div>
-</body>
-</html>
 
+
+</div>
+  
+
+<footer>
+
+        <div class="container">
+          <p>Copyright &copy; 2019 Rapyfix</p>
+          <p>Tel: 809-574-4343 y 809-574-7938 Cel: (Whtasapp): 829-931-0141</p>
+        </div>          
+</footer>
+
+</body>
+
+</html>
