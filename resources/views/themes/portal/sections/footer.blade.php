@@ -253,7 +253,7 @@
             <div class="copyright-container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <p class="copyright-text text-center text-md-left">Copyright © 2018 <a href="#">Rossi</a>. All Rights Reserved</p>
+                        <p class="copyright-text text-center text-md-left"> Copyright © 2019  <a href="/">Rapyfix</a>. All Rights Reserved</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="payment-logos text-md-right text-center">

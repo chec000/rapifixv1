@@ -136,12 +136,12 @@
                                     <div class="price-box">
                                         <h4>{{$p->price}}</h4>
                                     </div>
-                                    <span onclick="ShoppingCart.add('{{ $p->id }}', 1)"class="add-to-cart-btn">
+                                    <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">
                                 <i class="fa fa-shopping-cart"></i>
                                 Add to Cart
                             </span>
-
-                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                        <!--
+                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i> Add to Cart</a>-->
                                 </div>
                             </div>
                             <!-- product end -->

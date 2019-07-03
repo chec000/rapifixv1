@@ -149,7 +149,7 @@ class ShoppingCartController extends Controller {
     }
 
     public function getCarrito(){
-
+        
         $categories=$this->category();
         $categories=$categories->original['brandCategories'][0]['categories'];
 
