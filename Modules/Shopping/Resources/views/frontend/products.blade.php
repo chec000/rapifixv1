@@ -205,7 +205,9 @@
 
                                                     <div class="single-auto-vertical-product d-flex">
                                                         <div class="product-image">
-                                                            <a href="single-product-variable.html">
+                                                         
+
+                                                            <a href="{{route('products.detail', ['product_slug' => $p->slug])}}">
                                                                 <img src="{{$p->image}}" class="img-fluid" alt=""></a>
                                                         </div>
                                                         <div class="product-description">
@@ -393,7 +395,7 @@
                                                     <div class="single-product">
                                                         <div class="single-product-content">
                                                             <div class="product-image new-badge">
-                                                                <a href="single-product-variable.html">
+                                                                <a href="{{route('products.detail', ['product_slug' => $p->slug])}}">
                                                                     <img src="{{$p->image}}" class="img-fluid" alt="">
 
                                                                 </a>
@@ -484,7 +486,7 @@
                                                     @foreach ($c->products as $p)
                                                         <div class="single-vertical-product d-flex">
                                                             <div class="product-image">
-                                                                <a href="#"><img src="{{$p->image}}" class="img-fluid" alt=""></a>
+                                                                <a href="{{route('products.detail', ['product_slug' => $p->slug])}}"><img src="{{$p->image}}" class="img-fluid" alt=""></a>
                                                             </div>
                                                             <div class="product-description">
                                                                 <h5 class="product-name">

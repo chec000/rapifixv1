@@ -34,9 +34,9 @@
                                 @foreach($cart['items'] as $p)
                                 <tr>
                                     <td class="pro-thumbnail">
-                                        <a href="single-product-variable.html"><img class="img-fluid" src="{{$p['image']}}" alt="Product"></a></td>
-                                        <td class="pro-title"><a href="single-product-variable.html">{{$p['name']}}
-                                        </a></td>
+                                        <img class="img-fluid" src="{{$p['image']}}" alt="Product"></td>
+                                        <td class="pro-title">{{$p['name']}}
+                                        </td>
 
                                         <td class="pro-price"><span>${{$p['price']}}</span></td>
                                         <td class="pro-quantity">

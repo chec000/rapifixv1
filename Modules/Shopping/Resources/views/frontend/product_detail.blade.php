@@ -12,46 +12,39 @@
             <div class="col-lg-9 col-md-12">
                 <div class="row">
                     <div class="col-lg-5 col-md-7">
-
+                         <div class="single-product-img img-full">
+                                        <img src="{{$countryProduct->image}}" class="img-fluid" alt="">
+                                        <a href="{{$countryProduct->image}}" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
+                                    </div>
+                         <!--   
                         <div class="single-product-page-image-gallery">
-                            <!-- product quickview image gallery -->
-                            <!--Modal Tab Content Start-->
+                            
                             <div class="tab-content product-details-large  sale-badge new-badge">
                                 <div class="tab-pane fade show active" id="single-slide1" role="tabpanel" aria-labelledby="single-slide-tab-1">
-                                    <!--Single Product Image Start-->
                                     <div class="single-product-img img-full sale-badge new-badge">
-                                        <img src="{{$countryProduct->name}}" class="img-fluid" alt="">
+                                        <img src="{{$countryProduct->image}}" class="img-fluid" alt="">
                                         <a href="assets/images/product-slider-images/image1.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
                                     </div>
-                                    <!--Single Product Image End-->
                                 </div>
                                 <div class="tab-pane fade" id="single-slide2" role="tabpanel" aria-labelledby="single-slide-tab-2">
-                                    <!--Single Product Image Start-->
                                     <div class="single-product-img img-full">
-                                        <img src="assets/images/product-slider-images/image2.jpg" class="img-fluid" alt="">
+                                        <img src="{{$countryProduct->image}}" class="img-fluid" alt="">
                                         <a href="assets/images/product-slider-images/image2.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
                                     </div>
-                                    <!--Single Product Image End-->
                                 </div>
                                 <div class="tab-pane fade" id="single-slide3" role="tabpanel" aria-labelledby="single-slide-tab-3">
-                                    <!--Single Product Image Start-->
                                     <div class="single-product-img img-full">
-                                        <img src="assets/images/product-slider-images/image3.jpg" class="img-fluid" alt="">
+                                        <img src="{{$countryProduct->image}}" class="img-fluid" alt="">
                                         <a href="assets/images/product-slider-images/image3.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
                                     </div>
-                                    <!--Single Product Image End-->
                                 </div>
                                 <div class="tab-pane fade" id="single-slide4" role="tabpanel" aria-labelledby="single-slide-tab-4">
-                                    <!--Single Product Image Start-->
                                     <div class="single-product-img img-full">
                                         <img src="assets/images/product-slider-images/image4.jpg" class="img-fluid" alt="">
                                         <a href="assets/images/product-slider-images/image4.jpg" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
                                     </div>
-                                    <!--Single Product Image End-->
                                 </div>
                             </div>
-                            <!--Modal Content End-->
-                            <!--Modal Tab Menu Start-->
 
                             <div class="single-product-menu">
                                 <div class="nav single-slide-menu slick-initialized slick-slider" role="tablist"><i class="fa fa-angle-left slick-arrow" style=""></i>
@@ -83,9 +76,9 @@
 
                                     <i class="fa fa-angle-right slick-next-btn slick-arrow" style=""></i></div>
                             </div>
-                            <!--Modal Tab Menu End-->
-                            <!-- end of product quickview image gallery -->
                         </div>
+                            -->
+
                     </div>
                     <div class="col-lg-7 col-md-5">
                         <!-- product quick view description -->
@@ -121,7 +114,7 @@
                                                         Stock</span></p>
                             <p class="quantity">Quantity:
 
-                                <span class="pro-qty counter"><input type="text" value="1" class="mr-5"><a href="#" class="inc qty-btn mr-5"><i class="fa fa-plus"></i></a><a href="#" class="dec qty-btn"><i class="fa fa-minus"></i></a></span>
+                                <span class="pro-qty counter"><input type="text" value="" class="mr-5"><a href="#" class="inc qty-btn mr-5"><i class="fa fa-plus"></i></a><a href="#" class="dec qty-btn"><i class="fa fa-minus"></i></a></span>
 
                             </p>
                             <p class="size">
@@ -1086,77 +1079,6 @@
     </div>
 </div>
 
-<section class="newsletter-section">
-    <div class="container">
-        <div class="newsletter-container dark-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-12 col-sm-12">
-
-                        <!-- ======  Newsletter input box  ======= -->
-
-                        <div class="newsletter-wrapper d-md-flex">
-                            <!-- newsletter text -->
-                            <div class="newsletter-text">
-                                <h2>newsletter <span>Sign up for our newsletter</span></h2>
-                            </div>
-                            <!-- end of newsletter text -->
-
-                            <!-- newsletter input -->
-                            <div class="newsletter-input">
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <form id="mc-form" class="mc-form subscribe-form" novalidate="true">
-                                            <input type="email" id="mc-email" autocomplete="off" placeholder="Enter your e-mail" required="" name="EMAIL">
-                                            <button id="mc-submit" type="submit">Subscribe</button>
-                                        </form>
-
-                                    </div>
-                                </div>
-                                <!-- mailchimp-alerts Start -->
-                                <div class="mailchimp-alerts">
-                                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                </div><!-- mailchimp-alerts end -->
-                            </div>
-                            <!-- end of newsletter input -->
-                        </div>
-
-                        <!-- ====  End of Newsletter input box  ==== -->
-
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <!-- ======  Social icon list  ======= -->
-
-                        <div class="social-icons text-right mt-5">
-                            <ul>
-                                <li><a class="facebook-link" href="//www.facebook.com"><i class="fa fa-facebook"></i></a>
-                                    <span class="popup">facebook</span>
-                                </li>
-                                <li><a class="rss-link" href="//rss.com"><i class="fa fa-rss"></i></a>
-                                    <span class="popup">rss</span>
-                                </li>
-                                <li><a class="twitter-link" href="//www.twitter.com"><i class="fa fa-twitter"></i></a>
-                                    <span class="popup">twitter</span>
-                                </li>
-                                <li><a class="skype-link" href="//www.skype.com"><i class="fa fa-skype"></i></a>
-                                    <span class="popup">Skype</span>
-                                </li>
-                                <li><a class="dribbble-link" href="//www.dribbble.com"><i class="fa fa-dribbble"></i></a>
-                                    <span class="popup">Dribbble</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- ====  End of Social icon list  ==== -->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 <a href="#" class="scroll-top" style="display: inline;"></a>
