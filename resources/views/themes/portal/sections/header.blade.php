@@ -105,7 +105,7 @@
                         <div class="main-menu">
                             <nav>
                                 <ul>
-                                    <li class="active menu-item-has-children"><a href="/">Home</a>
+                                    <li class="active menu-item-has-children"><a href="{{url('/')}}">Home</a>
 
                                         <!-- ======  Submenu block  ======= -->
 
