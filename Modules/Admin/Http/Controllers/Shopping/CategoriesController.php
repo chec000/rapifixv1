@@ -22,10 +22,13 @@ class CategoriesController extends Controller
      * @return Response
      */
     public function index() {
+      
         $categories                  = GroupCountry::where('group_id', 1)->where('active', '!=', -1)->groupBy('code')->get();
+
         $this->layoutData['modals']  = View::make('admin::shopping.products.modals.confirm');
         $this->layoutData['content'] = View::make('admin::shopping.categories.index', compact('categories'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,9 +36,13 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+
         $userBrands = Auth::user()->userBrandsPermission();
         $locale     = Auth::user()->language->locale_key;
         $title      = trans('admin::shopping.categories.add.view.form-brand');
+
+            $categories                  = GroupCountry::where('group_id', 1)->where('active', '!=', -1)->groupBy('code')->get();
+      
 
         $countriesByBrand = [];
         foreach ($userBrands as $ub) {
@@ -48,9 +55,9 @@ class CategoriesController extends Controller
 
         $colorsOmnilife = !empty(config('settings::frontend.color.omnilife')) ? explode(',', config('settings::frontend.color.omnilife')) : [];
         $colorsSeytu    = !empty(config('settings::frontend.color.seytu')) ? explode(',', config('settings::frontend.color.seytu')) : [];
-
+        
         $this->layoutData['modals']  = View::make('admin::shopping.categories.modals.brand', compact('userBrands', 'title'));
-        $this->layoutData['content'] = View::make('admin::shopping.categories.create', compact('locale', 'countriesByBrand', 'colorsSeytu', 'colorsOmnilife'));
+        $this->layoutData['content'] = View::make('admin::shopping.categories.create', compact('locale', 'countriesByBrand', 'colorsSeytu', 'colorsOmnilife','categories'));
     }
 
     /**
@@ -61,6 +68,8 @@ class CategoriesController extends Controller
     public function store(Request $request) {
         $codeCat    = "";
 
+
+
         foreach (Auth::user()->countries as $uC) {
             $products   = "products_".$uC->id;
             $active     = "active_".$uC->id;
@@ -68,7 +77,7 @@ class CategoriesController extends Controller
             $order      = "order_".$uC->id;
 
             if ($request->$active != null) {
-                $idCat = $this->saveCategoryCountry($uC->id, $request->$bannerLink, $request->$active, $request->$order);
+                $idCat = $this->saveCategoryCountry($uC->id, $request->$bannerLink, $request->$active, $request->$order,$request->parent_category);
                 if ($idCat > 0) {
                     if ($codeCat == "") {
                         $codeCat = $idCat;
@@ -133,6 +142,8 @@ class CategoriesController extends Controller
         foreach ($categoriesByCountry as $categoryByCountry) {
             $productsJSON = [];
             foreach ($categoryByCountry->groupProducts->where('active', 1) as $p) {
+                //var_dump($p->product_id);
+                //die();
                 $object = (object) [
                     'id'       => $p->product_id,
                     'sku'      => $p->countryProduct->product->sku,
@@ -197,7 +208,7 @@ class CategoriesController extends Controller
                 $infoCategory->update();
             } else {
                 if ($request->$active != null) {
-                    $idCat = $this->saveCategoryCountry($uC->id, $request->$bannerLink, $request->$active, $request->$order);
+                    $idCat = $this->saveCategoryCountry($uC->id, $request->$bannerLink, $request->$active, $request->$order,$request->parent_category);
                     if ($idCat > 0) {
                         GroupCountry::where('id', $idCat)->update(['code'=> $request->input('code'), 'color' => $request->input('color_'.$uC->id)]);
                         $idCategoryBrand = BrandGroup::saveInfo($request->brand_id, $idCat, 1);
@@ -342,13 +353,15 @@ class CategoriesController extends Controller
      * @param $active
      * @return int
      */
-    private function saveCategoryCountry($countryId, $bannerLink, $active, $order)
+    
+    private function saveCategoryCountry($countryId, $bannerLink, $active, $order,$parent_id=0)
     {
-        $groupCountry = new GroupCountry();
+        $groupCountry = new GroupCountry();       
         $groupCountry->country_id = $countryId;
         $groupCountry->group_id = $this->getIdCategories();
         $groupCountry->link_banner = $bannerLink;
         $groupCountry->order = $order;
+        $groupCountry->parent=$parent_id;
         $groupCountry->active = $active;
         $groupCountry->last_modifier_id = Auth::user()->id;
         $groupCountry->save();

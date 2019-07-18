@@ -243,14 +243,22 @@ Route::group(['middleware' => 'web', 'prefix' => 'shopping-cart', 'namespace' =>
     Route::post('/remove-all', 'ShoppingCartController@removeAll')->name('cart.remove_all');
     Route::post('/remove-all-resume-cart', 'ShoppingCartController@removeAllResumeCart')->name('cart.remove_all_resume_cart');
 
-    Route::post('/cart_list', ['as' => 'cart.list', 'uses' => 'ShoppingCartController@listProductsCart']);
+
+    Route::get('/cart-list', ['as' => 'cart.list', 'uses' => 'ShoppingCartController@listProductsCart']);
 
     Route::get('/cart_products', ['as' => 'cart.list_products', 'uses' => 'ShoppingCartController@getCarrito']);
+
+    
     Route::get('/categories/{id}', 'ProductController@procuctsByCategory')
         ->name('category.products');
 
         Route::get('/cart-report', 'ShoppingController@export_cart')
         ->name('cart.report');
+
+
+        Route::get('/send-mail', 'ShoppingController@sendEmailShopping')
+        ->name('cart.send_mail');
+
 
 
 

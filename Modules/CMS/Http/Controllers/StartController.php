@@ -43,17 +43,18 @@ class StartController extends Controller
 
     public function index()
     {
-    
+
         $this->getCountry(17);
+            
 
         $brand_1 = session()->get('portal.main.brand');
-
         $cart=\session()->get('portal.cart');
-
-        $categories=$this->getCategories();
+        $categories=$this->getCategories();    
         $categories=$categories->original['brandCategories'][0]['categories'];
+        
         return View::make('shopping::frontend.products',['categories'=>$categories,
-            'cart'=>$cart
+            'cart'=>$cart,
+            'latest'=>$this->getLatestProducts()
             ]);
 
         //  return View::make('cms::frontend.index',['categories'=>$categories]);
@@ -74,22 +75,32 @@ class StartController extends Controller
         $brandCategories = [];
         for ($i=0; $i < count($brands); $i++) {
             $categories         = GroupCountry::getByCountryAndBrand($country_id, $brands[$i]->id, 1, true);
+            
             $categoriesFiltered = collect([]);
 
             foreach ($categories as $j => $category) {
+               
+                
+                
+                $categories[$j]['children']=$this->getCategoriesByParentId($category->id);
                 $categories[$j]['products']=$this->getProductByCategory($category->id);
+                
+                /*
                 if ($categories[$j]->countHomeProducts > 0) {
                     $categories[$j]->url = $brands[$i]->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(session()->get('portal.main.app_locale'), ['products', 'category']), $category->slug, false);
                     $categories[$j]->home_products = $categories[$j]->countHomeProducts;
 
                     $categoriesFiltered->push($categories[$j]);
                 }
+                */
             }
 
+                //var_dump($categories);
+                //die();
             if ($brands[$i]->belongsToCountry($country_id)) {
                 $brandCategories[] = [
                     'brand'      => $brands[$i],
-                    'categories' => $categoriesFiltered
+                    'categories' => $categories
                 ];
             }
         }
@@ -98,6 +109,7 @@ class StartController extends Controller
         if($corbiz==null){
             $corbiz="";
         }
+
 
         $json = array(
             'brandCategories'    => $brandCategories,
@@ -108,6 +120,24 @@ class StartController extends Controller
 
         return response()->json($json);
     }
+
+private function getCategoriesByParentId($parentId)
+{
+  $categories  = GroupCountry::where('group_id', 1)->where('active', '!=', -1)->where('parent',$parentId)->get();
+  
+   foreach ($categories as $j => $value) {
+    $categories[$j]['products']=$this->getProductByCategory($value->id);
+   }  
+  
+  
+  return $categories;
+}
+
+private function getLatestProducts(){
+              $countryProducts = CountryProduct::getAllLatest( session()->get('portal.main.country_id'), App()->getLocale(), true, false);          
+
+        return $countryProducts;
+}
 
     public function getProducts($category_id) {
 
@@ -160,6 +190,7 @@ class StartController extends Controller
         ShoppingCart::validateProductWarehouse($sesionCorbiz, $warehouse);
         $products        = [];
         $countryProducts = CountryProduct::getAllByCategory($category->id, $category->country_id, App()->getLocale(), true, false);
+
         foreach ($countryProducts as $countryProduct) {
             if ($countryProduct->product->is_kit == 0) {
                 $countryProduct->url         = $category->brandGroup->brand->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'detail']), [($countryProduct->slug . '-' . $countryProduct->product->sku)], false);
@@ -205,12 +236,7 @@ class StartController extends Controller
                 session()->put('portal.main.app_locale', $lanDefault->locale_key);
 
                 //Implementacion de WEB Service getCountryConfiguration
-                if (config('settings::frontend.webservices') == 1 && (session()->has("portal.main.shopping_active") && session()->get("portal.main.shopping_active") == 1) && $saveWHSessionGeoLoc == 1) {
-                    if ($this->existSession()) {
-                        $useZipCodeOrCity = $this->getCountryConfigurationService(session()->get('portal.main.country_corbiz')
-                            , session()->get('portal.main.language_corbiz'), true);
-                    }
-                }
+             
             }
             if (count($languages_list) > 1) {
                 return $response = array(

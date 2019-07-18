@@ -137,12 +137,12 @@
                                     <div class="price-box">
                                         <h4><?php echo e($p->price); ?></h4>
                                     </div>
-                                    <span onclick="ShoppingCart.add('<?php echo e($p->id); ?>', 1)"class="add-to-cart-btn">
+                                    <span onclick="ShoppingCart.add('<?php echo e($p->id); ?>', 1)" class="add-to-cart-btn">
                                 <i class="fa fa-shopping-cart"></i>
                                 Add to Cart
                             </span>
-
-                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                        <!--
+                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i> Add to Cart</a>-->
                                 </div>
                             </div>
                             <!-- product end -->
@@ -200,16 +200,50 @@
                         <div class="search-result">
                             Showing 1 - 6 of 9 items
                         </div>
-                        <div class="pagination-container">
-                            <ul class="pagination justify-content-left justify-content-lg-center">
-                                <li class="previous disabled"><a aria-disabled="true" href="#"><i class="fa fa-angle-left"></i>Back</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li class="dots"> - - </li>
-                                <li><a href="#">20</a></li>
-                                <li class="next"><a href="#">Next<i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
+                                         <div id="product_pagination" class="pagination-container">
+    
+
+    <?php if($products->hasPages()): ?>
+    <ul class="pagination justify-content-left justify-content-lg-center">
+        <?php if($products->onFirstPage()): ?>
+            <li style="display: none;"  class="disabled"><span>? Previous</span></li>
+        <?php else: ?>
+        <li  class="previous disabled"><a aria-disabled="true" href="<?php echo e($products->previousPageUrl()); ?>"><i class="fa fa-angle-left"></i>Back</a></li>  
+        <?php endif; ?>
+      
+        <?php for($i=1;$i<=$products->lastPage();$i++): ?>
+        <?php if($i==$products->currentPage()): ?>
+
+        <li class="disabled">
+            <a  rel="next">
+        <?php echo e($i); ?>
+
+            </a></li>
+        <?php else: ?>
+            <li>
+            <a href="<?php echo e($products->url($i)); ?>" rel="next">
+<?php echo e($i); ?>
+
+</a></li> 
+       <?php endif; ?>
+
+        <?php endfor; ?>
+        <!-- Array Of Links -->
+       
+        <?php if($products->hasMorePages()): ?>
+            <li class="next"><a href="<?php echo e($products->nextPageUrl()); ?>" rel="next">
+            Next
+            <i class="fa fa-angle-right"></i>
+            </a>    
+        </li>
+ 
+        <?php endif; ?>
+    
+    </ul>
+<?php endif; ?>
+
+</div>  
+
 
                         <div class="pagination-buttons">
                             <a href="#" class="show-all-btn">Show all</a>
@@ -219,129 +253,13 @@
                     </div>
 
                     <!-- end of product pagination -->
+                
 
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-<div class="brand-logo-slider mb-50">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-sm-12">
-                <div class="brand-logo-list slick-initialized slick-slider"><i class="fa fa-angle-left slick-arrow" style=""></i>
-                    <!-- ======  single brand logo block  ====== -->
-
-
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ====== -->
-
-
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ====== -->
-
-
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ====== -->
-
-
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ====== -->
-
-
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ====== -->
-
-
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ====== -->
-
-
-
-                    <!-- ====  End of single brand logo block  ==== -->
-
-                    <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 2720px; transform: translate3d(-1280px, 0px, 0px);"><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="-3" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/5.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="-2" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/6.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="-1" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/7.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide" tabindex="-1" style="width: 160px;" data-slick-index="0" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/1.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide" tabindex="-1" style="width: 160px;" data-slick-index="1" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/2.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide" tabindex="-1" style="width: 160px;" data-slick-index="2" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/3.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide" tabindex="-1" style="width: 160px;" data-slick-index="3" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/4.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide" tabindex="-1" style="width: 160px;" data-slick-index="4" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/5.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-current slick-active" tabindex="0" style="width: 160px;" data-slick-index="5" aria-hidden="false">
-                                <a href="#" tabindex="0">
-                                    <img src="assets/images/brand-logos/6.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-active" tabindex="0" style="width: 160px;" data-slick-index="6" aria-hidden="false">
-                                <a href="#" tabindex="0">
-                                    <img src="assets/images/brand-logos/7.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned slick-active" tabindex="-1" style="width: 160px;" data-slick-index="7" aria-hidden="false">
-                                <a href="#" tabindex="0">
-                                    <img src="assets/images/brand-logos/1.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="8" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/2.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="9" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/3.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="10" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/4.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="11" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/5.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="12" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/6.jpg" alt="">
-                                </a>
-                            </div><div class="single-brand-logo slick-slide slick-cloned" tabindex="-1" style="width: 160px;" data-slick-index="13" aria-hidden="true">
-                                <a href="#" tabindex="-1">
-                                    <img src="assets/images/brand-logos/7.jpg" alt="">
-                                </a>
-                            </div></div></div><i class="fa fa-angle-right slick-next-btn slick-arrow" style=""></i></div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <?php echo PageBuilder::section('footer',['categories'=>$categories]); ?>
 

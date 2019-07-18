@@ -4,66 +4,15 @@
             <div class="col-lg-12 col-sm-12">
                 <div class="brand-logo-list">
                     <!-- ======  single brand logo block  ======= -->
-
+                    <?php for($i = 0; $i <= 10; $i++): ?>
                     <div class="single-brand-logo">
                         <a href="#">
-                            <img src="assets/images/brand-logos/1.jpg" alt="">
+
+                            <img src="<?php echo e(asset('cms/inicio/images/brand-logos/1.jpg')); ?>" alt="">
                         </a>
                     </div>
+                    <?php endfor; ?>
 
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/2.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/3.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/4.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/5.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/6.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/7.jpg" alt="">
-                        </a>
-                    </div>
 
                     <!-- ====  End of single brand logo block  ==== -->
 
@@ -253,7 +202,7 @@
             <div class="copyright-container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <p class="copyright-text text-center text-md-left">Copyright © 2018 <a href="#">Rossi</a>. All Rights Reserved</p>
+                        <p class="copyright-text text-center text-md-left"> Copyright © 2019  <a href="/">Rapyfix</a>. All Rights Reserved</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="payment-logos text-md-right text-center">

@@ -61,18 +61,27 @@ class ProductController extends Controller {
         }
         ShoppingCart::validateProductWarehouse($sesionCorbiz, $warehouse);
         $products        = [];
-        $countryProducts = CountryProduct::getAllByCategory($category->id, $category->country_id, App()->getLocale(), true, false);
+        //$countryProducts = CountryProduct::getAllByCategory($category->id, $category->country_id, App()->getLocale(), true, false);
 
+$countryProducts = CountryProduct::getAllByCategoryPaginated($category->id, $category->country_id, App()->getLocale(), true, false);
+      //  echo json_encode($countryProducts);
+        //die();
+    
         foreach ($countryProducts as $countryProduct) {
+        
+
+
             if ($countryProduct->product->is_kit == 0) {
-                $countryProduct->url         = $category->brandGroup->brand->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'detail']), [($countryProduct->slug . '-' . $countryProduct->product->sku)], false);
-                $countryProduct->price       = !hide_price() ? currency_format($countryProduct->price, Session::get('portal.main.currency_key')) : '';
-                $countryProduct->description = str_limit2($countryProduct->description, 74);
+             //   $countryProduct->url         = $category->brandGroup->brand->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'detail']), [($countryProduct->slug . '-' . $countryProduct->product->sku)], false);
+               // $countryProduct->price       = !hide_price() ? currency_format($countryProduct->price, Session::get('portal.main.currency_key')) : '';
+                //$countryProduct->description = str_limit2($countryProduct->description, 74);
+                
                 $products[] = $countryProduct;
 
             }
         }
-
+        //var_dump($countryProducts);
+        //die();
         $categories=$this->category();
         $categories=$categories->original['brandCategories'][0]['categories'];
         $cart=\session()->get('portal.cart');
@@ -81,7 +90,7 @@ class ProductController extends Controller {
             'categories'=> $categories,
             'cart'=>$cart,
             'category'=>$category,
-            'products'=>$products
+            'products'=>$countryProducts
         ]);
     }
 
@@ -269,10 +278,11 @@ class ProductController extends Controller {
         $categories=$this->category();
         $categories=$categories->original['brandCategories'][0]['categories'];
         $cart=\session()->get('portal.cart');
-
+        $latest=CountryProduct::getAllLatest( session()->get('portal.main.country_id'), App()->getLocale(), true, false);
         return View::make('shopping::frontend.product_detail', [
             'categories'          => $categories,
             'cart'=>$cart,
+            'latest'=>$latest,
             'category'            => $category,
             'countryProduct'      => $countryProduct,
             'relatedProducts'     => $relatedProducts,

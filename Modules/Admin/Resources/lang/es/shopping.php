@@ -19,7 +19,7 @@ return [
      */
 
     'products' => [
-        'index' => [
+        'index' => [            
             'title'=>'Lista de productos',
             'form-add-button'=>'Agregar nuevo producto',
             'thead-product-key'=>'Codigo de pais ',
@@ -121,6 +121,7 @@ return [
     ],
     'categories' => [
         'index' => [
+            'parent_category'=>'Seleccionar categoria padre',
             'title'=>'Lista de categoria',
             'form-add-button'=>'Agregar categoria',
             'thead-category-name'=>'Categoria:',

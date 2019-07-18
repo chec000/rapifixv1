@@ -20,6 +20,18 @@
             <label for="global_name"><?php echo e(trans('admin::shopping.products.index.thead-product-global_name')); ?> *</label>
             <input type="text" name="global_name" id="global_name" class="form-control" required="required">
         </div>
+        <div class="form-group">
+         <label for="global_name"><?php echo e(trans('admin::shopping.categories.index.parent_category')); ?> *</label>
+          <select class="form-control" name="parent_category">
+            <option value="0">Ninguna</option>
+            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+            <option value="<?php echo e($c->id); ?>"><?php echo e($c->global_name); ?></option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+              
+          </select>
+            
+        </div>
 
         <div class="form-group">
             <label for="exampleInputEmail1"><?php echo app('translator')->getFromJson('admin::shopping.categories.add.view.form-country'); ?></label><br />

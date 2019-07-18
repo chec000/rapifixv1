@@ -182,6 +182,8 @@ class CountryProduct extends Model
     }
 
     public function getRelatedProducts() {
+
+      
         return ComplementaryProducts::select('shop_complementary_products.*')
             ->join('shop_country_products', 'shop_country_products.id', '=', 'shop_complementary_products.product_related_id')
             ->join('shop_product_translations as t', function ($join) {
@@ -208,7 +210,7 @@ class CountryProduct extends Model
             ->where('shop_country_products.active', 1)
             ->where('shop_country_products.delete', 0)
             ->orderBy('t.name', 'ASC');
-
+         
         if ($onlyHome) {
             $products->where('gp.product_home', 1);
         }
@@ -216,10 +218,62 @@ class CountryProduct extends Model
         if ($onlyCat) {
             $products->where('gp.product_category', 1);
         }
+        
+
+        return $products->get();
+    }
+   public static function getAllLatest($countryId, $locale, $onlyHome = false, $onlyCat = false) {
+
+        $products = CountryProduct::select('shop_country_products.*')
+            ->join('shop_products as p', 'p.id', '=', 'shop_country_products.product_id')
+            ->join('shop_group_products as gp', 'gp.product_id', '=', 'shop_country_products.id')
+            ->join('shop_product_translations as t', function ($join) use ($locale) {
+                $join->on('shop_country_products.id', '=', 't.country_product_id')
+                    ->where('t.locale', '=', $locale);
+            })
+            ->where('shop_country_products.country_id', $countryId)           
+            ->where('shop_country_products.active', 1)
+            ->where('shop_country_products.delete', 0)
+            ->orderBy('t.name', 'ASC');
+         
+        if ($onlyHome) {
+            $products->where('gp.product_home', 1);
+        }
+
+        if ($onlyCat) {
+            $products->where('gp.product_category', 1);
+        }
+        
 
         return $products->get();
     }
 
+    public static function getAllByCategoryPaginated($categoryId, $countryId, $locale, $onlyHome = false, $onlyCat = false) {
+
+        $products = CountryProduct::select('shop_country_products.*')
+            ->join('shop_products as p', 'p.id', '=', 'shop_country_products.product_id')
+            ->join('shop_group_products as gp', 'gp.product_id', '=', 'shop_country_products.id')
+            ->join('shop_product_translations as t', function ($join) use ($locale) {
+                $join->on('shop_country_products.id', '=', 't.country_product_id')
+                    ->where('t.locale', '=', $locale);
+            })
+            ->where('shop_country_products.country_id', $countryId)
+            ->where('gp.country_group_id', $categoryId)
+            ->where('shop_country_products.active', 1)
+            ->where('shop_country_products.delete', 0)
+            ->orderBy('t.name', 'ASC');
+         
+        if ($onlyHome) {
+            $products->where('gp.product_home', 1);
+        }
+
+        if ($onlyCat) {
+            $products->where('gp.product_category', 1);
+        }
+        
+
+        return $products->paginate(2);
+    }
     public static function getFilteredByGroup($countryGroupId) {
         $config           = country_config(SessionHdl::getCorbizCountryKey());
         $isShoppingActive = $config['shopping_active'];

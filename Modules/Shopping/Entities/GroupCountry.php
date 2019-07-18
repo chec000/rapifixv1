@@ -25,7 +25,7 @@ class GroupCountry extends Model
      *
      * @var array
      */
-    protected $fillable = ['country_id', 'group_id', 'code', 'color', 'global_name', 'link_banner', 'link_banner_two', 'product_id_featured',
+    protected $fillable = ['country_id', 'group_id', 'code', 'color', 'global_name', 'link_banner', 'link_banner_two', 'product_id_featured','parent',
         'price', 'points', 'order', 'active', 'last_modifier_id', 'created_at', 'updated_at'];
 
     public $translationModel      = 'Modules\Shopping\Entities\GroupTranslations';
@@ -91,6 +91,8 @@ class GroupCountry extends Model
             ->join('shop_brand_group', 'shop_brand_group.country_group_id', 'shop_country_groups.id')
             ->where('shop_brand_group.brand_id', $brandId)
             ->where('shop_country_groups.country_id', $countryId)
+            ->where('shop_brand_group.brand_id', $brandId)
+            ->where('shop_country_groups.parent', 0)
             ->where('shop_country_groups.active', 1)
             ->where('shop_country_groups.group_id', $type);
 

@@ -5,7 +5,9 @@
   font-family:arial;
   font-size: 18px;
 }
-
+.bold{
+  font-weight: bold;
+}
 td {
   border: 1px solid #726E6D;
   padding: 15px;
@@ -52,6 +54,24 @@ position: absolute;
 </div>    
   </div>
 
+<div id="cliente"  style="background-color: #dee7fd;">
+  <div id="usuario">
+   <span>Nombre:</span><span  class="bold">{{$data['nombre']}} </span>
+  </div>
+  <div id="Apellidos">
+   <span>Apellidos: </span> <span  class="bold">{{$data['apellidos']}}</span>
+  </div>
+  <div id="celular"><span>Teléfono celular:</span> <span class="bold">
+    {{$data['celular']}}
+  </span></div>
+  <div id="telefono"><span>Telefono de casa:</span> <span  class="bold">
+    {{$data['telefono']}}
+  </span></div>
+  <div id="ciudad"><span>Ciudad:</span> <span  class="bold">{{$data['ciudad']}}</span></div>
+  <div>
+    <span>Comentario: </span><span  class="bold">{{$data['comentario']}}</span>
+  </div>  
+</div>
 <div>
   <p>Lista de productos</p>
 </div>

@@ -14,7 +14,7 @@
     <link href="{{asset('cms/inicio/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('cms/inicio/css/icon-font.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('cms/inicio/css/plugins.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('cms/inicio/css/plugins.css')}}" rel="stylesheet" type="text/css">
+
     <link href="{{asset('cms/inicio/css/main.css')}}" rel="stylesheet" type="text/css">
 
 

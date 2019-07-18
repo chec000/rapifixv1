@@ -57,7 +57,7 @@
                     <p class="total">Total <span id="subtotal">$<?php echo e($cart['subtotal']); ?></span></p>
                 </div>
                 <div class="checkout-button">
-                    <a href="checkout.html">Checkout</a>
+                    <a href="<?php echo e(route('cart.list')); ?>">Checkout</a>
                 </div>
             </div>
         </div>

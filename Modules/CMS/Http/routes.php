@@ -136,7 +136,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Modules\CMS\Http\Controll
     Route::get('/cedis', 'CedisController@index')->name('cedis.index');
     Route::get('/cedis/{slug}', 'CedisController@detail')->name('cedis.detail')->where('slug', '[A-Za-z0-9-]+');
     # CEDIS ROUTES END
-    Route::get('start', ['uses' => 'StartController@index','as'=>'index']);
+    Route::get('inicio', ['uses' => 'StartController@index','as'=>'index']);
     Route::get('index_session', ['uses' => 'StartController@session','as'=>'index_session']);
 
     Route::post('save_read_cookies', ['uses' => 'StartController@saveReadCookies', 'as' => 'vars.save_read_cokies']);

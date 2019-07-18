@@ -122,6 +122,7 @@ return [
     ],
     'categories' => [
         'index' => [
+            'parent_category'=>'Select parent categoy',
             'title'                      => 'Categories list',
             'form-add-button'            => 'Add Category',
             'thead-category-name'        => 'Category',

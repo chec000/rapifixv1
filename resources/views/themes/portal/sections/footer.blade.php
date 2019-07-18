@@ -4,66 +4,15 @@
             <div class="col-lg-12 col-sm-12">
                 <div class="brand-logo-list">
                     <!-- ======  single brand logo block  ======= -->
-
+                    @for($i = 0; $i <= 10; $i++)
                     <div class="single-brand-logo">
                         <a href="#">
-                            <img src="assets/images/brand-logos/1.jpg" alt="">
+
+                            <img src="{{ asset('cms/inicio/images/brand-logos/1.jpg') }}" alt="">
                         </a>
                     </div>
+                    @endfor
 
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/2.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/3.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/4.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/5.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/6.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- ====  End of single brand logo block  ==== -->
-                    <!-- ======  single brand logo block  ======= -->
-
-                    <div class="single-brand-logo">
-                        <a href="#">
-                            <img src="assets/images/brand-logos/7.jpg" alt="">
-                        </a>
-                    </div>
 
                     <!-- ====  End of single brand logo block  ==== -->
 
