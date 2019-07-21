@@ -38,7 +38,7 @@ class ShoppingCartController extends Controller {
         $corbizKey = Session::get('portal.main.country_corbiz');
         $item      = $request->all();
 
-        $removed = ShoppingCart::removeItem($corbizKey, $item['sku']);
+        $removed = ShoppingCart::removeItem($item['sku']);
 
         return response()->json([
             'status'      => $removed,

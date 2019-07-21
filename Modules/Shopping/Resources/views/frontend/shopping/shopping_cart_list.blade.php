@@ -20,18 +20,18 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th class="pro-thumbnail">Image</th>
-                                <th class="pro-title">Product</th>
-                                <th class="pro-price">Price</th>
-                                <th class="pro-quantity">Quantity</th>
+                                <th class="pro-thumbnail">Imagen</th>
+                                <th class="pro-title">Producto</th>
+                                <th class="pro-price">Precio</th>
+                                <th class="pro-quantity">Cantidad</th>
                                 <th class="pro-subtotal">Total</th>
-                                <th class="pro-remove">Remove</th>
+                                <th class="pro-remove">Eliminar</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $p):
+                            @foreach($products as $p)
 
-                            <tr>
+                            <tr id="product-checkout-{{$p['id']}}">
                                 <td class="pro-thumbnail"><a href="single-product-variable-wide.html">
                                         <img class="img-fluid" src="{{$p['image']}}" alt="Product"></a></td>
                                 <td class="pro-title"><a href="single-product-variable-wide.html">
@@ -40,10 +40,16 @@
                                 <td class="pro-price"><span>${{$p['price']}}</span></td>
                                 <td class="pro-quantity">
                                     <span class="pro-qty-cart counter">
-                                        <input type="text" value="{{$p['quantity']}}" class="mr-5">
+                                        <input type="text" value="{{$p['quantity']}}" id="{{$p['id']}}" class="mr-5">
                                 </td>
-                                <td class="pro-subtotal"><span>${{$p['quantity']*$p['price']}}</span></td>
-                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                <td class="pro-subtotal">
+                                    <span id="subtotal-{{$p['id']}}">${{$p['quantity']*$p['price']}}</span></td>
+                                <td class="pro-remove">
+                                    <span style="cursor: pointer;" onclick="ShoppingCart.remove_all_from_item({{$p['id']}})">
+                                        <i class="fa fa-trash-o"></i>
+                                    </span>
+                                    
+                                </td>
                             </tr>
                             @endforeach
 
@@ -60,19 +66,19 @@
                         <!-- Calculate Shipping -->
                         <div class="calculate-shipping">
                             <h4>Mis datos</h4>
-                            <form action="{{route('cart.send_mail')}}" method="GET">
+                            <form action="{{route('cart.send_mail')}}" method="GET" id="cart-form">
                                 <div class="row" >
                                     <div class="col-md-6 col-12 mb-25">
-                                        <input name="nombre" type="text" placeholder="Nombre(s)">
+                                        <input name="nombre" type="text" placeholder="Nombre(s)" required="required">
                                     </div>
                                     <div class="col-md-6 col-12 mb-25">
-                                        <input name="apellidos" type="text" placeholder="apellidos">
+                                        <input name="apellidos" type="text" placeholder="apellidos" required="required">
                                     </div>
                                     <div class="col-md-6 col-12 mb-25">
-                                        <input name="telefono" type="number" placeholder="Telefono celular">
+                                        <input name="telefono" type="number" placeholder="Telefono celular" required="required">
                                     </div>
                                     <div class="col-md-6 col-12 mb-25">
-                                        <input type="number" name="celular" placeholder="celular">
+                                        <input type="number" name="celular" placeholder="celular" required="required">
                                     </div>
                                     <div class="col-md-6 col-12 mb-25">
                                         <input name="otro_telefono" type="number"  placeholder="Otro télefono">
@@ -150,9 +156,9 @@
                         <div class="cart-summary">
                             <div class="cart-summary-wrap">
                                 <h4>Resumen de compra</h4>
-                                <p>Sub Total <span>${{$cart['subtotal']}}</span></p>
+                                <p>Sub Total <span id="subtotal-cart">${{$cart['subtotal']}}</span></p>
                                 <p style="display: none;"><span>$00.00</span></p>
-                                <h2>Total <span>${{$cart['subtotal']}}</span></h2>
+                                <h2>Total <span id="total-cart">${{$cart['subtotal']}}</span></h2>
                             </div>
                             <div class="cart-summary-button" style="display: none;">
                                 <button class="checkout-btn">Checkout</button>

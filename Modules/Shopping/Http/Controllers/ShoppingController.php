@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Helpers\ShoppingCart;
-use Modules/Shopping/Entities/Order;
-use Modules/Shopping/Entities/OrderDetail;
+use Modules\Shopping\Entities\Order;
+use Modules\Shopping\Entities\OrderDetail;
 use Illuminate\Support\Facades\Mail;
 use PDF;
 class ShoppingController extends Controller
@@ -52,10 +52,10 @@ class ShoppingController extends Controller
             
         try {                
             $r=$request->all();
-
+        
         $usuario='rapifixjarabacoa@gmail.com';
         $asunto='Presupuesto';
-        $user=$r['nombre'].' '.$r['apellidos'];
+        $user=$r['nombre'].'  '.$r['apellidos'];
         
          Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r){
 
@@ -68,7 +68,7 @@ class ShoppingController extends Controller
 
         //$message->from('from@gmail.com','The Sender');
 
-        $m->attachData($pdf->output(),'prusupuesto.pdf');
+        $m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
 
     });
 

@@ -250,6 +250,7 @@ class ShoppingCart {
      * @return bool
      */
     public static function removeItem(string $sku, bool $removeAll = false) : bool {
+     
         $items = Session::get("portal.cart.items");
         for ($i = 0; $i < sizeof($items); $i++) {
             if ($sku == $items[$i]['sku']) {

@@ -14,7 +14,7 @@
                     <!-- Header Category -->
                     <div class="hero-side-category shop-side-category">
 
-                        <h2 class="block-title">CATEGORIES</h2>
+                        <h2 class="block-title">CATEGORIAS</h2>
 
                         <!-- Category Menu -->
                         <nav class="shop-category-menu mb-50">

@@ -68,13 +68,15 @@
 			e.preventDefault();
 			var $button = $(this);
 			var oldValue = $button.parent().find('input').val();
+		    var product_id =$button.parent().find('input').attr("id");
 
 			if ($button.hasClass('inc')) {
 				var newVal = parseFloat(oldValue) + 1;
-
+				ShoppingCart.add_one(product_id);
 			} else {
 				// Don't allow decrementing below zero
 				if (oldValue > 0) {
+					ShoppingCart.remove_one(product_id);
 					var newVal = parseFloat(oldValue) - 1;
 				} else {
 					newVal = 0;

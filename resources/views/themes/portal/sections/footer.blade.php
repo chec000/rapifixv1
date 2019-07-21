@@ -354,16 +354,18 @@
                         <!-- cart product short details -->
 
                         <div class="cart-product-short-desc">
-                            <h2 class="cart-success-message"> Product successfully added to your shopping cart</h2>
+                            <h2 class="cart-success-message">Producto agregado correctamente</h2>
                             <div class="cart-product-short-desc-content d-flex">
                                 <div class="product-image">
-                                    <img src="assets/images/products/faded-short-sleeve-tshirts.jpg" class="img-fluid" alt="">
+                                    <img src="" id="img-product-cart" class="img-fluid" alt="">
                                 </div>
                                 <div class="product-desc">
-                                    <h4 class="product-title">Printed Dress</h4>
-                                    <p class="color-size">Yellow, S</p>
-                                    <p class="quantity"><span>Quantity</span> 1</p>
-                                    <p class="total-amount"><span>Total:</span> $20.40</p>
+                                    <h4 class="product-title" id="name-product-cart"></h4>
+                                    <p id="description-product-cart"></p>
+                                    <p class="quantity"><span>Cantidad:</span> <span id="quantity-product-cart"></span></p>
+                                    <p class="total-amount"><span >Total:</span> 
+                                    <span id="price-product-cart"></span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -372,20 +374,29 @@
                     <div class="col-lg-6 col-md-6">
                         <!-- cart product calculation -->
                         <div class="cart-product-calculation">
-                            <h2 class="cart-info-message">There is 1 item in your cart.</h2>
+                            <h2 class="cart-info-message">Carrito</h2>
                             <div class="product-calculations">
-                                <p><span>Total products</span> $20.50</p>
-                                <p><span>Total shipping</span> $2</p>
-                                <p><span>Total</span> $22.50</p>
+                                <!--
+                                <p><span id="total-product-cart"></span> $20.50</p>
+                                -->
+                                <p><span style="display: none;">Total envio: </span> <span id="shopping-product-cart" style="display: none;">$0</span></p>
+                                <p><span >Total: </span> <span id="total-cart">$0</span></p>
                             </div>
                         </div>
                         <!-- end of cart product calculation -->
 
                         <!-- cart modal buttons -->
                         <div class="cart-modal-buttons">
-                            <a class="continue-shopping-btn" href="shop-left-sidebar.html"><i class="fa fa-chevron-left"></i> Continue
-                                shopping</a>
-                            <a class="proceed-checkout-btn" href="checkout.html">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                            <a href="#" class="continue-shopping-btn" data-dismiss="modal" aria-hidden="true">
+                                <i class="fa fa-chevron-left"></i> 
+                                Continuar comprando
+
+                            </a>
+                           
+                            
+                            <a class="proceed-checkout-btn" href="{{route('cart.list')}}">
+                                ir a checkout
+                             <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                         <!-- end of cart modal buttons -->
@@ -398,7 +409,12 @@
     </div>
 </div>
 <!-- end of add to cart modal -->
-
+<div class="animatedDiv" id="bloqueo" style="display: none">
+	<div class="ring" >
+            <span id="mensajeBloqueo"></span>
+                <span class="span-m"></span>
+	</div>
+</div>
 
 <!-- scroll to top  -->
 <a href="#" class="scroll-top"></a>
@@ -410,8 +426,10 @@
 <script type="text/javascript" src="{{asset('cms/inicio/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('cms/inicio/js/plugins.js')}}"></script>
 <script type="text/javascript" src="{{asset('cms/inicio/js/main.js')}}"></script>
+<script type="text/javascript" src="{{asset('cms/inicio/js/cart.js')}}"></script>
 <script src="{{ PageBuilder::js('shopping_cart_old_browsers') }}"></script>
 <input type="hidden" id="shop_secret" value="{{ csrf_token() }}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="application/javascript">
     $(document).ready(function () {
         var products;
@@ -425,7 +443,7 @@
 
 
         @foreach ($categories as $category)
-            products = {!! ShoppingCart::productsToJson($category->groupProducts->where('active', 1)->where('product_category', 1)->where('delete', 0)) !!};
+            products = {!! ShoppingCart::productsToJson($category->groupProducts->where('active', 1)->where('delete', 0)) !!};
         $.each(products, function (i, product) {
             document.products[i] = product;
         });
