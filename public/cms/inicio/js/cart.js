@@ -39,10 +39,8 @@ swal({
   confirmButtonClass: "btn-success",
   confirmButtonText: "Aceptar",
   closeOnConfirm: false
-},
-function(){
- window.location.href=window.origin;
-});
+}
+);
                 // Clear the form.
                 $('#contact-form input,#contact-form textarea').val('');
             })
