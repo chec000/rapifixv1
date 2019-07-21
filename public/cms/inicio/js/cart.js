@@ -46,16 +46,19 @@ swal({
             })
             .fail(function(data) {
              
-                $(formMessages).removeClass('success');
-                $(formMessages).addClass('error');
-
-                if (data.responseText !== '') {
-                    $(formMessages).text(data.responseText);
-                } else {
-                    $(formMessages).text('Oops! An error occured and your message could not be sent.');
-                }
+       
   $("#bloqueo").hide();
-            });
+swal({
+  title: "Error",
+  text: "Ha existido un error, favor de comunicarse con el administrador.",
+  type: "danger",
+  showCancelButton: true,
+ confirmButtonClass: "btn-danger",
+  closeOnConfirm: false,
+  showLoaderOnConfirm: true
+});       
+
+     });
     });
 
 });
