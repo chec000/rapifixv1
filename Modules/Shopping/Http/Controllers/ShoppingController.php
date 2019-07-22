@@ -58,14 +58,20 @@ class ShoppingController extends Controller
         if(\Session::has('portal.cart' ) && \Session::get('portal.cart.items') > 0) {
             $date=getdate();
             $numeroOrden=  "P1-".$date['year'].'-'.time();                              
-            $items=\Session::get('portal.cart.items');                    
-           $this->saveOrder( $items,$numeroOrden,$r);
-        $enviarCorreo=false;
-           if($enviarCorreo){
-                $usuario='rapifixjarabacoa@gmail.com';
+           // $items=\Session::get('portal.cart.items');                    
+          // $this->saveOrder( $items,$numeroOrden,$r);
+        
+          //$usuario='emmanuel@rapifixrd.com';
+          $usuario='rapifixjarabacoa@gmail.com';
           $asunto='Presupuesto';
          $user=$r['nombre'].'  '.$r['apellidos'];
-        
+    /*   
+          Mail::send('shopping::frontend.shopping.email.test',[], function ($message) {
+
+            $message->to('sergiogalindo2010@hotmail.com')->subject('Subject of the message!');
+        });
+*/
+
          Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r){
             $subTotal=ShoppingCart::getSubtotal();
             $cart=\session()->get('portal.cart');    
@@ -73,9 +79,8 @@ class ShoppingController extends Controller
             $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
 
         $m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
-    });    
-           }
-       session()->forget('portal.cart');
+    });                
+    //   session()->forget('portal.cart');
         }
   
 
