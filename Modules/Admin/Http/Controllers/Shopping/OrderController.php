@@ -66,7 +66,7 @@ class OrderController extends Controller {
                          ->get();
 
 
-
+                 
         $this->layoutData['content'] = View::make('admin::shopping.orders.list', array('orders' => $orders,
 
                     'can_delete' => Auth::action('orders.active'),
@@ -155,6 +155,7 @@ class OrderController extends Controller {
 
             $orderdetail = $order->orderDetail;
             $shippingAddress = $order->shippingAddress;
+           
             $documents = $order->orderDocument;
             $products = $order->products;
             $orderhistory = $order->orderstatushistory;

@@ -43,16 +43,8 @@ class CheckoutController extends Controller {
 
     public function index(){
 
-        //Session::forget("portal.checkout.".Session::get('portal.main.country_corbiz').".promotions");
-        //Session::forget("portal.checkout.".Session::get('portal.main.country_corbiz').".promotionsSent");
-        Session::forget("portal.checkout.".SessionHdl::getCorbizCountryKey().".quotation");
-        Session::forget("portal.checkout.".SessionHdl::getCorbizCountryKey().".shippingAddress");
-
-        if (!areShoppingAndWsActive() && !allow_by_ip(\Request::ip())) {
-            return redirect('/');
-        }
-
-        if(session::has('portal.cart.'.Session::get('portal.main.country_corbiz') ) && session::get('portal.cart.'.Session::get('portal.main.country_corbiz').'.items') > 0) {
+   
+        if(session::has('portal.cart' ) && session::get('portal.cart.items') > 0) {
 
             return View::make('shopping::frontend.shopping.checkout.shippingaddress',
                 [   'currency'         => SessionHdl::getCurrencyKey(),

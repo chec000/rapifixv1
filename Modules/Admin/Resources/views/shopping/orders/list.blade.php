@@ -19,14 +19,8 @@
         <thead>
             <tr>
                 <th class="select-filter">{{ trans('admin::shopping.orders.index.countries') }}</th>
-                <th class="select-filter">{{ trans('admin::shopping.orders.index.order_number') }}</th>
-                <th class="select-filter">{{ trans('admin::shopping.orders.index.distributor_number') }}</th>
-                <th class="select-filter">{{ trans('admin::shopping.orders.index.order_type') }}</th>
-                <th class="select-filter">{{ trans('admin::shopping.orders.index.source') }}</th>
-                <th class="select-filter">{{ trans('admin::shopping.orders.index.status') }}</th>
-                <th>{{ trans('admin::shopping.orders.index.payment_type') }}</th>
-                <th>{{ trans('admin::shopping.orders.index.payment_trans') }}</th>
-                <th>{{ trans('admin::shopping.orders.index.corbiz_order_number') }}</th>
+                <th class="select-filter">{{ trans('admin::shopping.orders.index.order_number') }}</th>                             
+               
                 <th>{{ trans('admin::shopping.orders.index.date_created') }}</th>
 
                 @if ($can_edit || $can_delete)
@@ -43,13 +37,6 @@
             <tr id="lang_{!! $or->id !!}">
                 <td>{!! $or->country->name !!}</td>
                 <td>{!! $or->order_number !!}</td>
-                <td>{!! $or->distributor_number !!}</td>
-                <td>{!! $or->shop_type !!}</td>
-                <td>{!! $or->source->source_name !!}</td>
-                <td>{!! $or->estatus->name !!}</td>
-                <td>{!! $or->bank->name !!}</td>
-                <td>{!! $or->bank_authorization !!}</td>
-                <td>{!! $or->corbiz_order_number !!}</td>
                 <td>{!! $or->created_at !!}</td>
 
 
@@ -57,11 +44,10 @@
 
                     <td data-lid="{!! $or->id !!}">
                         <a class="glyphicon glyphicon-eye-open itemTooltip" href="{{ route('admin.orders.detail', ['oe_id' => $or->id]) }}" title="{{ trans('admin::shopping.orders.index.detail') }}"></a>
-                        @if($or->estatus->key_estatus == 'CORBIZ_ERROR' && in_array($or->source->source_name,Config::get('admin.sources')))
-                            <span onclick="changeOrderStatus({{$or->id}})" id='activeOrderEstatus{{$or->id}}'>
+                               <span onclick="changeOrderStatus({{$or->id}})" id='activeOrderEstatus{{$or->id}}'>
                             <i class="glyphicon glyphicon-check itemTooltip" style="color:green;" title="{{ trans('admin::shopping.orders.index.activate') }}"></i>
                         </span>
-                        @endif
+                      
                     </td>
                 @endif
 
@@ -69,27 +55,6 @@
         @endforeach
 
         </tbody>
-        <tfoot>
-        <tr>
-            <th>{{ trans('admin::shopping.orders.index.country') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.order_number') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.payment_type') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.order_type') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.source') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.status') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.payment_type') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.payment_trans') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.corbiz_order_number') }}</th>
-            <th>{{ trans('admin::shopping.orders.index.date_created') }}</th>
-
-            @if ($can_edit || $can_delete)
-                <th>{{ trans('admin::shopping.orders.index.actions') }}</th>
-            @endif
-
-
-        </tr>
-        </tfoot>
-
     </table>
 
 

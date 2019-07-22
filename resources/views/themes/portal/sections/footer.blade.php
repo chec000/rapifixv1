@@ -429,7 +429,7 @@
 <script type="text/javascript" src="{{asset('cms/inicio/js/cart.js')}}"></script>
 <script src="{{ PageBuilder::js('shopping_cart_old_browsers') }}"></script>
 <input type="hidden" id="shop_secret" value="{{ csrf_token() }}">
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script  src="{{asset('cms/inicio/js/sweetalert.min.js')}}"></script>
 <script type="application/javascript">
     $(document).ready(function () {
         var products;

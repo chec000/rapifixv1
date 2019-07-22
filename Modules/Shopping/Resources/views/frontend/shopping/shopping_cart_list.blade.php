@@ -69,27 +69,53 @@
                             <form action="{{route('cart.send_mail')}}" method="GET" id="cart-form">
                                 <div class="row" >
                                     <div class="col-md-6 col-12 mb-25">
-                                        <input name="nombre" type="text" placeholder="Nombre(s)" required="required">
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input name="apellidos" type="text" placeholder="apellidos" required="required">
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input name="telefono" type="number" placeholder="Telefono celular" required="required">
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input type="number" name="celular" placeholder="celular" required="required">
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input name="otro_telefono" type="number"  placeholder="Otro télefono">
-                                    </div>
-                                      <div class="col-md-6 col-12 mb-25">
+                                        <div class="form-group">
+                                            <label>Nombre(s):</label>
+                                               <input name="nombre" type="text" class="form-control" placeholder="Nombre(s)" required="required">
 
-                                        <textarea name="comentario" placeholder="Comentario"></textarea>
+                                        </div>
                                     </div>
                                     <div class="col-md-6 col-12 mb-25">
+                                        <div  class="form-group">
+                                            <label>
+                                                Apellidos:
+                                            </label>
+                                            <input class="form-control" name="apellidos" type="text" placeholder="Apellidos" required="required">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-25">
+                                        <div class="form-group">
+                                            <label>Telefono de casa:</label>
+                                        <input  class="form-control"name="telefono" type="tel" placeholder="Telefono celular" required="required">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-25">
+                                        <div class="form-group">
+                                            <label>Numero celular:</label>
+                                            <input type="tel"  class="form-control"name="celular" placeholder="celular" required="required">
+                                        </div>
+                                    </div>         
+                                <div class="col-md-6 col-12 mb-25">
+                                        <div class="form-group">
+                                            <label  for="address">Direccion:</label>
+                                            <input  id="address"type="text"  class="form-control"name="direccion" placeholder="Direccion" required="required">
+                                        </div>
+                                    </div>    
+                                    <div class="col-md-6 col-12 mb-25">
+                                     <div class="form-group">
+                               <label for="email">Correo:</label>
+                               <input  class="form-control" type="email" name="email" class="form-control" id="email"  placeholder="Ingresa tu email ">
+
+                               </div>
+                
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-25">
+                                           <div class="form-group">
+                                              <label >Ciudad:</label>
                                         <select class="form-control" required="required" name="ciudad">
-
+                                    <option value="">Selecciona una opcion</option>
                                             <option value="Azua">Azua</option>
                                              <option value="Bahoruco">Bahoruco</option>
                                               <option value="Barahona">  Barahona</option>
@@ -122,15 +148,23 @@
                                                  <option value="Santiago">   Santiago</option>
                                                  <option value="Santiago Rodríguez">Santiago Rodríguez</option>
                                                  <option value="Santo Domingo">Santo Domingo</option>
-                                                 <option value="Valverde">Valverde</option>
-                                                 
+                                                 <option value="Valverde">Valverde</option>                                                 
                                              </select>
-
-                                        </select>
-                                        
+                                           </div>                                                                                                                  
                                     </div>
                                     <div class="col-md-6 col-12 mb-25">
-                                        <input type="submit" value="Enviar">
+                        <div class="form-group">
+                               <label for="email">Comentario:</label>
+                               <textarea class="form-control" name="comentario" placeholder="Si tienes un comentrio, ingresalo aqui "></textarea>
+                              
+                               </div>                
+                                    </div>
+                        
+                                    <div class="col-md-6 col-12 mb-25">
+                                        <div class="form-group" >
+                                            <input class="form-control" type="submit" value="Enviar">
+
+                                        </div>
                                     </div>
                                 </div>
                             </form>

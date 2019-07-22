@@ -10,13 +10,15 @@ foreach (TranslatableUrlPrefix::getTranslatablePrefixesByIndex('shopping') as $l
         $prefixCheckout = TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('checkout', $lang);
         $prefixCheckoutUrl = TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('checkout_url', $lang);
         $prefixConfirmation= TranslatableUrlPrefix::getTranslatablePrefixByIndexAndLang('confirmation', $lang);
-        /*if($lang == "es"){
-            dd($prefixCheckout.'.'.$prefixConfirmation);
-        }*/
-
+     
 
         Route::get('/', 'CheckoutController@redirect');
         Route::get('/'.$prefixCheckoutUrl,['as' => $prefixCheckout.'.index','uses' =>'CheckoutController@index']);
+   if($lang == "es"){
+        //  dd($prefixCheckoutUrl.'.'.$prefixConfirmation);
+     // dd('/'.$prefixCheckoutUrl); 
+       
+   }
 
         Route::get('/'.$prefixCheckoutUrl.'/'.$prefixConfirmation.'/', ['as' => $prefixCheckout.'.'.$prefixConfirmation, 'uses' => 'CheckoutController@confirmation']);
         Route::post('/'.$prefixCheckoutUrl.'/'.$prefixConfirmation.'/', ['as' => $prefixCheckout.'.'.$prefixConfirmation, 'uses' => 'CheckoutController@confirmation']);
@@ -28,6 +30,7 @@ foreach (TranslatableUrlPrefix::getTranslatablePrefixesByIndex('shopping') as $l
 
 Route::group(['middleware' => ['web'], 'prefix' => 'shopping',
     'namespace' => 'Modules\Shopping\Http\Controllers'], function () {
+    Route::get('/checkout/index',['as' => 'shopping.checkout.index','uses' =>'CheckoutController@index']);
     Route::get('/checkout/getShippingAddress/{getFromWs}', ['as' => 'checkout.getShippingAddress', 'uses' => 'CheckoutController@getShippingAddress']);
     Route::post('/checkout/shippingAddress/states', ['as' => 'checkout.shippingAddress.states', 'uses' => 'CheckoutController@states']);
     Route::post('/checkout/shippingAddress/cities', ['as' => 'checkout.shippingAddress.cities', 'uses' => 'CheckoutController@cities']);

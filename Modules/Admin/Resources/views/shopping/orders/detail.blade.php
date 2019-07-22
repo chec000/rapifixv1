@@ -29,28 +29,11 @@
                             <strong>@lang('admin::shopping.orders.detail.phone')</strong>: {{$shipping_address['telephone']}}<br>
                             <strong>@lang('admin::shopping.orders.detail.cellphone')</strong>: {{$shipping_address['cellphone']}}<br>
                             <strong>@lang('admin::shopping.orders.detail.email')</strong>: {{$shipping_address['email']}}<br>
-                            @if(strtoupper($order['shop_type']) == 'INSCRIPTION')
-                            <div>
-                                @if($order->country->corbiz_key == "BRA")
-                                CPF: {{$shipping_address['cpf']}}{{--$order[''cpf'] or ''--}}<br><br>
-                                @endif
-                                <b>@lang('admin::shopping.orders.detail.birth'):</b> {{$shipping_address['birthdate']}}{{--$order[''sponsor_name'] or ''--}}<br>
-                                <b>@lang('admin::shopping.orders.detail.gender'):</b> {{$shipping_address['gender']}}{{--$order[''sponsor_name'] or ''--}}<br>
-                                <b>@lang('admin::shopping.orders.detail.sponsor'):</b> {{$shipping_address['sponsor']}}{{--$order[''sponsor'] or ''--}}<br>
-                                <b>@lang('admin::shopping.orders.detail.sponsor_name'):</b> {{$shipping_address['sponsor_name']}}{{--$order[''sponsor_name'] or ''--}}<br>
-                                @if($shipping_address['is_pool'] == 1)
-                                    <b>@lang('admin::shopping.orders.detail.reference'):</b> {{$shipping_address->reference->name}}
-                                @endif
-                            </div>
-
-                            <a href="{{asset($order['contract_path'])}}" target="_blank"><i class="fa fa-download"></i> <b>@lang('admin::shopping.orders.detail.contract')</b></a>
-                            @endif
+                            
                         </address>
                     </div>
                     <div class="col-sm-4 invoice-col">
-                        <address>
-                            <strong>
-                            <i class="fa fa-truck"></i> {{$shipping_address['type_address']}}</strong><br>
+                        <address>                                                      
                             <i class="fa fa-home"></i>  {{$shipping_address['address']}}, {{$shipping_address['number']}}(<small>{{$shipping_address['complement']}}</small>)<br>
                             <strong>@lang('admin::shopping.orders.detail.suburb')</strong> {{$shipping_address['suburb']}}, <strong>@lang('admin::shopping.orders.detail.zip')</strong> {{$shipping_address['zip_code']}}<br>
                             <strong>@lang('admin::shopping.orders.detail.city')</strong> {{$shipping_address['city_name']}} ({{$shipping_address['city']}})<br>
@@ -58,15 +41,13 @@
                         </address>
                     </div>
                     <div class="col-sm-4 invoice-col">
-                        <b>@lang('admin::shopping.orders.detail.corbiz_order') #{{$order['corbiz_order']}}{{--$order[''corbiz_order']--}}</b><br>
+                        <b>@lang('admin::shopping.orders.detail.order') : #{{$order['order_number']}}</b><br>
                         <!-- <br> -->
 
                         <b>@lang('admin::shopping.orders.detail.oid'):</b> {{$order['id']}}{{--$order[''id_order']--}}<br>
-                        <b>@lang('admin::shopping.orders.detail.status'):</b> {{$order->estatus->name}}{{--$order[''estatus']--}}<br>
+                        
                         <b>@lang('admin::shopping.orders.detail.points'):</b> {{$order['points']}}{{--$order[''points']--}}<br />
-                        <b>@lang('admin::shopping.orders.detail.corbiz_transaction'):</b> {{$order['corbiz_transaction']}}{{--$order[''corbiz_transaction']--}} <br />
-                        <b>@lang('admin::shopping.orders.index.source'):</b> {{$order->source->source_name}}{{--$order[''corbiz_transaction']--}} <br />
-
+                        
                     @if(!empty($order['bank_transaction']))
                         <b>@lang('admin::shopping.orders.detail.bank_transaction'):</b> {{$order['bank_transaction']}}{{--$order[''bank_transaction']--}}
                     @endif
@@ -92,15 +73,10 @@
                             </tr>
                             </thead>
                             <tbody>
-
-
                             @foreach($orderdetail as $od)
 
                                 @php
                                     $active = $od->active;
-
-
-
                                         switch ($active){
                                                 case 1 :
                                                 //caso de producto normal sin cambios
@@ -149,8 +125,7 @@
                                     @if($can_delete)
                                     <td>
                                         <span class="label label-success" id="item_{{$od->id}}" style="display: none;">@lang('admin::shopping.orders.detail.added')</span>
-                                        @if($order->estatus->key_estatus == 'CORBIZ_ERROR' && $od->is_promo == 0)
-                                           <button id="del_{{$od->id}}" type="button" class="btn btn-danger" style="padding: 0 5px; {{$visibledel}}" onclick="removeProductList('{{$od->order_id}}','{{$od->id}}')">
+                                          <button id="del_{{$od->id}}" type="button" class="btn btn-danger" style="padding: 0 5px; {{$visibledel}}" onclick="removeProductList('{{$od->order_id}}','{{$od->id}}')">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </button>
 
@@ -158,7 +133,6 @@
                                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                                             </button>
 
-                                        @endif
                                     </td>
                                     @endif
                                 </tr>
@@ -167,111 +141,13 @@
 
                             </tbody>
                         </table>
-                        @if($order->estatus->key_estatus == 'CORBIZ_ERROR' && in_array($order->source->source_name,Config::get('admin.sources')))
-                            <form id="productsNew">
-                            <input type="hidden" name="productsnew" id="productsnew" class="form-control" />
-                            <input type="hidden" name="orderid" id="orderid" value="{{$order['id']}}">
-                            <table class="table table-responsive" id="addnewproducts">
-
-                                <tr id="change_products">
-
-                                    <td colspan="7" style="background-color: #ccc;">@lang('admin::shopping.orders.detail.change_products')<i class="fa fa-arrow-down" aria-hidden="true"></i></td>
-
-                                </tr>
-                                <tr id="choose_products">
-
-                                    <td>@lang('admin::shopping.orders.detail.qty'):</td>
-                                    <td><input type="number" required="" id="cant_prod"></td>
-                                    <td>@lang('admin::shopping.orders.detail.product'):</td>
-                                    <td>
-                                        <select name="prods" id="prod_sel">
-                                            <option value="">@lang('admin::shopping.orders.detail.chooseoption.6')</option>
-                                            @foreach($products as $p)
-                                                @if($p->product->active == 1 && $p->product->delete == 0)
-                                                    <option id="opt_{{$p->product_id}}" value="{{$p->product_id}}">{{$p->product->sku}} - {{!empty($p->name) ? $p->name : $p->product->global_name}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-
-                                    <button type="button" class="btn btn-success" style="padding: 0 12px" onclick="addListProduct({{$products}})">
-                                        <i class="fa fa-plus" aria-hidden="true"></i> @lang('admin::shopping.orders.detail.add_product')
-                                    </button>
-
-                                    <button type="button" id="actOrdBtn" class="actOrdBtn btn btn-primary" style="padding: 0 12px"
-                                            disabled="disabled" onclick="saveChanges()">
-                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> @lang('admin::shopping.orders.detail.save_changes')
-                                        <i class="guardaOrderBtn fa fa-spinner fa-pulse fa-fw" style="display: none;"></i>
-                                    </button>
-                                </td>
-
-                            </tr>
-                                <tr>
-                                    <th>@lang('admin::shopping.orders.detail.qty')</th>
-                                    <th>@lang('admin::shopping.orders.detail.product')</th>
-                                    <th>@lang('admin::shopping.orders.detail.sku')</th>
-                                    <th>@lang('admin::shopping.orders.detail.description')</th>
-                                    <th>@lang('admin::shopping.orders.detail.points')</th>
-                                    <th>@lang('admin::shopping.orders.detail.subtotal')</th>
-                                    <th>@lang('admin::shopping.orders.detail.action')</th>
-                                </tr>
-
-                                    @foreach($products as $p)
-                                        @if($p->product->active == 1 && $p->product->delete == 0)
-                                            <tr id="prods_added_{{$p->product_id}}" style="display: none">
-                                                <td id="quantity_{{$p->product_id}}"></td>
-                                                <td>{{!empty($p->name) ? $p->name : $p->product->global_name}}</td>
-                                                <td>{{$p->product->sku}}</td>
-                                                <td>{{$p->description}}</td>
-                                                <td id="points_{{$p->product_id}}">{{$p->points }}</td>
-                                                <td id="subtotal_{{$p->product_id}}"></td>
-                                                <td id="price_{{$p->product_id}}" style="display: none;">{{$p->price }}</td>
-                                                <td>
-                                                    <i id="{{$p->product_id}}" class="del_btn fa fa-trash fa-2x"
-                                                       aria-hidden="true" onclick="delProduct({{$p->product_id}})"></i>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                   @endforeach
-
-                            </table>
-                        </form>
-                       @endif
-
+                      
                     </div>
                 </div>
 
                 <div class="row">
                     <!-- accepted payments column -->
-                    <div class="col-xs-6">
-                        <span class="lead">@lang('admin::shopping.orders.detail.payment_methods')</span><br>
-                        <i class="fa fa-credit-card"></i><strong> {{strtoupper($order->bank->name)}}</strong><br>
-                        @if(!empty($order['payment_type']))
-                         <i class="fa fa-credit-card"></i> {{$order['payment_type']}}
-                        @endif
-
-                        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                            <strong>@lang('admin::shopping.orders.detail.corbiz_error'): </strong>{{$order['error_corbiz']}}
-                        </p>
-                        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                            <strong>@lang('admin::shopping.orders.detail.last_modifier'):</strong>
-                            @if(!empty($order['last_modifier_id']))
-                                <span>{{$order->users->name}}</span>
-                            @else
-                                <span>@lang('admin::shopping.orders.detail.system')</span>
-                            @endif
-                        </p>
-                        <a class="btn btn-info btn-sm" id="showlog">
-                            <i class="fa-calendar-o fa"></i> @lang('admin::shopping.orders.detail.payment_log')
-                        </a>
-                        @if($order->estatus->key_estatus == 'CORBIZ_ERROR' && in_array($order->source->source_name,Config::get('admin.sources')))
-                            <button class="btn btn-info btn-sm" onclick="changeOrderStatus({{$order['id']}})"> <i class="fa-check-square fa"></i> @lang('admin::shopping.orders.detail.change_status')</button>
-                        @endif
-
-
-
-                    </div>
+    
                     <!-- /.col -->
                     <div class="col-xs-6">
                         <div class="table-responsive">

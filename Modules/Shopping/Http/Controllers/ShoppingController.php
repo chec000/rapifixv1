@@ -2,14 +2,17 @@
 
 namespace Modules\Shopping\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+
+use Modules\Shopping\Entities\ShippingAddress;
+use Modules\Shopping\Entities\OrderDetail;
+use Modules\Shopping\Entities\Order;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Routing\Controller;
 use App\Helpers\ShoppingCart;
-use Modules\Shopping\Entities\Order;
-use Modules\Shopping\Entities\OrderDetail;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use PDF;
+
 class ShoppingController extends Controller
 {
     /**
@@ -49,46 +52,86 @@ class ShoppingController extends Controller
 
 
     public function sendEmailShopping(Request $request) {
-            
-        try {                
-            $r=$request->all();
-        
-        $usuario='rapifixjarabacoa@gmail.com';
-        $asunto='Presupuesto';
-        $user=$r['nombre'].'  '.$r['apellidos'];
+             
+        try {                           
+              $r=$request->all();
+        if(\Session::has('portal.cart' ) && \Session::get('portal.cart.items') > 0) {
+            $date=getdate();
+            $numeroOrden=  "P1-".$date['year'].'-'.time();                              
+            $items=\Session::get('portal.cart.items');                    
+           $this->saveOrder( $items,$numeroOrden,$r);
+        $enviarCorreo=false;
+           if($enviarCorreo){
+                $usuario='rapifixjarabacoa@gmail.com';
+          $asunto='Presupuesto';
+         $user=$r['nombre'].'  '.$r['apellidos'];
         
          Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r){
-
             $subTotal=ShoppingCart::getSubtotal();
-                $cart=\session()->get('portal.cart');
-    
-            $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);
-        
-                $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
-
-        //$message->from('from@gmail.com','The Sender');
+            $cart=\session()->get('portal.cart');    
+            $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
+            $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
 
         $m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
+    });    
+           }
+       session()->forget('portal.cart');
+        }
+  
 
-    });
-
-            return redirect()->route('cart.list');
-
-            if (count(Mail::failures()) > 0) {
-                return false;
-            } else {
-                return true;
-            }
+           return json_encode(true); 
+        
+            
         } catch (Exception $ex) {
             return $ex->getText;
         }
-    }
+                    
+        return json_encode(false);
+                }
+       
 
-    private function saveOrder()
+
+    private function saveOrder($items,$numeroOrden,$data)
     {
-        $order= new Order();
+            
+         $order= new Order();
+        $order->country_id=\Session::get('portal.main.country_id');      
+        $order->order_estatus_id=1;
+        $order->order_number=$numeroOrden;
+        $order->points=\Session::get('portal.cart.points');
+        $order->total_taxes=0;
+        $order->total=\Session::get('portal.cart.subtotal');
+        $order->discount=0;        
+        $order->guide_number=$numeroOrden;
+        $order->save();
+    
+        foreach ($items as $i){          
+            $orderDetail = new OrderDetail();
+            $orderDetail->order_id=$order->id;
+            $orderDetail->product_id=$i['id'];
+            $orderDetail->quantity=$i['quantity'];
+            $orderDetail->final_price=$i['price'];
+            $orderDetail->points=$i['points'];
+            $orderDetail->active=1;
+            $orderDetail->country_group_id=\Session::get('portal.main.country_id');
+            $orderDetail->save();
+            
+        }
+       $shipingAddres= new  ShippingAddress();
+       $shipingAddres->order_id=$order->id;
+        $shipingAddres->name=$data['nombre'];
+       $shipingAddres->lastname=$data['apellidos'];   
+       $shipingAddres->address=$data['direccion'];
+       $shipingAddres->cellphone=$data['celular'];
+       $shipingAddres->telephone=$data['telefono'];
+       $shipingAddres->zip_code="";
+       $shipingAddres->city=$data['ciudad'];
+       $shipingAddres->state=$data['ciudad'];
+       $shipingAddres->country="Republica Dominicana";
+       $shipingAddres->email=$data['email'];
+       $shipingAddres->save();
+         
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -143,33 +186,5 @@ class ShoppingController extends Controller
     {
     }
 
-    private function getPdf()
-    {
-    $ruta = $this->generateReport($articulos, $user->usuario, $request->getSchemeAndHttpHost(),  $venta->codigo_factura);
-        
-    }    
-    public function generateReport($membresias, $user, $path,$name_report) {
-        /**
-         * toma en cuenta que para ver los mismos 
-         * datos debemos hacer la misma consulta
-         * */
-        $directorio = public_path() . '/uploads/facturas';
-        $date = new \DateTime();
-        if (file_exists($directorio)) {
-
-            $pdf = PDF::loadView('admin::gym.ventas.factura_venta', ['date' => $date->format('d-M-Y'), "membresias" => $membresias, "user" => $user, "total" => $this->total_pagar]);
-
-            file_put_contents($directorio . '/' .  $name_report.".pdf", $pdf->stream());
-        } else {
-            mkdir($directorio, 7777, true);
-            $pdf = PDF::loadView('admin::gym.ventas.factura_venta', ['date' => $date->format('d-M-Y')]);
-            file_put_contents($directorio . '/' . $name_report.".pdf", $pdf->stream());
-        }
-        $archivo = $path . '/uploads/facturas/' .$name_report . '.pdf';
-        $archivoEmail = $directorio . "/" .$name_report. ".pdf";
-
-        return array("archivo" => $archivo, "archivoEmail" => $archivoEmail);
-
-//        return compact($archivoEmail,$archivo);
-    }
+ 
 }
