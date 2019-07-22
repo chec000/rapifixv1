@@ -14,7 +14,7 @@
                             <!-- Category Toggle Wrap -->
                             <div class="category-toggle-wrap">
                                 <!-- Category Toggle -->
-                                <button class="category-toggle">Categories <i class="ti-menu"></i></button>
+                                <button class="category-toggle">Categorias <i class="ti-menu"></i></button>
                             </div>
                             <!-- Category Menu -->
                             <nav class="category-menu mb-40">
@@ -165,7 +165,7 @@
                                         </div>
                                         <div class="product-description">
                                             <h5 class="product-name">
-                                                <a href="single-product-variable.html">
+                                                <a href="{{route('products.detail', ['product_slug' => $p->slug])}}">
                                                     {{$p->name}}
                                                 </a></h5>
                                                 <div class="price-box">
@@ -214,7 +214,7 @@
                                                 <a href="{{route('products.detail', ['product_slug' => $lp->slug])}}"><img src="{{asset($lp->image)}}" class="img-fluid" alt=""></a>
                                             </div>
                                             <div class="product-description">
-                                                <h5 class="product-name"><a href="single-product-variable.html">
+                                                <h5 class="product-name"><a href="{{route('products.detail', ['product_slug' => $lp->slug])}}">
                                                     {{$lp->name}}
                                                 </a></h5>
                                                 <div class="price-box">
@@ -275,7 +275,7 @@
 
                                                     </div>
                                                 </div>
-                                                <h5 class="product-name"><a href="single-product-variable.html">{{$p->name}}</a></h5>
+                                                <h5 class="product-name"><a href="{{route('products.detail', ['product_slug' => $p->slug])}}">{{$p->name}}</a></h5>
                                                 <div class="price-box">
                                                     <h4>{{$p->price}}</h4>
                                                 </div>
@@ -414,7 +414,7 @@
                         <div class="col-lg-12">
                             <!-- Block title -->
                             <div class="block-title">
-                                <h2>LATEST PRODUCTS</h2>
+                                <h2>Productos recientes</h2>
                             </div>
                         </div>
                     </div>
