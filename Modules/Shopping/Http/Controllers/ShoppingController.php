@@ -77,9 +77,10 @@ class ShoppingController extends Controller
             $cart=\session()->get('portal.cart');    
             $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
             $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
+            $m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
 
-        $m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
-    });                
+               return $pdf->download('presupuesto.pdf');        
+         });                
     //   session()->forget('portal.cart');
         }
   
