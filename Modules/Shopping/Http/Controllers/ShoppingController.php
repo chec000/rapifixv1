@@ -19,6 +19,7 @@ class ShoppingController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
+    //public  $numero="";
     public function index()
     {
         return view('shopping::index');
@@ -26,26 +27,17 @@ class ShoppingController extends Controller
     
  
 
-        public function export_cart($request)    
+        public function export_cart()    
     {
 
 
-            $subTotal=ShoppingCart::getSubtotal();
-    
-                $cart=\session()->get('portal.cart');
-        return view('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$request]);
-
-            $usuario="Sergio ";
-     return view('shopping::frontend.shopping.email.budget',array('cliente'=>$usuario));
-
-             
-        $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal]);
+            $subTotal=ShoppingCart::getSubtotal();    
+          $cart=\session()->get('portal.cart');           
+        $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,"data"=>null]);
         
-        //$pdf->save(storage_path().'_filename.pdf');
-      
+             session()->forget('portal.cart');
 
-         //return $pdf->stream('cart_products.pdf',array('Attachment'=>0));
-        return $pdf->download('cart_products.pdf');
+         return $pdf->stream('Stock Report.pdf');
   
 
   }
@@ -57,35 +49,30 @@ class ShoppingController extends Controller
               $r=$request->all();
         if(\Session::has('portal.cart' ) && \Session::get('portal.cart.items') > 0) {
             $date=getdate();
-            $numeroOrden=  "P1-".$date['year'].'-'.time();                              
-           // $items=\Session::get('portal.cart.items');                    
-          // $this->saveOrder( $items,$numeroOrden,$r);
-        
-          //$usuario='emmanuel@rapifixrd.com';
+            $numeroOrden=  "P1-".$date['year'].'-'.time();      
+            //$this->numero=$numeroOrden;
+          
           $usuario='rapifixjarabacoa@gmail.com';
           $asunto='Presupuesto';
          $user=$r['nombre'].'  '.$r['apellidos'];
-    /*   
-          Mail::send('shopping::frontend.shopping.email.test',[], function ($message) {
 
-            $message->to('sergiogalindo2010@hotmail.com')->subject('Subject of the message!');
-        });
-*/
-       $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
-     
-         Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$pdf){
             $subTotal=ShoppingCart::getSubtotal();
             $cart=\session()->get('portal.cart');    
+       $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
+    
+         Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$pdf){
+         
             $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
             $m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
                
          });   
-         return $pdf->download('presupuesto.pdf');        
-       session()->forget('portal.cart');
-        }
-  
-
-           return json_encode(true); 
+     
+   
+             
+      return json_encode(true);
+        
+       }
+        
         
             
         } catch (Exception $ex) {

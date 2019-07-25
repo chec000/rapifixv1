@@ -53,7 +53,7 @@ position: absolute;
   </div>
 </div>    
   </div>
-
+@if($data!=null)
 <div id="cliente"  style="background-color: #dee7fd;">
   <div id="usuario">
    <span>Nombre:</span><span  class="bold">{{$data['nombre']}} </span>
@@ -72,6 +72,7 @@ position: absolute;
     <span>Comentario: </span><span  class="bold">{{$data['comentario']}}</span>
   </div>  
 </div>
+@endif
 <div>
   <p>Lista de productos</p>
 </div>
