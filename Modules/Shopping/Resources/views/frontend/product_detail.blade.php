@@ -50,7 +50,7 @@
                         </div>
                         <p class="stock-details">288 items <span class="stock-status in-stock">In
                         Stock</span></p>
-                        <p class="quantity">Quantity:
+                        <p style="display: none"  class="quantity">Quantity:
 
                             <span class="pro-qty counter">
                                 <input type="text" value="" class="mr-5">
@@ -73,7 +73,8 @@
                             <a href="#"><span class="color-block color-choice-2"></span></a>
                             <a href="#"><span class="color-block color-choice-3 active"></span></a>
                         </p>
-                        <span onclick="ShoppingCart.add_to_item('{{ $countryProduct->id }}', 2)" class="add-to-cart-btn">
+                        
+                        <span onclick="ShoppingCart.add('{{ $countryProduct->id }}', 1)" class="add-to-cart-btn">
                             <i class="fa fa-shopping-cart"></i>
                             Add to Cart
                         </span>
