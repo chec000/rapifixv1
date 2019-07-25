@@ -58,6 +58,7 @@ class ShoppingController extends Controller
 
             $subTotal=ShoppingCart::getSubtotal();
             $cart=\session()->get('portal.cart');    
+            $this->saveOrder(Session::get('portal.cart.items'),$numeroOrden,$r);
        $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
     
          Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$pdf){
