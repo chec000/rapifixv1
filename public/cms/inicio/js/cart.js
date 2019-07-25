@@ -23,7 +23,7 @@ $(function () {
             data: formData
         })
                 .done(function (response) {
-                    window.open(URL_PROJECT + '/shopping-cart/cart-report', "Presupuesto");
+                    
                     $("#bloqueo").hide();
                     Swal.fire({
                         title: 'Exito',
@@ -35,6 +35,10 @@ $(function () {
                         allowEscapeKey:false
                     }).then((result) => {
                         if (result.value) {
+                            var a = document.createElement("a");                            
+		a.target = "_blank";
+		a.href = URL_PROJECT + '/shopping-cart/cart-report';
+		a.click();
                             window.location.href = window.origin
                         }
                     });
