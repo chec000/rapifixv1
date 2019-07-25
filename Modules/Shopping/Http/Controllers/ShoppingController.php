@@ -36,8 +36,8 @@ class ShoppingController extends Controller
         $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,"data"=>null]);
         
              session()->forget('portal.cart');
-
-         return $pdf->stream('Stock Report.pdf');
+ 
+         return $pdf->download('orden.pdf');
   
 
   }
