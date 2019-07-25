@@ -39,7 +39,7 @@ $(function () {
 		a.target = "_blank";
 		a.href = URL_PROJECT + '/shopping-cart/cart-report';
 		a.click();
-                            window.location.href = window.origin
+                           // window.location.href = window.origin
                         }
                     });
                 })
