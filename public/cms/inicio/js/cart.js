@@ -22,26 +22,27 @@ $(function () {
             url: $(form).attr('action'),
             data: formData
         })
-                .done(function (response) {
-                    
-                    $("#bloqueo").hide();
+                .done(function (response) {     
+                    var json=JSON.stringify(response);
+            if(json!==false){
+                        $("#bloqueo").hide();
                     Swal.fire({
                         title: 'Exito',
                         text: "El presupuesto se ha enviado correctamente",
                         type: 'success',
+                         html:    
+                        '<a href='+response.archivo.replace(/['"]+/g, '')+'  download="orden">Descargar orden</a> ',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick:false,
                         allowEscapeKey:false
                     }).then((result) => {
                         if (result.value) {
-                            var a = document.createElement("a");                            
-		a.target = "_blank";
-		a.href = URL_PROJECT + '/shopping-cart/cart-report';
-		a.click();
-                           // window.location.href = window.origin
+                            window.location.href = window.origin;
                         }
                     });
+            }
+            
                 })
                 .fail(function (data) {
 

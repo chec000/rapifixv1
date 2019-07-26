@@ -48,7 +48,7 @@ position: absolute;
 </div>    
  <div style="max-width: 33%;display: inline-block;">
   <div><p style="font-weight: bold;text-decoration: underline;">Presupuesto</p>
-    <p>Número: <span style="font-weight: bold;">P1-<?php echo date('Y'); ?></span></p>
+    <p>Número: <span style="font-weight: bold;">{{ $numero }}</span></p>
     <p>Fecha: <span style="font-weight: bold;"><?php echo date('d-m-Y'); ?></span></p>
   </div>
 </div>    

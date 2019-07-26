@@ -25,26 +25,40 @@ class ShoppingController extends Controller
         return view('shopping::index');
     }
     
- 
 
-        public function export_cart()    
+
+        public function export_cart($request=null,$data,$numeroOrden)    
     {
 
-
-            $subTotal=ShoppingCart::getSubtotal();    
-          $cart=\session()->get('portal.cart');           
-        $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,"data"=>null]);
         
-             session()->forget('portal.cart');
- 
-         return $pdf->download('orden.pdf');
-  
+         $subTotal=ShoppingCart::getSubtotal();    
+         $cart=\session()->get('portal.cart');           
+        $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,"data"=>$data,'numero'=>$numeroOrden]);
+        $directorio = public_path() . '/uploads/facturas';
+        $date = new \DateTime();
+        $name_report="orden".time();
+         $path=$request->getSchemeAndHttpHost();
+      if (file_exists($directorio)) {
+          
+            file_put_contents($directorio . '/' .  $name_report.".pdf", $pdf->stream());
+      }else{
+           mkdir($directorio, 7777, true);
+            file_put_contents($directorio . '/' . $name_report.".pdf", $pdf->stream());
+      }
+      
+          $archivo = $path . '/uploads/facturas/' .$name_report . '.pdf';
+        $archivoEmail = $directorio . "/" .$name_report. ".pdf";
+        
+       // $pdf->save(storage_path().'_filename.pdf');
+    
+   return  array("archivo" => $archivo, "archivoEmail" => $archivoEmail,'name'=>$name_report);
 
   }
 
 
     public function sendEmailShopping(Request $request) {
-             
+                
+      
         try {                           
               $r=$request->all();
         if(\Session::has('portal.cart' ) && \Session::get('portal.cart.items') > 0) {
@@ -55,23 +69,26 @@ class ShoppingController extends Controller
           $usuario='rapifixjarabacoa@gmail.com';
           $asunto='Presupuesto';
          $user=$r['nombre'].'  '.$r['apellidos'];
-
+           $file= $this->export_cart($request,$r,$numeroOrden) ;
+        
             $subTotal=ShoppingCart::getSubtotal();
             $cart=\session()->get('portal.cart');    
             $items=\Session::get('portal.cart.items') ;
             $this->saveOrder( $items,$numeroOrden,$r);
-       $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
-    
-         Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$pdf){
+     //  $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
+
+         Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$file){
          
             $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
-            $m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
+            //$m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
+         $m->attach($file['archivoEmail'], array(
+                    'as' => $file['name'],
+                    'mime' => 'application/pdf')
+                );
                
          });   
-     
-   
-             
-      return json_encode(true);
+                        session()->forget('portal.cart');
+      return  $file;
         
        }
         
