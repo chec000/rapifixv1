@@ -74,20 +74,23 @@ class ShoppingController extends Controller
             $items=\Session::get('portal.cart.items') ;
             $this->saveOrder( $items,$numeroOrden,$r);
      //  $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
-           var_dump($file,"hola");
-        die();
      
+     var_dump($usuario, $asunto,$r,$file);
+     die();
          Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$file){
          
             $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
-            //$m->attachData($pdf->output(),'prusupuesto.pdf',['mime'=>'application/pdf']);
+
          $m->attach($file['archivoEmail'], array(
                     'as' => $file['name'],
                     'mime' => 'application/pdf')
                 );
                
          });   
-       session()->forget('portal.cart');
+           var_dump($file,"hola");
+        die();
+     
+         session()->forget('portal.cart');
       return  $file;
         
        }
