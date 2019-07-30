@@ -38,8 +38,7 @@ class ShoppingController extends Controller
         $date = new \DateTime();
         $name_report="orden".time();
          $path=$request->getSchemeAndHttpHost();
-      if (file_exists($directorio)) {
-          
+      if (file_exists($directorio)) {          
             file_put_contents($directorio . '/' .  $name_report.".pdf", $pdf->stream());
       }else{
            mkdir($directorio, 7777, true);
@@ -58,17 +57,18 @@ class ShoppingController extends Controller
 
     public function sendEmailShopping(Request $request) {
                 
-      
+        var_dump(\Session::has('portal.cart' ) && \Session::get('portal.cart.items'));
+        die();
+        
         try {                           
-              $r=$request->all();
+         $r=$request->all();
         if(\Session::has('portal.cart' ) && \Session::get('portal.cart.items') > 0) {
             $date=getdate();
             $numeroOrden=  "P1-".$date['year'].'-'.time();      
-            //$this->numero=$numeroOrden;
           
           $usuario='rapifixjarabacoa@gmail.com';
           $asunto='Presupuesto';
-         $user=$r['nombre'].'  '.$r['apellidos'];
+          $user=$r['nombre'].'  '.$r['apellidos'];
            $file= $this->export_cart($request,$r,$numeroOrden) ;
         
             $subTotal=ShoppingCart::getSubtotal();
@@ -87,7 +87,7 @@ class ShoppingController extends Controller
                 );
                
          });   
-                        session()->forget('portal.cart');
+       session()->forget('portal.cart');
       return  $file;
         
        }
