@@ -57,8 +57,6 @@ class ShoppingController extends Controller
 
     public function sendEmailShopping(Request $request) {
                 
-        var_dump(\Session::has('portal.cart' ) && \Session::get('portal.cart.items'));
-        die();
         
         try {                           
          $r=$request->all();
@@ -70,13 +68,15 @@ class ShoppingController extends Controller
           $asunto='Presupuesto';
           $user=$r['nombre'].'  '.$r['apellidos'];
            $file= $this->export_cart($request,$r,$numeroOrden) ;
-        
-            $subTotal=ShoppingCart::getSubtotal();
+     
+           $subTotal=ShoppingCart::getSubtotal();
             $cart=\session()->get('portal.cart');    
             $items=\Session::get('portal.cart.items') ;
             $this->saveOrder( $items,$numeroOrden,$r);
      //  $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
-
+           var_dump($file,"hola");
+        die();
+     
          Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$file){
          
             $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
