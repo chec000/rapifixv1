@@ -3,9 +3,9 @@
         @lang('admin::shopping.categories.index.btn_return')
     </a>
     @if(session('msg'))
-        <div class="alert alert-success" role="alert">{{ session('msg') }}</div>
+    <div class="alert alert-success" role="alert">{{ session('msg') }}</div>
     @elseif(session('errors') != null)
-        <div class="alert alert-danger" role="alert">{{ session('errors')->first('msg') }}</div>
+    <div class="alert alert-danger" role="alert">{{ session('errors')->first('msg') }}</div>
     @endif
     <h1>{!!trans('admin::shopping.categories.add.view.title-add')!!}</h1>
     <form id="categories" method="POST" action="{{ route('admin.categories.store') }}">
@@ -20,256 +20,256 @@
             <input type="text" name="global_name" id="global_name" class="form-control" required="required">
         </div>
         <div class="form-group">
-         <label for="global_name">{{ trans('admin::shopping.categories.index.parent_category') }} *</label>
-          <select class="form-control" name="parent_category">
+           <label for="global_name">{{ trans('admin::shopping.categories.index.parent_category') }} *</label>
+           <select class="form-control" name="parent_category">
             <option value="0">Ninguna</option>
             @foreach($categories as $c)
 
             <option value="{{ $c->id }}">{{ $c->global_name }}</option>
             @endforeach
-              
-          </select>
-            
-        </div>
 
-        <div class="form-group">
-            <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-country')</label><br />
+        </select>
 
-            <ul id="countryForm" class="nav nav-tabs" role="tablist">
-                @foreach(Auth::user()->countries as $uC)
-                    <li role="presentation" data-country-tab="{{ $uC->id }}">
-                        <a href="#{{ str_replace(' ', '_', $uC->name) }}" aria-controls="home" role="tab" data-toggle="tab">
-                            {{ $uC->name }} <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-            <div class="tab-content">
-                @foreach(Auth::user()->countries as $uC)
-                    <div role="tabpanel" class="tab-pane" id="{{ str_replace(' ', '_', $uC->name) }}" data-country-pane="{{ $uC->id }}"> <br />
+    </div>
 
-                        <div data-id="c_omni" class="form-group">
-                            <label for="color">{{ trans('admin::shopping.categories.index.color') }}</label>
-                            <div id="bcolor_{{ $uC->id }}_1" class="products-page inner"></div>
-                            <select class="form-control select-color" name="color_{{ $uC->id }}" data-brand="1">
-                                <option value="">{{ trans('admin::shopping.categories.index.default') }}</option>
-                                @foreach ($colorsOmnilife as $class)
-                                    <option value="{{ $class }}">{{ ucfirst($class) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-country')</label><br />
 
-                        <div data-id="c_seytu" class="form-group">
-                            <label for="color">{{ trans('admin::shopping.categories.index.color') }}</label>
-                            <div id="bcolor_{{ $uC->id }}_2" class="products-page inner"></div>
-                            <select class="form-control select-color" name="color_{{ $uC->id }}" data-brand="2">
-                                <option value="">{{ trans('admin::shopping.categories.index.default') }}</option>
-                                @foreach ($colorsSeytu as $class)
-                                    <option value="{{ $class }}">{{ ucfirst($class) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+        <ul id="countryForm" class="nav nav-tabs" role="tablist">
+            @foreach(Auth::user()->countries as $uC)
+            <li role="presentation" data-country-tab="{{ $uC->id }}">
+                <a href="#{{ str_replace(' ', '_', $uC->name) }}" aria-controls="home" role="tab" data-toggle="tab">
+                    {{ $uC->name }} <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                </a>
+            </li>
+            @endforeach
+        </ul>
+        <div class="tab-content">
+            @foreach(Auth::user()->countries as $uC)
+            <div role="tabpanel" class="tab-pane" id="{{ str_replace(' ', '_', $uC->name) }}" data-country-pane="{{ $uC->id }}"> <br />
 
-                        <div class="form-group">
-                            <label for="oder_{{ $uC->id }}">@lang('admin::shopping.categories.add.input.order')</label>
-                            <input name="order_{{ $uC->id }}"
-                                   type="number" min="1" max="30"
-                                   class="form-control"
-                                   id="order_{{ $uC->id }}"
-                                   placeholder="@lang('admin::shopping.categories.add.input.category')"
-                                   value="{{ old('order_'.$uC->id, 30) }}">
-                        </div>
-
-                        @foreach(Auth::user()->getCountryLang($uC->id) as $langCountry)
-                            <div role="panel-group" id="accordion-{{ $uC->id }}-{{ $langCountry->id }}">
-                                <div class="panel panel-default">
-                                    <div role="tab" class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                                               href="#product-language-{{ $uC->id }}-{{ $langCountry->id }}">
-                                                {{trans('admin::shopping.products.add.second_general_tab.country-language-title') . $langCountry->language }}
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div role="tabpanel" data-parent="#accordion" class="panel-collapse collapse"
-                                         id="product-language-{{ $uC->id }}-{{ $langCountry->id }}" >
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.input.category') *</label>
-                                                        <input name="category_{{ $uC->id }}_{{ $langCountry->id }}"
-                                                               type="text" rel="requerido_{{ $uC->id }}"
-                                                               class="requerido requerido_{{ $uC->id }} requerido_{{ $uC->id }}_{{ $langCountry->id }} form-control"
-                                                               id="requerido_{{ $uC->id }}_{{ $langCountry->id }}"
-                                                               placeholder="@lang('admin::shopping.categories.add.input.category')"
-                                                               value="{{ old('category_'.$uC->id.'_'.$langCountry->id) }}">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label"
-                                                               for="product-image-{{ $uC->id }}-{{ $langCountry->id }}">
-                                                            {{trans('admin::shopping.categories.add.input.select_banner')}}
-                                                        </label>
-                                                        <div class="input-group">
-                                                            <input name="image_{{ $uC->id }}_{{ $langCountry->id }}" readonly="true"
-                                                                   type="text" id="image_{{ $uC->id }}_{{ $langCountry->id }}"
-                                                                   class="img_src requerido_{{ $uC->id }}_{{ $langCountry->id }} form-control"
-                                                                   value="{{ old('image_'.$uC->id.'_'.$langCountry->id) }}">
-                                                            <span class="input-group-btn">
-                                                                <a href="{!! URL::to(config('admin.config.public') . '/filemanager/dialog.php?type=1&field_id=image_'.$uC->id.'_'.$langCountry->id) !!}"
-                                                                   class="btn btn-default iframe-btn">
-                                                                    {{ trans('admin::countries.add_btn_image') }}
-                                                                </a>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.input.description')</label>
-                                                        <textarea name="description_{{ $uC->id }}_{{ $langCountry->id }}"
-                                                                  class="form-control" rows="3"
-                                                                  placeholder="@lang('admin::shopping.categories.add.input.description')"
-                                                        >{{ old('description_'.$uC->id.'_'.$langCountry->id) }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- dd($langCountry)  --}}
+                <div data-id="c_omni" class="form-group">
+                    <label for="color">{{ trans('admin::shopping.categories.index.color') }}</label>
+                    <div id="bcolor_{{ $uC->id }}_1" class="products-page inner"></div>
+                    <select class="form-control select-color" name="color_{{ $uC->id }}" data-brand="1">
+                        <option value="">{{ trans('admin::shopping.categories.index.default') }}</option>
+                        @foreach ($colorsOmnilife as $class)
+                        <option value="{{ $class }}">{{ ucfirst($class) }}</option>
                         @endforeach
-                        <hr />
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-banner-link')</label>
-                            <input name="bannerLink_{{ $uC->id }}" type="text" class="form-control"
-                                   placeholder="@lang('admin::shopping.categories.add.input.banner-link')"
-                                   value="{{ old('bannerLink_'.$uC->id) }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-active')</label>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="active_{{ $uC->id }}" value="1" @if(old('active_'.$uC->id) == null || old('active_'.$uC->id)) checked @else '' @endif>
-                                    @lang('admin::shopping.categories.add.input.yes')
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="active_{{ $uC->id }}" value="0" {{ old('active_'.$uC->id) === 0 ? ' checked' : '' }}>
-                                    @lang('admin::shopping.categories.add.input.no')
-                                </label>
-                            </div>
-                        </div><br />
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-product-select')</label>
-                            <input type="hidden" name="products_{{ $uC->id }}" id="products_{{ $uC->id }}" class="form-control"
-                                   value="{{ old('products_'.$uC->id) }}"/>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div id="alert_{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
-                                        @lang('admin::shopping.categories.add.error.select-product-error')
-                                    </div>
-                                </div>
-                                <div class="col-xs-10">
-                                    <select class="form-control" id="sel_{{ $uC->id }}">
-                                        <option id="opt_{{ $uC->id }}" value="">
-                                            @lang('admin::shopping.categories.add.input.product')
-                                        </option>
-                                        @foreach(Auth::user()->activeProductsByCountry($uC->id) as $prod)
-                                            <option id="opt_{{$prod->id}}_{{ $uC->id }}" value="{{$prod->id}}">{{$prod->sku}} - {{$prod->global_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-xs-2">
-                                    <button type="button" class="btn btn-default"
-                                            onclick="addProduct({{ $uC->id }}, {{ Auth::user()->activeProductsByCountry($uC->id) }})">
-                                        @lang('admin::shopping.categories.add.view.form-add-button')
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div id="alert_limit_{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
-                                @lang('admin::shopping.categories.add.error.select-category')
-                            </div>
-                            <div id="alert_limit_home{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
-                                @lang('admin::shopping.categories.add.error.select-banner')
-                            </div>
-                            <div id="alert_limit_category{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
-                                @lang('admin::shopping.categories.add.error.select-home')
-                            </div>
-                            <table class="table text-center">
-                                <tr>
-                                    <th class="text-center" colspan="5">@lang('admin::shopping.categories.add.view.form-product-list')</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-id')</th>
-                                    <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-sku')</th>
-                                    <th class="text-center">@lang('admin::shopping.products.add.first_general_tab.form-global-name-label')</th>
-                                    <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-home')</th>
-                                    <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-category')</th>
-                                    <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-delete')</th>
-                                </tr>
-                                @foreach(Auth::user()->activeProductsByCountry($uC->id) as $prod)
-                                    <tr id="dis_{{$prod->id}}_{{ $uC->id }}" style="display: none">
-                                        <td>{{ $prod->id }}</td>
-                                        <td>{{ $prod->sku }}</td>
-                                        <td>{{ $prod->global_name }}</td>
-                                        <td class="text-center">
-                                            <i id="favOff_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye-slash fa-2x"
-                                               aria-hidden="true" onclick="addFavorite({{$prod->id}},{{ $uC->id }})"></i>
-                                            <i id="favOn_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye fa-2x"
-                                               aria-hidden="true" onclick="quitFavorite({{$prod->id}},{{ $uC->id }})"
-                                               style="color: green;display: none"></i>
-                                        </td>
-                                        <td class="text-center">
-                                            <i id="catOff_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye-slash fa-2x"
-                                               aria-hidden="true" onclick="addCat({{$prod->id}},{{ $uC->id }})"></i>
-                                            <i id="catOn_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye fa-2x"
-                                               aria-hidden="true" onclick="quitCat({{$prod->id}},{{ $uC->id }})"
-                                               style="color: green;display: none"></i>
-                                        </td>
-                                        <td>
-                                            <i id="{{$prod->id}}|{{ $uC->name }}" class="del_btn fa fa-trash fa-2x"
-                                               aria-hidden="true" onclick="delProduct({{$prod->id}},'{{ $uC->id }}')"></i>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        </div>
+                    </select>
+                </div>
+
+                <div data-id="c_seytu" class="form-group">
+                    <label for="color">{{ trans('admin::shopping.categories.index.color') }}</label>
+                    <div id="bcolor_{{ $uC->id }}_2" class="products-page inner"></div>
+                    <select class="form-control select-color" name="color_{{ $uC->id }}" data-brand="2">
+                        <option value="">{{ trans('admin::shopping.categories.index.default') }}</option>
+                        @foreach ($colorsSeytu as $class)
+                        <option value="{{ $class }}">{{ ucfirst($class) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="oder_{{ $uC->id }}">@lang('admin::shopping.categories.add.input.order')</label>
+                    <input name="order_{{ $uC->id }}"
+                    type="number" min="1" max="30"
+                    class="form-control"
+                    id="order_{{ $uC->id }}"
+                    placeholder="@lang('admin::shopping.categories.add.input.category')"
+                    value="{{ old('order_'.$uC->id, 30) }}">
+                </div>
+
+                @foreach(Auth::user()->getCountryLang($uC->id) as $langCountry)
+                <div role="panel-group" id="accordion-{{ $uC->id }}-{{ $langCountry->id }}">
+                    <div class="panel panel-default">
+                        <div role="tab" class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                                href="#product-language-{{ $uC->id }}-{{ $langCountry->id }}">
+                                {{trans('admin::shopping.products.add.second_general_tab.country-language-title') . $langCountry->language }}
+                            </a>
+                        </h4>
                     </div>
+                    <div role="tabpanel" data-parent="#accordion" class="panel-collapse collapse"
+                    id="product-language-{{ $uC->id }}-{{ $langCountry->id }}" >
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.input.category') *</label>
+                                    <input name="category_{{ $uC->id }}_{{ $langCountry->id }}"
+                                    type="text" rel="requerido_{{ $uC->id }}"
+                                    class="requerido requerido_{{ $uC->id }} requerido_{{ $uC->id }}_{{ $langCountry->id }} form-control"
+                                    id="requerido_{{ $uC->id }}_{{ $langCountry->id }}"
+                                    placeholder="@lang('admin::shopping.categories.add.input.category')"
+                                    value="{{ old('category_'.$uC->id.'_'.$langCountry->id) }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                    for="product-image-{{ $uC->id }}-{{ $langCountry->id }}">
+                                    {{trans('admin::shopping.categories.add.input.select_banner')}}
+                                </label>
+                                <div class="input-group">
+                                    <input name="image_{{ $uC->id }}_{{ $langCountry->id }}" readonly="true"
+                                    type="text" id="image_{{ $uC->id }}_{{ $langCountry->id }}"
+                                    class="img_src requerido_{{ $uC->id }}_{{ $langCountry->id }} form-control"
+                                    value="{{ old('image_'.$uC->id.'_'.$langCountry->id) }}">
+                                    <span class="input-group-btn">
+                                        <a href="{!! URL::to(config('admin.config.public') . '/filemanager/dialog.php?type=1&field_id=image_'.$uC->id.'_'.$langCountry->id) !!}"
+                                         class="btn btn-default iframe-btn">
+                                         {{ trans('admin::countries.add_btn_image') }}
+                                     </a>
+                                 </span>
+                             </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.input.description')</label>
+                            <textarea name="description_{{ $uC->id }}_{{ $langCountry->id }}"
+                              class="form-control" rows="3"
+                              placeholder="@lang('admin::shopping.categories.add.input.description')"
+                              >{{ old('description_'.$uC->id.'_'.$langCountry->id) }}</textarea>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {{-- dd($langCountry)  --}}
+  @endforeach
+  <hr />
+  <div class="form-group">
+    <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-banner-link')</label>
+    <input name="bannerLink_{{ $uC->id }}" type="text" class="form-control"
+    placeholder="@lang('admin::shopping.categories.add.input.banner-link')"
+    value="{{ old('bannerLink_'.$uC->id) }}">
+</div>
+<div class="form-group">
+    <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-active')</label>
+    <div class="radio">
+        <label>
+            <input type="radio" name="active_{{ $uC->id }}" value="1" @if(old('active_'.$uC->id) == null || old('active_'.$uC->id)) checked @else '' @endif>
+            @lang('admin::shopping.categories.add.input.yes')
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="active_{{ $uC->id }}" value="0" {{ old('active_'.$uC->id) === 0 ? ' checked' : '' }}>
+            @lang('admin::shopping.categories.add.input.no')
+        </label>
+    </div>
+</div><br />
+<div class="form-group">
+    <label for="exampleInputEmail1">@lang('admin::shopping.categories.add.view.form-product-select')</label>
+    <input type="hidden" name="products_{{ $uC->id }}" id="products_{{ $uC->id }}" class="form-control"
+    value="{{ old('products_'.$uC->id) }}"/>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="alert_{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
+                @lang('admin::shopping.categories.add.error.select-product-error')
+            </div>
+        </div>
+        <div class="col-xs-10">
+            <select class="form-control" id="sel_{{ $uC->id }}">
+                <option id="opt_{{ $uC->id }}" value="">
+                    @lang('admin::shopping.categories.add.input.product')
+                </option>
+                @foreach(Auth::user()->activeProductsByCountry($uC->id) as $prod)
+                <option id="opt_{{$prod->id}}_{{ $uC->id }}" value="{{$prod->id}}">{{$prod->sku}} - {{$prod->global_name}}</option>
                 @endforeach
-            </div>
+            </select>
         </div>
-        <div class="form-group text-center">
-            <div class="alert alert-danger alert-info-input" role="alert" style="display: none">
-                @lang('admin::shopping.categories.add.view.form-error')
-            </div>
-            <button type="submit" id="formCategoryButton" class="btn btn-default">
-                <span class="btn-submit-text">@lang('admin::shopping.categories.add.view.form-save-button')</span>
-                <span class="btn-submit-spinner" style="display: none"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span>
-            </button>
-        </div>
-    </form>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default"
+            onclick="addProduct({{ $uC->id }}, {{ Auth::user()->activeProductsByCountry($uC->id) }})">
+            @lang('admin::shopping.categories.add.view.form-add-button')
+        </button>
+    </div>
+</div>
+</div>
+<div class="form-group">
+    <div id="alert_limit_{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
+        @lang('admin::shopping.categories.add.error.select-category')
+    </div>
+    <div id="alert_limit_home{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
+        @lang('admin::shopping.categories.add.error.select-banner')
+    </div>
+    <div id="alert_limit_category{{ $uC->id }}" class="alert alert-danger btn-xs" role="alert" style="display: none; padding: 5px">
+        @lang('admin::shopping.categories.add.error.select-home')
+    </div>
+    <table class="table text-center">
+        <tr>
+            <th class="text-center" colspan="5">@lang('admin::shopping.categories.add.view.form-product-list')</th>
+        </tr>
+        <tr>
+            <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-id')</th>
+            <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-sku')</th>
+            <th class="text-center">@lang('admin::shopping.products.add.first_general_tab.form-global-name-label')</th>
+            <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-home')</th>
+            <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-category')</th>
+            <th class="text-center">@lang('admin::shopping.categories.add.view.form-list-delete')</th>
+        </tr>
+        @foreach(Auth::user()->activeProductsByCountry($uC->id) as $prod)
+        <tr id="dis_{{$prod->id}}_{{ $uC->id }}" style="display: none">
+            <td>{{ $prod->id }}</td>
+            <td>{{ $prod->sku }}</td>
+            <td>{{ $prod->global_name }}</td>
+            <td class="text-center">
+                <i id="favOff_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye-slash fa-2x"
+                 aria-hidden="true" onclick="addFavorite({{$prod->id}},{{ $uC->id }})"></i>
+                 <i id="favOn_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye fa-2x"
+                     aria-hidden="true" onclick="quitFavorite({{$prod->id}},{{ $uC->id }})"
+                     style="color: green;display: none"></i>
+                 </td>
+                 <td class="text-center">
+                    <i id="catOff_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye-slash fa-2x"
+                     aria-hidden="true" onclick="addCat({{$prod->id}},{{ $uC->id }})"></i>
+                     <i id="catOn_{{$prod->id.'_'.$uC->id}}" class="fa fa-eye fa-2x"
+                         aria-hidden="true" onclick="quitCat({{$prod->id}},{{ $uC->id }})"
+                         style="color: green;display: none"></i>
+                     </td>
+                     <td>
+                        <i id="{{$prod->id}}|{{ $uC->name }}" class="del_btn fa fa-trash fa-2x"
+                         aria-hidden="true" onclick="delProduct({{$prod->id}},'{{ $uC->id }}')"></i>
+                     </td>
+                 </tr>
+                 @endforeach
+             </table>
+         </div>
+     </div>
+     @endforeach
+ </div>
+</div>
+<div class="form-group text-center">
+    <div class="alert alert-danger alert-info-input" role="alert" style="display: none">
+        @lang('admin::shopping.categories.add.view.form-error')
+    </div>
+    <button type="submit" id="formCategoryButton" class="btn btn-default">
+        <span class="btn-submit-text">@lang('admin::shopping.categories.add.view.form-save-button')</span>
+        <span class="btn-submit-spinner" style="display: none"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span>
+    </button>
+</div>
+</form>
 </div>
 
 
 
 @section('scripts')
-    <script type="text/javascript">
-        function deleteTabsFromAnotherCountry(brandId) {
-            var countriesByBrand = jQuery.parseJSON($('#countries_by_brand').val());
-            countriesByBrand = countriesByBrand[brandId];
+<script type="text/javascript">
+    function deleteTabsFromAnotherCountry(brandId) {
+        var countriesByBrand = jQuery.parseJSON($('#countries_by_brand').val());
+        countriesByBrand = countriesByBrand[brandId];
 
-            $.each($('[data-country-tab]'), function (i, element) {
-                if (countriesByBrand.indexOf($(element).data('country-tab')) == -1) { $(element).remove(); }
-            });
+        $.each($('[data-country-tab]'), function (i, element) {
+            if (countriesByBrand.indexOf($(element).data('country-tab')) == -1) { $(element).remove(); }
+        });
 
-            $.each($('[data-country-pane]'), function (i, element) {
-                if (countriesByBrand.indexOf($(element).data('country-pane')) == -1) { $(element).remove(); }
-            });
-        }
+        $.each($('[data-country-pane]'), function (i, element) {
+            if (countriesByBrand.indexOf($(element).data('country-pane')) == -1) { $(element).remove(); }
+        });
+    }
 
         // Eliminar las tabs de los paises que no fueron seleccionados
         function deleteTabsFromUnselectedCountries() {
@@ -293,10 +293,10 @@
         // Generar el checkbox de para cada país
         function generateCountryCheckbox(countryId, languages, name) {
             return '<div data-country-checkbox="'+countryId+'" name="check-countries">\
-                <input onclick="enableNextButton()" class="form-check-input" id="checkCountry_'+countryId+'" value="'+countryId+'" type="checkbox">\
-                <input id="country-langs-'+countryId+'" value="'+languages+'" type="hidden">\
-                <label for="checkCountry_'+countryId+'" id="label-langsCountry_'+countryId+'" class="form-check-label">'+name+'</label>\
-                </div>';
+            <input onclick="enableNextButton()" class="form-check-input" id="checkCountry_'+countryId+'" value="'+countryId+'" type="checkbox">\
+            <input id="country-langs-'+countryId+'" value="'+languages+'" type="hidden">\
+            <label for="checkCountry_'+countryId+'" id="label-langsCountry_'+countryId+'" class="form-check-label">'+name+'</label>\
+            </div>';
         }
 
         // Obtener los paises por marca
@@ -435,91 +435,91 @@
             });
         });
 
-        $( "#categories" ).submit(function( event )
-        {
-            $('.btn-submit-text').hide();
-            $('.btn-submit-spinner').show();
-            $('.alert-info-input').hide();
-            $('#formCategoryButton').prop('disabled', true);
+$( "#categories" ).submit(function( event )
+{
+    $('.btn-submit-text').hide();
+    $('.btn-submit-spinner').show();
+    $('.alert-info-input').hide();
+    $('#formCategoryButton').prop('disabled', true);
 
-            var banderaFinal = 2;
-            var exit = 1;
-            $('.requerido').each(function(i, elem)
+    var banderaFinal = 2;
+    var exit = 1;
+    $('.requerido').each(function(i, elem)
+    {
+        var nameClass = '.'+$(elem).attr('rel');
+        var banderaLang = 0;
+        var banderaCountry = 0;
+        $(nameClass).each(function(i1, elem1)
+        {
+            var nameId = '.'+$(elem1).attr('id');
+            var inputLang = 0;
+            var contLang = 0;
+            $(nameId).each(function(i2, elem2)
             {
-                var nameClass = '.'+$(elem).attr('rel');
-                var banderaLang = 0;
-                var banderaCountry = 0;
-                $(nameClass).each(function(i1, elem1)
-                {
-                    var nameId = '.'+$(elem1).attr('id');
-                    var inputLang = 0;
-                    var contLang = 0;
-                    $(nameId).each(function(i2, elem2)
-                    {
-                        contLang ++;
-                        if($(elem2).val() != ''){
-                            $(elem2).css({'border':'1px solid #ccc'});
-                            inputLang ++;
-                        } else {
-                            $(elem2).css({'border':'1px solid red'});
-                        }
-                    });
-                    if(inputLang == contLang){
-                        banderaLang = 1;
-                    }
-                    if(banderaLang == 1){
-                        banderaCountry = 1;
-                    }
-                });
-                if(banderaFinal == 2 || banderaFinal == 1){
-                    if (banderaCountry == 1 && banderaLang == 1){
-                        exit = 0;
-                        banderaFinal = 1;
-                    }else{
-                        exit = 1;
-                        banderaFinal = 0;
-                    }
-                }else{
-                    exit == 1;
+                contLang ++;
+                if($(elem2).val() != ''){
+                    $(elem2).css({'border':'1px solid #ccc'});
+                    inputLang ++;
+                } else {
+                    $(elem2).css({'border':'1px solid red'});
                 }
             });
-            if(exit == 1){
-                event.preventDefault();
-                $('.alert-info-input').show();
-                $('.btn-submit-text').show();
-                $('.btn-submit-spinner').hide();
-                $('#formCategoryButton').prop('disabled', false);
+            if(inputLang == contLang){
+                banderaLang = 1;
+            }
+            if(banderaLang == 1){
+                banderaCountry = 1;
             }
         });
-    </script>
-    <script>
-        this.loadListProduct();
-        function loadListProduct()
-        {
-            var userCountries = <?= Auth::user()->countries ?>;
-            userCountries.forEach(function(element) {
-                var idProd = $("#products_"+element.id).val();
-                if(idProd != "")
-                {
-                    var prod = jQuery.parseJSON(idProd);
-                    prod.forEach(function(element1) {
-                        if (element1.home == 1){
-                            $("#homOff_"+element1.id+"_"+element.id).hide();
-                            $("#homOn_"+element1.id+"_"+element.id).show();
-                        }
-                        if (element1.favorite == 1){
-                            $("#favOff_"+element1.id+"_"+element.id).hide();
-                            $("#favOn_"+element1.id+"_"+element.id).show();
-                        }
-                        if (element1.category == 1){
-                            $("#catOff_"+element1.id+"_"+element.id).hide();
-                            $("#catOn_"+element1.id+"_"+element.id).show();
-                        }
-                        $("#opt_"+element1.id+"_"+element.id).hide();
-                        $("#dis_"+element1.id+"_"+element.id).show();
-                    });
-                }
-            });
+        if(banderaFinal == 2 || banderaFinal == 1){
+            if (banderaCountry == 1 && banderaLang == 1){
+                exit = 0;
+                banderaFinal = 1;
+            }else{
+                exit = 1;
+                banderaFinal = 0;
+            }
+        }else{
+            exit == 1;
+        }
+    });
+    if(exit == 1){
+        event.preventDefault();
+        $('.alert-info-input').show();
+        $('.btn-submit-text').show();
+        $('.btn-submit-spinner').hide();
+        $('#formCategoryButton').prop('disabled', false);
+    }
+});
+</script>
+<script>
+    this.loadListProduct();
+    function loadListProduct()
+    {
+        var userCountries = <?= Auth::user()->countries ?>;
+        userCountries.forEach(function(element) {
+            var idProd = $("#products_"+element.id).val();
+            if(idProd != "")
+            {
+                var prod = jQuery.parseJSON(idProd);
+                prod.forEach(function(element1) {
+                    if (element1.home == 1){
+                        $("#homOff_"+element1.id+"_"+element.id).hide();
+                        $("#homOn_"+element1.id+"_"+element.id).show();
+                    }
+                    if (element1.favorite == 1){
+                        $("#favOff_"+element1.id+"_"+element.id).hide();
+                        $("#favOn_"+element1.id+"_"+element.id).show();
+                    }
+                    if (element1.category == 1){
+                        $("#catOff_"+element1.id+"_"+element.id).hide();
+                        $("#catOn_"+element1.id+"_"+element.id).show();
+                    }
+                    $("#opt_"+element1.id+"_"+element.id).hide();
+                    $("#dis_"+element1.id+"_"+element.id).show();
+                });
+            }
+        });
             //var prodSelect = "#products_"+idCountry;
 
         }
@@ -642,7 +642,7 @@
                     count++;
                 }
             });
-            if (count < 3){
+            if (count < 40){
                 obj.forEach(function(element) {
                     if(element.id == idProd){
                         element.category = 1;
@@ -710,4 +710,4 @@
             $(prodSelect).val(JSON.stringify(obj));
         }
     </script>
-@endsection
+    @endsection
