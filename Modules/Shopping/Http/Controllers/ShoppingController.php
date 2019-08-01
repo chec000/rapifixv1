@@ -85,8 +85,6 @@ class ShoppingController extends Controller
                 );
                
          });   
-          
-     
          session()->forget('portal.cart');
       return  $file;
         
