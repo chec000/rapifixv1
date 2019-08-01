@@ -74,8 +74,8 @@ class ShoppingController extends Controller
             $items=\Session::get('portal.cart.items') ;
             $this->saveOrder( $items,$numeroOrden,$r);
      //  $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
-           var_dump($file,"hola");
-        die();
+          // var_dump($file,"hola");
+       // die();
      
          Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$file){
          
