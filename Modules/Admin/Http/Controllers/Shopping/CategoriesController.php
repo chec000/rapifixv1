@@ -141,11 +141,13 @@ class CategoriesController extends Controller
         $products = [];
         foreach ($categoriesByCountry as $categoryByCountry) {
             $productsJSON = [];
+            
             foreach ($categoryByCountry->groupProducts->where('active', 1) as $p) {
                 if ($p!=null) {
-                                $object = (object) [
+
+                       $object = (object) [
                     'id'       => $p->product_id,
-                    'sku'      => $p->countryProduct->product->sku,
+                    'sku'      =>'', //$p->countryProduct->product->sku,
                     'favorite' => $p->product_home,
                     'home'     => 0,
                     'category' => $p->product_category,
