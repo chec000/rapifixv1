@@ -75,9 +75,8 @@ class ShoppingController extends Controller
             $this->saveOrder( $items,$numeroOrden,$r);
      //  $pdf = PDF::loadView('shopping::frontend.shopping.cart_list_report',['cart'=>$cart,'subTotal'=>$subTotal,'data'=>$r]);        
      
-     var_dump($usuario, $asunto,$r,$file);
-     die();
-         Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$file){
+
+            Mail::send('shopping::frontend.shopping.email.budget',['cliente' => $user], function ($m) use ($usuario, $asunto,$r,$file){
          
             $m->to($usuario,'rapifix.com')->subject('Presupuesto de compra');
 
@@ -87,9 +86,7 @@ class ShoppingController extends Controller
                 );
                
          });   
-           var_dump($file,"hola");
-        die();
-     
+
          session()->forget('portal.cart');
       return  $file;
         
