@@ -263,9 +263,6 @@ class CountryProduct extends Model
             ->where('shop_country_products.delete', 0)
             ->orderBy('t.name', 'ASC');
          
-        if ($onlyHome) {
-            $products->where('gp.product_home', 1);
-        }
 
         if ($onlyCat) {
             $products->where('gp.product_category', 1);
