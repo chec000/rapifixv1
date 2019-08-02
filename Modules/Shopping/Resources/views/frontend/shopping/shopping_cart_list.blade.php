@@ -32,9 +32,11 @@
                             @foreach($products as $p)
 
                             <tr id="product-checkout-{{$p['id']}}">
-                                <td class="pro-thumbnail"><a href="single-product-variable-wide.html">
+                                <td class="pro-thumbnail"><a href="#">
                                         <img class="img-fluid" src="{{$p['image']}}" alt="Product"></a></td>
-                                <td class="pro-title"><a href="single-product-variable-wide.html">
+                                <td class="pro-title"><a 
+                                href="#"
+                                    >
                                         {{$p['name']}}
                                     </a></td>
                                 <td class="pro-price"><span>${{$p['price']}}</span></td>

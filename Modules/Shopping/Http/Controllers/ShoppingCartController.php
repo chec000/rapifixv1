@@ -138,7 +138,6 @@ class ShoppingCartController extends Controller {
 
         $categories=$this->category();
         $categories=$categories->original['brandCategories'][0]['categories'];
-
         return View::make('shopping::frontend.shopping.shopping_cart_list', [
             'cart'=>$cart,
             'categories'=>$categories,

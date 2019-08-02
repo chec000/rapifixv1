@@ -8,7 +8,7 @@
                     <div class="single-brand-logo">
                         <a href="#">
 
-                            <img src="{{ asset('cms/inicio/images/brand-logos/1.jpg') }}" alt="">
+                            <img src="{{ asset('cms/inicio/images/brand-logos/'.$i.'.jpg') }}" alt="">
                         </a>
                     </div>
                     @endfor

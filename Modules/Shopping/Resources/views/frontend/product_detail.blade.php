@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="product-description-tab-container section-padding">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist" style="display: none;">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#more-info" role="tab" aria-selected="true">MORE
                                 INFO</a>
@@ -101,13 +101,9 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="more-info" role="tabpanel" aria-labelledby="home-tab">
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Aliquam alias libero temporibus sit repellat delectus eos
-                                    velit odit natus fugiat porro tempora, dignissimos ex quo
-                                    laborum explicabo consequatur aperiam doloribus nostrum
-                                    quae? Eos, adipisci quisquam iusto ex quasi odit mollitia,
-                                    pariatur expedita eligendi necessitatibus hic voluptatum.
-                                Nobis a dolor temporibus.</p>
+                                <p>
+                        {{ $countryProduct->description }}
+                                </p>
                             </div>
                             <div class="tab-pane fade" id="data-sheet" role="tabpanel" aria-labelledby="profile-tab">
                                 <table class="table-data-sheet">

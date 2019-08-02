@@ -3,20 +3,20 @@
     <div class="header-top-nav">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 offset-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-3 offset-lg-3 col-md-6 col-sm-12" >
                     <!-- language and currency changer -->
-                    <div class="language-currency-changer d-flex justify-content-center justify-content-md-start justify-content-lg-center">
-                        <div class="language-changer">
+                    <div class="language-currency-changer d-flex justify-content-center justify-content-md-start justify-content-lg-center" style="display: none;">
+                        <div class="language-changer" ">
                             <img src="" alt="">
                             <a href="#" id="changeLanguage"><span id="languageName">English <i class="fa fa-caret-down"></i></span></a>
-                            <div class="language-currency-list hidden" id="languageList">
-                                <ul>
+                            <div class="language-currency-list hidden" id="languageList" >
+                                <ul style="display: none;">
                                     <li><a href="#"><img src="assets/images/flags/1.jpg" alt=""> English</a></li>
                                     <li><a href="#"><img src="assets/images/flags/2.jpg" alt=""> Français</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="currency-changer">
+                        <div class="currency-changer" style="display: none;">
                             <a href="#" id="changeCurrency"><span id="currencyName">USD <i class="fa fa-caret-down"></i></span></a>
                             <div class="language-currency-list hidden" id="currencyList">
                                 <ul>
@@ -34,8 +34,8 @@
                     <!-- user information menu -->
                     <div class="user-information-menu">
                         <ul>
-                            <li><a href="wishlist.html">My Wishlist</a> <span class="separator">|</span></li>
-                            <li><a href="checkout.html">Check Out</a> <span class="separator">|</span></li>
+                            <li><a href="wishlist.html">Lista de deseos</a> <span class="separator">|</span></li>
+                            <li><a href="{{route('cart.list')}}" >Check Out</a> <span class="separator">|</span></li>
                             <li><a href="cart.html">Cart (<span id="cart-status">Empty</span>)</a> <span class="separator">|</span></li>
                             <li><a href="login-register.html">Sign In</a></li>
                         </ul>
@@ -95,7 +95,7 @@
                 <div class="row">
                     <div class="col-lg-3 d-none d-lg-block">
                         <!-- ======  Header menu left text  ======= -->
-                        <p class="call-us-text">Call us 24/7: (+66) 123-456-789</p>
+                        <p class="call-us-text" style="display: none;">Call us 24/7: (+66) 123-456-789</p>
                     </div>
                     <div class="col-lg-9 col-md-12">
 
