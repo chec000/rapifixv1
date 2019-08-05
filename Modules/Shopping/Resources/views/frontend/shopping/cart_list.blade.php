@@ -1,7 +1,7 @@
 
 {!! PageBuilder::section('head', [
-    'categories' => $categories,
-    'cart'=>$cart
+'categories' => $categories,
+'cart'=>$cart
 ]) !!}
 
 <div class="page-content mt-50 mb-10">
