@@ -31,7 +31,7 @@ $(function () {
                         text: "El presupuesto se ha enviado correctamente",
                         type: 'success',
                          html:    
-                        '<a href='+response.archivo.replace(/['"]+/g, '')+'  download="orden">Descargar orden</a> ',
+                        '<a href='+response.archivo.replace(/['"]+/g, '')+'  download="orden">Has clic aquí para descargar la orden</a> ',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick:false,
