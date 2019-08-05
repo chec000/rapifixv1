@@ -116,9 +116,9 @@
                                         <td>{{$od->product_code}}</td>
                                         <td>{{$od->product_name}}</td>
                                     @else
-                                        <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->name : $od->products->global_name}}</td>
+                                        <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->name : ''}}</td>
                                         <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->product->sku : $od->products->sku}}</td>
-                                        <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->description : $od->products->global_name}}</td>
+                                        <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->description : ''}}</td>
                                     @endif
                                     <td>{{$od->points}}</td>
                                     <td>${{number_format($od->final_price,2)}}</td>
