@@ -28,15 +28,10 @@ class ShoppingCart {
     public static function productsToJson(Collection $groupProducts) : string {
     //ahsajshjh
         $products         = [];
-        $config           = country_config(SessionHdl::getCorbizCountryKey());
-        $isShoppingActive = $config['shopping_active'];
-        $isWSActive       = $config['webservices_active'];
-        $warehouse        = SessionHdl::getWarehouse();
 
         if(count($groupProducts)>0){
             foreach ($groupProducts as $groupProduct) {
-                if ( ($isShoppingActive and $groupProduct->countryProduct->belongsToWarehouse($warehouse) and $isWSActive) xor (!$isShoppingActive or !$isWSActive) ) {
-
+                
                     $product = new \stdClass();
                     if($groupProduct->countryProduct!=null){
                         $product->id          = $groupProduct->countryProduct->id;
@@ -50,7 +45,7 @@ class ShoppingCart {
                         $products[$product->id] = $product;
                     }
 
-                }
+                
             }
         }
 
