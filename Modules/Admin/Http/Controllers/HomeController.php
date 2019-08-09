@@ -10,6 +10,12 @@ use Modules\CMS\Entities\PageSearchLog;
 use Modules\Admin\Entities\Setting;
 use GuzzleHttp\Client;
 use Modules\Admin\Helpers\View\AdminMenu;
+use Carbon\Carbon;
+use Modules\Admin\Entities\ACL\User;
+use Modules\Shopping\Entities\Order;
+use Modules\Shopping\Entities\OrderDetail;
+use Modules\Shopping\Entities\OrderEstatus;
+
 use View;
 use Request;
 class HomeController extends Controller
@@ -18,7 +24,9 @@ class HomeController extends Controller
 
     public function getIndex()
     {        
-        $requests = PagePublishRequests::can_moderate(['status' => 'awaiting'], 10);         
+
+        $requests = PagePublishRequests::can_moderate(['status' => 'awaiting'], 10);
+
         $requests_table = View::make('admin::cms.partials.tabs.publish_requests.table', array('show' => ['page' => true, 'status' => false, 'requested_by' => true], 'requests' => $requests))->render();
       
         $any_requests = config('admin.config.publishing') && !PagePublishRequests::can_moderate([], 1)->isEmpty();
@@ -79,14 +87,30 @@ class HomeController extends Controller
         $this->layoutData['title'] = 'Admin home';
     $this->layoutData['content'] = View::make('admin::commons.dashboard', $data);
         $sections_menu= AdminMenu::getSectionsMenu();
+
 //           $sections_menu=AdminMenu::getMenuDashboard();
           
 $menu_aside= View::make('admin::commons.menu_aside',array("sections_menu"=>$sections_menu))->render();
+        $orders= $this->getOrders();
 
-        $this->layoutData['content'] = View::make('admin::commons.menu_admin',array("data"=> $data,"menu_aside"=>$menu_aside))->render();
+        $this->layoutData['content'] = View::make('admin::commons.menu_admin',array("data"=> $data,"menu_aside"=>$menu_aside,'orders'=>$orders))->render();
 
     }
 
+private function getOrders()
+{
+            $dt = Carbon::now();
+
+        $orders = Order::wherein('country_id',User::userCountriesPermission())
+                        ->where('created_at','>=',$dt->subMonths(6))
+                        ->orderBy('created_at', 'asc')
+                         ->get();
+    return View::make('admin::shopping.orders.list', array('orders' => $orders,
+
+                    'can_delete' => Auth::action('orders.active'),
+                    'can_edit' => Auth::action('orders.edit'),
+        ));
+}
     public function getLogs()
     {
         $logs_data = AdminLog::with('user')->with('backup')->orderBy('id', 'desc')->paginate(50);

@@ -5,16 +5,9 @@
 
 
 </div>
-
-
     <p id="message_activated" role="alert">
-
     </p>
-
-
-
 <div class="table">
-
     <table class="table table-striped table-hover dt-responsive" id="tbl_order">
         <thead>
             <tr>

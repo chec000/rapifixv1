@@ -26,12 +26,13 @@ class ShoppingCart {
      * @return string
      */
     public static function productsToJson(Collection $groupProducts) : string {
-    //ahsajshjh
+
         $products         = [];
 
         if(count($groupProducts)>0){
             foreach ($groupProducts as $groupProduct) {
-                
+
+                //*ashajsh
                     $product = new \stdClass();
                     if($groupProduct->countryProduct!=null){
                         $product->id          = $groupProduct->countryProduct->id;
