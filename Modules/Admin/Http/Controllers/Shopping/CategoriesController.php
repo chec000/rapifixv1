@@ -161,8 +161,9 @@ class CategoriesController extends Controller
             }
             $products[$categoryByCountry->country_id] = json_encode($productsJSON);
         }
-
-        $this->layoutData['modals']  = View::make('admin::shopping.categories.modals.country', ['title' => $title, 'groupsByCountry' => $categoriesByCountry, 'anotherCountries' => $anotherCountries]);
+//var_dump($products);
+//die();
+       // $this->layoutData['modals']  = View::make('admin::shopping.categories.modals.country', ['title' => $title, 'groupsByCountry' => $categoriesByCountry, 'anotherCountries' => $anotherCountries]);
         $this->layoutData['content'] = View::make('admin::shopping.categories.edit', compact('categoriesByCountry', 'code', 'brand', 'products', 'countriesByBrand', 'anotherCountries', 'globalName', 'colors'));
     }
 

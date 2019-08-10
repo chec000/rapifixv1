@@ -103,6 +103,37 @@
                                         }
                                 @endphp
 
+                                <tr class="row_{{$od->id}} {{$color}}">
+                                    <td>{{$od->quantity}}</td>
+                                    @if($od->is_promo == 1 && $od->promo_prod_id != 0)
+                                        <td>{{$od->productSkuPromo->name}}</td>
+                                        <td>{{$od->productSkuPromo->clv_producto}}</td>
+                                        <td>{{$od->productSkuPromo->description}}</td>
+                                    @elseif(($od->is_promo == 1 && $od->promo_prod_id == 0) || $od->is_special == 1)
+                                        <td>{{$od->product_name}}</td>
+                                        <td>{{$od->product_code}}</td>
+                                        <td>{{$od->product_name}}</td>
+                                    @else
+                                        <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->name : $od->products->global_name}}</td>
+                                        <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->product->sku : $od->products->sku}}</td>
+                                        <td>{{!empty($od->countryProduct->name) ? $od->countryProduct->description : $od->products->global_name}}</td>
+                                    @endif
+                                    <td>{{$od->points}}</td>
+                                    <td>${{number_format($od->final_price,2)}}</td>
+                                    @if($can_delete)
+                                    <td>
+                                        <span class="label label-success" id="item_{{$od->id}}" style="display: none;">@lang('admin::shopping.orders.detail.added')</span>
+                                          <button id="del_{{$od->id}}" type="button" class="btn btn-danger" style="padding: 0 5px; {{$visibledel}}" onclick="removeProductList('{{$od->order_id}}','{{$od->id}}')">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+
+                                            <button id="act_{{$od->id}}" type="button" class="btn btn-warning" style="padding: 0 5px; {{$visiblerea}}" onclick="restoreProductList('{{$od->order_id}}','{{$od->id}}')">
+                                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                                            </button>
+
+                                    </td>
+                                    @endif
+                                </tr>
                            
                             @endforeach
 
