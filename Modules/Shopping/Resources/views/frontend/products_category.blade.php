@@ -169,7 +169,7 @@
                                     <p class="product-description">
                                         {{$p['description']}}
                                     </p>
-                                    <p class="color">
+                                    <p class="color" style="display: none">
                                         <a href="#"><span class="color-block color-choice-1"></span></a>
                                         <a href="#"><span class="color-block color-choice-2"></span></a>
                                         <a href="#"><span class="color-block color-choice-3 active"></span></a>
@@ -178,10 +178,9 @@
 
                                     <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">
                                 <i class="fa fa-shopping-cart"></i>
-                                Add to Cart
+                                Agregar al carrito
                             </span>
-                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i>
-                                        Add to Cart</a>
+                                  
                                 </div>
                             </div>
                             <!-- product list end -->
