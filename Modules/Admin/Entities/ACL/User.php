@@ -321,6 +321,8 @@ class User extends Eloquent implements AuthenticatableContract, AuthorizableCont
             ->where('shop_products.is_kit', 0)
             ->get();
 
+//dd($productQuery);
+//die();
         return $productQuery;
     }
 

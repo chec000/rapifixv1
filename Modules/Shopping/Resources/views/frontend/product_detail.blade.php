@@ -33,7 +33,7 @@
                                 <li><a href="#"> <i class="fa fa-envelope-o"></i> Send to a
                                 friend</a></li>
                                 <li><a href="#"> <i class="fa fa-print"></i> Print</a></li>
-                                <li><a href="#"> <i class="fa fa-heart-o"></i> Add to wishlist</a></li>
+                                <li><a href="#"> <i class="fa fa-heart-o"></i> Agregar lista de deseos</a></li>
                             </ul>
                         </div>
                         <div class="social-share-buttons" style="display: none;">
@@ -48,7 +48,7 @@
                                 Pinterest</a></li>
                             </ul>
                         </div>
-                        <p class="stock-details">288 items <span class="stock-status in-stock">In
+                        <p style="display: none" class="stock-details">288 items <span class="stock-status in-stock">In
                         Stock</span></p>
                         <p style="display: none"  class="quantity">Quantity:
 
@@ -76,7 +76,7 @@
                         
                         <span onclick="ShoppingCart.add('{{ $countryProduct->id }}', 1)" class="add-to-cart-btn">
                             <i class="fa fa-shopping-cart"></i>
-                            Add to Cart
+                            Agregar al carrito
                         </span>
 
                     </div>
@@ -274,11 +274,12 @@
             </div>
 
             <!-- related horizontal product slider -->
-            <div class="horizontal-product-slider" >
+            @if(count($relatedProducts)>0)
+             <div class="horizontal-product-slider" >
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="block-title">
-                            <h2><a href="#">RELATED PRODUCTS</a></h2>
+                            <h2><a href="#">Productos relacionados</a></h2>
                         </div>
                     </div>
                 </div>
@@ -320,6 +321,8 @@
 
             </div>
         </div>
+            @endif
+           
         <!-- end of related horizontal product slider -->
     </div>
 

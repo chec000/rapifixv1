@@ -132,13 +132,13 @@
                                             <a href="#"><i class="fa fa-heart-o"></i></a>
                                         </div>
                                     </div>
-                                    <h5 class="product-name"><a href="single-product-variable.html">{{$p->name}}</a></h5>
+                                    <h5 class="product-name"><a href="{{route('products.detail', ['product_slug' => $p->slug])}}">{{$p->name}}</a></h5>
                                     <div class="price-box">
                                         <h4>{{$p->price}}</h4>
                                     </div>
                                     <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">
                                 <i class="fa fa-shopping-cart"></i>
-                                Add to Cart
+                                Agregar al carrito
                             </span>
                                         <!--
                                     <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container"><i class="fa fa-shopping-cart"></i> Add to Cart</a>-->

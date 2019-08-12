@@ -269,8 +269,31 @@ class CountryProduct extends Model
         }
         
 
-        return $products->paginate(2);
+        return $products->paginate(15);
     }
+    
+        public static function getAllByCategoryPaginatedSearch($categoryId, $countryId, $locale, $onlyHome = false, $onlyCat = false,$productName) {
+            
+        $products = CountryProduct::select('shop_country_products.*')
+            ->join('shop_products as p', 'p.id', '=', 'shop_country_products.product_id')
+            ->join('shop_group_products as gp', 'gp.product_id', '=', 'shop_country_products.id')
+            ->join('shop_product_translations as t', function ($join) use ($locale) {
+                $join->on('shop_country_products.id', '=', 't.country_product_id')
+                    ->where('t.locale', '=', $locale);
+            })
+            ->where('shop_country_products.country_id', $countryId)
+            ->where('gp.country_group_id', $categoryId)
+            ->where('t.name','like', '%' . $productName . '%')
+            ->where('shop_country_products.active', 1)
+            ->where('shop_country_products.delete', 0)
+            ->orderBy('t.name', 'ASC');
+        if ($onlyCat) {
+            $products->where('gp.product_category', 1);
+        }
+        return $products->paginate(15);
+    }
+    
+    
     public static function getFilteredByGroup($countryGroupId) {
         $config           = country_config(SessionHdl::getCorbizCountryKey());
         $isShoppingActive = $config['shopping_active'];

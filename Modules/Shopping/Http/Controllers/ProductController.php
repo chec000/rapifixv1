@@ -94,6 +94,54 @@ $countryProducts = CountryProduct::getAllByCategoryPaginated($category->id, $cat
         ]);
     }
 
+    /** Busqueda de productos por categoria**/
+    
+    public function searchProducts(Request $request){
+
+        //var_dump($request->search);
+        
+        $category         = GroupCountry::find($request->category);
+        
+        $warehouse        = SessionHdl::getWarehouse();
+        $sesionCorbiz="";
+        if(SessionHdl::getCorbizCountryKey()!=null){
+            $sesionCorbiz=SessionHdl::getCorbizCountryKey();
+        }
+        ShoppingCart::validateProductWarehouse($sesionCorbiz, $warehouse);
+        $products        = [];
+        //$countryProducts = CountryProduct::getAllByCategory($category->id, $category->country_id, App()->getLocale(), true, false);
+
+        $countryProducts = CountryProduct::getAllByCategoryPaginatedSearch($category->id, $category->country_id, App()->getLocale(), true, false,$request->search);
+      //  echo json_encode($countryProducts);
+        //die();
+    
+        foreach ($countryProducts as $countryProduct) {
+        
+
+
+            if ($countryProduct->product->is_kit == 0) {
+             //   $countryProduct->url         = $category->brandGroup->brand->domain . route(\App\Helpers\TranslatableUrlPrefix::getRouteName(SessionHdl::getLocale(), ['products', 'detail']), [($countryProduct->slug . '-' . $countryProduct->product->sku)], false);
+               // $countryProduct->price       = !hide_price() ? currency_format($countryProduct->price, Session::get('portal.main.currency_key')) : '';
+                //$countryProduct->description = str_limit2($countryProduct->description, 74);
+                
+                $products[] = $countryProduct;
+
+            }
+        }
+        //var_dump($countryProducts);
+        //die();
+        $categories=$this->category();
+        $categories=$categories->original['brandCategories'][0]['categories'];
+        $cart=\session()->get('portal.cart');
+
+        return View::make('shopping::frontend.products_category', [
+            'categories'=> $categories,
+            'cart'=>$cart,
+            'category'=>$category,
+            'products'=>$countryProducts
+        ]);
+    }
+    
     public function products() {
         session()->put('portal.main.varsChangeLangStart.changeStartLocale', 0);
         $cart=\session()->get('portal.cart');

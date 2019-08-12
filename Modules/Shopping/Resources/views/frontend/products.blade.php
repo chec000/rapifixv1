@@ -203,7 +203,7 @@
 
                             <!-- vertical auto slider container -->
                             <div class="sidebar">
-                                <h2 class="block-title">LATEST PRODUCTS</h2>
+                                <h2 class="block-title">Productos nuevos</h2>
                                 <div class="vertical-product-slider-container">
                                     <div class="single-vertical-slider">
                                         <div class="vertical-auto-slider-product-list">
@@ -279,7 +279,8 @@
                                                     <div class="price-box">
                                                         <h4>{{$p->price}}</h4>
                                                     </div>
-                                                    <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">                                add to car
+                                                    <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">    
+                                                        Agregar al carrito
                                                         <i class="fa fa-shopping-cart"></i>
                                                     </span>
 
@@ -359,29 +360,15 @@
                                                             <div class="price-box">
                                                                 <h4>{{$p->price}}</h4>
                                                             </div>
-                                                            <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">                                                                    add to car
+                                                            <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">   
+                                                                Agregar al carrito
                                                                 <i class="fa fa-shopping-cart"></i>
                                                             </span>
-
-                                                                <!-- end of single vertical product
-                                                                    <a href="#" class="add-to-cart-btn" data-toggle="modal" data-target="#add-to-cart-modal-container">
-                                                                    Add to cart</a>
-
-
-                                                                -->
-
                                                             </div>
                                                         </div>
                                                         @endforeach
-                                                        <!-- end of single vertical product -->
-                                                        <!-- single vertical product -->
-
-                                                        <!-- end of single vertical product -->
                                                     </div>
                                                 </div>
-
-                                                <!-- ====  End of single vertical product slider  ==== -->
-
                                             </div>
 
                                             @endforeach
@@ -456,21 +443,7 @@
                         
                     </div>
                 </div>
-
-                <!-- end of latest product section -->
             </div>
         </div>
-
-        <!--====  End of homepage content section  ====-->
-
-<!--=======================================
-=            brand logo slider            =
-========================================-->
-
-
-
-
-
-
 
 {!! PageBuilder::section('footer',['categories'=>$categories]) !!}

@@ -64,18 +64,21 @@
                 <div class="col-lg-6 col-md-8">
                     <!-- header search bar -->
                     <div class="header-search-bar">
+                        <form action="{{route('products.search')}}" method="GET">
                         <div class="input-group">
-                            <select name="categoryName" id="categoryName">
-                                <option value="">Categories</option>
+                            <select name="category" id="categoryName" required="required">
+                                <option value="">Categorias</option>
                                 @foreach ($categories as $c)
                                     <option value="{{$c->id}}}"><a href="{{route('category.products', ['id' => $c->id])}}">{{$c->name}}</a></option>
                                 @endforeach
                             </select>
                             <div class="input-group-append">
-                                <input type="search" name="search">
+                                <input type="search" name="search" required="required">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </div>
-                        </div>
+                        </div>                      
+                        </form>
+
                     </div>
                     <!-- end of header search bar -->
                 </div>

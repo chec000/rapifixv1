@@ -230,6 +230,9 @@ Route::group(['middleware' => ['web'], 'prefix' => 'products', 'namespace' => 'M
         ->where('product_slug', '[A-Za-z0-9-]+');
 
 
+    Route::get('/', 'ProductController@searchProducts')
+        ->name('products.search');
+
     # Category
     Route::get('/products/{category_slug}', 'ProductController@category')
         ->name('products.category')
