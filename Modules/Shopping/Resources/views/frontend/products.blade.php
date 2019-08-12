@@ -240,7 +240,7 @@
                             <!-- horizontal product slider -->
 
                             @foreach ($categories as $c)
-                                          @if(count($h->products))
+                                          @if(count($c->products))
                               <div class="horizontal-product-slider">
 
                                 <div class="row">
