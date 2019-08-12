@@ -146,13 +146,13 @@
                 <div class="homepage-sidebar">
                     <!-- vertical auto slider container -->
                     @foreach ($categories as $c)
+                                    @if(count($c->products))
                     <div class="sidebar">
                         <h2 class="block-title">{{$c->name}}</h2>
                         <div class="vertical-product-slider-container">
                             <div class="single-vertical-slider">
                                 <div class="vertical-auto-slider-product-list">
                                     <!-- single vertical product -->
-
 
                                     @foreach ($c->products as $p)
 
@@ -174,18 +174,14 @@
 
                                                 </div>
                                             </div>
-                                            @endforeach
-
-                                            <!-- end of single vertical product -->
-                                            <!-- single vertical product -->
-
-                                            <!-- end of single vertical product -->
-
+                                            @endforeach   
+                                
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                                    @endif
+                                    @endforeach
 
 
                             <!-- end of vertical auto slider container -->
@@ -207,7 +203,7 @@
                                 <div class="vertical-product-slider-container">
                                     <div class="single-vertical-slider">
                                         <div class="vertical-auto-slider-product-list">
-                                            <!-- single vertical product -->
+                                             @if(count($latest))
                                             @foreach($latest as $lp)
                                             <div class="single-auto-vertical-product d-flex">
                                                 <div class="product-image">
@@ -223,7 +219,7 @@
                                                 </div>
                                             </div>
                                             @endforeach
-
+                                                @endif
                                             <!-- end of single vertical product -->
 
                                         </div>
@@ -237,13 +233,15 @@
 
                     </div>
                     <div class="col-lg-9 col-md-8 mb-50">
-
+                
+  
+  
                         <div class="homepage-main-content">
                             <!-- horizontal product slider -->
 
                             @foreach ($categories as $c)
-
-                            <div class="horizontal-product-slider">
+                                          @if(count($h->products))
+                              <div class="horizontal-product-slider">
 
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -297,10 +295,12 @@
                                     </div>
                                 </div>
                             </div>
+                                          @endif
+                          
                             <!-- end of horizontal product slider -->
 
                             <!-- homepage double banner section -->
-                            <div class="homepage-banners mb-50">
+                            <div class="homepage-banners mb-50" style="display: none">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 mb-20 mb-lg-0">
                                         <!-- ======  Homepage single split banner  ======= -->
@@ -341,6 +341,8 @@
                             <div class="vertical-product-slider-container">
                                 <div class="row">
                                     @foreach ($categories as $c)
+                                    
+                                  @if(count($c->products))
                                     <div class="col-lg-4">
                                         <!-- ======  single vertical product slider  ======= -->
 
@@ -370,7 +372,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                       
+                                                      @endif
+                               
                                             @endforeach
                                         </div>
                                     </div>
