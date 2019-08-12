@@ -134,7 +134,7 @@
                                     </div>
                                     <h5 class="product-name"><a href="{{route('products.detail', ['product_slug' => $p->slug])}}">{{$p->name}}</a></h5>
                                     <div class="price-box">
-                                        <h4>{{$p->price}}</h4>
+                                        <h4>${{$p->price}}</h4>
                                     </div>
                                     <span onclick="ShoppingCart.add('{{ $p->id }}', 1)" class="add-to-cart-btn">
                                 <i class="fa fa-shopping-cart"></i>
@@ -164,7 +164,7 @@
                                     <h5 class="product-name">
                                         <a href="single-product-variable.html">{{$p['name']}}</a></h5>
                                     <div class="price-box">
-                                        <h4>{{$p['price']}}</h4>
+                                        <h4>${{$p['price']}}</h4>
                                     </div>
                                     <p class="product-description">
                                         {{$p['description']}}
