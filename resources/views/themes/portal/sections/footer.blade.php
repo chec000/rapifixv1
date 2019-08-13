@@ -40,7 +40,7 @@
                         <div class="newsletter-wrapper d-md-flex">
                             <!-- newsletter text -->
                             <div class="newsletter-text">
-                                <h2>newsletter <span>Sign up for our newsletter</span></h2>
+                                <h2>Boletin <span> </span></h2>
                             </div>
                             <!-- end of newsletter text -->
 
@@ -49,9 +49,9 @@
                                 <div class="input-group">
                                     <div class="input-group-append">
                                         <form id="mc-form" class="mc-form subscribe-form">
-                                            <input type="email" id="mc-email" type="email" autocomplete="off" placeholder="Enter your e-mail"
+                                            <input type="email" id="mc-email" type="email" autocomplete="off" placeholder="Ingresa tu correo"
                                                    required>
-                                            <button id="mc-submit" type="submit">Subscribe</button>
+                                            <button id="mc-submit" type="submit">Subscribirse</button>
                                         </form>
 
                                     </div>

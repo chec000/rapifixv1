@@ -65,11 +65,12 @@
                         <div class="row align-items-center justify-content-between">
                             <!-- Hero Content -->
                             <div class="hero-content col-md-8 offset-md-4 col-sm-12 offset-sm-0">
-                                <h1>THE WINTER</h1>
-                                <h2><span>SPORT WINTER</span></h2>
-                                <p>This is Photoshops version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean
-                                sollicitudin, lorem quis</p>
-                                <a href="shop-left-sidebar.html">shop now</a>
+                                <h1></h1>
+                                <h2><span></span></h2>
+                                <p>
+                                    
+                                </p>
+                                <a ></a>
                             </div>
                         </div>
                     </div><!-- Hero Item End -->
@@ -79,11 +80,10 @@
                         <div class="row align-items-center justify-content-between">
                             <!-- Hero Content -->
                             <div class="hero-content col-md-8 offset-md-4 col-sm-12 offset-sm-0">
-                                <h1>THE WINTER</h1>
-                                <h2><span>SPORT WINTER</span></h2>
-                                <p>This is Photoshops version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean
-                                sollicitudin, lorem quis</p>
-                                <a href="shop-left-sidebar.html">shop now</a>
+                                <h1></h1>
+                                <h2><span></span></h2>
+                                <p></p>
+                                <a ></a>
                             </div>
                         </div>
                     </div><!-- Hero Item End -->
@@ -99,9 +99,9 @@
                             <!-- single-feature -->
                             <div class="single-featured-service featured-service-bg-1">
                                 <div class="single-featured-service-content">
-                                    <h3>Lorem ipsum dolor.</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing </p>
-                                    <a href="shop-left-sidebar.html">View Collection</a>
+                                    <h3></h3>
+                                    <p> </p>
+                                    <a ></a>
                                 </div>
                             </div>
                             <!-- end of single feature -->
@@ -110,9 +110,9 @@
                             <!-- single-feature -->
                             <div class="single-featured-service featured-service-bg-2">
                                 <div class="single-featured-service-content">
-                                    <h3>Lorem ipsum dolor.</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing </p>
-                                    <a href="shop-left-sidebar.html">View Collection</a>
+                                    <h3></h3>
+                                    <p> </p>
+                                    <a ></a>
                                 </div>
                             </div>
                             <!-- end of single feature -->
@@ -121,9 +121,9 @@
                             <!-- single-feature -->
                             <div class="single-featured-service featured-service-bg-3">
                                 <div class="single-featured-service-content">
-                                    <h3>Marca1</h3>
+                                    <h3></h3>
                                     <p> </p>
-                                    <a href="shop-left-sidebar.html">View Collection</a>
+                                    <a ></a>
                                 </div>
                             </div>
                             <!-- end of single feature -->

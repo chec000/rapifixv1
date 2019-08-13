@@ -121,7 +121,7 @@
                                         <!-- ====  End of Submenu block  ==== -->
 
                                     </li>
-                                    <li class="menu-item-has-children"><a href="#">Shop</a>
+                                    <li class="menu-item-has-children" style="display:none"><a href="#">Shop</a>
 
                                         <!-- ======  Submenu block  ======= -->
 
@@ -199,7 +199,7 @@
                                         <!-- ====  End of Mega menu block  ==== -->
                                     </li>
 
-                                    <li class="menu-item-has-children" ><a href="#">Pages</a>
+                                    <li class="menu-item-has-children" style="display: none" ><a href="#">Pages</a>
                                         <!-- ======  Submenu block  ======= -->
 
                                         <ul class="sub-menu">
@@ -221,8 +221,8 @@
 
                                         <!-- ====  End of Submenu block  ==== -->
                                     </li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="about.html">Acerca de </a></li>
+                                    <li><a href="contact.html">Contacto</a></li>
                                 </ul>
                             </nav>
 
