@@ -40,7 +40,7 @@
                         <div class="newsletter-wrapper d-md-flex">
                             <!-- newsletter text -->
                             <div class="newsletter-text">
-                                <h2>Boletin <span> </span></h2>
+                                <h2>Boletin <span> Ingresa tu correo para recibir las mejores ofertas</span></h2>
                             </div>
                             <!-- end of newsletter text -->
 
