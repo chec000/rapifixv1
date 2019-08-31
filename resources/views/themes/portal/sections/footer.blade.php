@@ -48,15 +48,15 @@
                             <div class="newsletter-input">
                                 <div class="input-group">
                                     <div class="input-group-append">
-                                        <form id="mc-form" class="mc-form subscribe-form">
-                                            <input type="email" id="mc-email" type="email" autocomplete="off" placeholder="Ingresa tu correo"
+                                        <form id="mc-form" class="mc-form subscribe-form" method="post" action="{{route('complement.sendEmail')}}">
+                                            <input type="email" id="mc-email" type="email" autocomplete="on" placeholder="Ingresa tu correo"
                                                    required>
                                             <button id="mc-submit" type="submit">Subscribirse</button>
                                         </form>
 
                                     </div>
                                 </div>
-                                <!-- mailchimp-alerts Start -->
+
                                 <div class="mailchimp-alerts">
                                     <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
                                     <div class="mailchimp-success"></div><!-- mailchimp-success end -->
@@ -118,8 +118,10 @@
                     <!-- footer description -->
                     <div class="footer-description">
                         <div class="footer-logo">
-                            <img src="assets/images/logo.png" alt="">
-                        </div>
+                            <!--
+                            <img src="{{asset('cms/app/img/logo.png')}}" alt="">
+                        -->
+                            </div>
                         <p>
                             Desarrollado por GM software SA de CV
                         </p>
@@ -132,13 +134,10 @@
                         <div class="col-lg-3 col-md-6">
                             <!-- single footer nav block -->
                             <div class="single-footer-nav-block">
-                                <h2 class="block-title">INFORMATION</h2>
+                                <h2 class="block-title">INFORMACION</h2>
                                 <ul class="footer-nav-links">
-                                    <li><a href="shop-left-sidebar.html">Specials</a></li>
-                                    <li><a href="shop-left-sidebar.html">New Products</a></li>
-                                    <li><a href="shop-left-sidebar.html">Best Sellers</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="{{route('complement.contact')}}">Contacto</a></li>
+                                    <li><a href="{{route('complement.about')}}">Acerca de nosotros</a></li>
                                 </ul>
                             </div>
                             <!-- end of single footer nav block -->
@@ -146,7 +145,7 @@
                         <div class="col-lg-3 col-md-6">
                             <!-- single footer nav block -->
                             <div class="single-footer-nav-block">
-                                <h2 class="block-title"><a href="my-account.html">MY ACCOUNT</a></h2>
+                                <h2 class="block-title"><a href="my-account.html">MI CUENTA</a></h2>
                                 <ul class="footer-nav-links">
                                     <li><a href="#">Mis ordenes</a></li>
                                     
@@ -179,8 +178,8 @@
                         <div class="col-lg-3 col-md-6">
                             <!-- single footer nav block -->
                             <div class="single-footer-nav-block">
-                                <h2 class="block-title">OUR SERVICES</h2>
-                                <ul class="footer-nav-links">
+                                <h2 class="block-title">NUESTROS SERVICIOS</h2>
+                                <ul class="footer-nav-links" style="display: none">
                                     <li><a href="store.html">Our Stores</a></li>
                                     <li><a href="about.html">Information</a></li>
                                     <li><a href="#">Privacy Policy</a></li>
@@ -206,7 +205,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="payment-logos text-md-right text-center">
-                            <img src="assets/images/payment.png" alt="payment logo">
+                            <img src="assets/images/payment.png" alt="payment logo" style="display:none">
                         </div>
                     </div>
                 </div>

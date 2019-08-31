@@ -28,7 +28,7 @@ use Modules\Shopping\Entities\CountryProduct;
 use Modules\Shopping\Entities\GroupCountry;
 use Modules\Shopping\Entities\Legal;
 use Modules\CMS\Entities\PageLang;
-use Modules\Shopping\Entities\PromoProd;
+use Modules\CMS\Entities\Email;
 use View;
 use Request;
 use Illuminate\Http\Request as rqs;
@@ -41,12 +41,55 @@ class StartController extends Controller
         return json_encode(session()->all());
     }
 
-    public function index()
+    
+    public function  showContact(){
+        $cart=\session()->get('portal.cart');
+        $categories=$this->getCategories();    
+        $categories=$categories->original['brandCategories'][0]['categories'];
+        return View::make('cms::sections.contact',['categories'=>$categories,
+            'cart'=>$cart           
+            ]);        
+    }        
+    
+        /** 
+         * Enviar mensaje de contacto        
+         *    */
+            
+    public function sendEmailContact(){      
+        try {            
+        $emailExistente = Email::where('email', '=', Request::get('EMAIL'))->get();        
+        if(!count($emailExistente)>0){
+        $emailEntity= new Email();
+        $emailEntity->email=Request::get('EMAIL');
+        $emailEntity->save();
+        return json_encode( true);            
+        }else{
+            return json_encode( false);            
+        }
+        
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        return json_encode( false);
+            
+        }
+        return json_encode( false);
+    }
+
+        public function  showAbout(){
+        $cart=\session()->get('portal.cart');
+        
+        $categories=$this->getCategories();    
+        $categories=$categories->original['brandCategories'][0]['categories'];
+
+        return View::make('cms::sections.about',['categories'=>$categories,
+            'cart'=>$cart            
+            ]);       
+    }      
+        public function index()
     {
 
         $this->getCountry(17);
-            
-
+        
         $brand_1 = session()->get('portal.main.brand');
         $cart=\session()->get('portal.cart');
         $categories=$this->getCategories();    
@@ -57,8 +100,7 @@ class StartController extends Controller
             'latest'=>$this->getLatestProducts()
             ]);
 
-        //  return View::make('cms::frontend.index',['categories'=>$categories]);
-    }
+        }
 
 
     public function getCategories()
@@ -282,18 +324,15 @@ private function getLatestProducts(){
 
     public function saveCountry($lat = "", $lon = "") {
 
-//    $lat=35.114351;
-//    $lon=-106.593404;
-//
 
         try {
-            //if (session()->has('portal.main.country_id') != true) {
+           
             session()->put('portal.main.useGeolocalization', 1);
             $httpClient = new \Http\Adapter\Guzzle6\Client();
             $provider = new \Geocoder\Provider\GoogleMaps\GoogleMaps($httpClient, null, 'AIzaSyBBmgIlPaMOTALtAFrpNzOSEpxEJHyoce4');
             $geocoder = new \Geocoder\StatefulGeocoder($provider, 'en');
             $location = $geocoder->reverse($lat, $lon)->first()->toArray();
-            //dd($location);
+           
             if ($location != null) {
                 $countryKey = $this->is_uecountry($location['countryCode']) ? config('cms.countryKey_ue') : $location['countryCode'];
                 $country = Country::where('country_key', 'like', '%' . $countryKey . '%')->first();
@@ -475,7 +514,7 @@ private function getLatestProducts(){
     public function sessionData() {
 
         //     app()->getTimeZone();
-        dd(session()->all());
+       
         return json_encode(session()->all());
     }
 

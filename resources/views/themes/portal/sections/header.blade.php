@@ -8,7 +8,7 @@
                     <div class="language-currency-changer d-flex justify-content-center justify-content-md-start justify-content-lg-center" style="display: none;">
                         <div class="language-changer" ">
                             <img src="" alt="">
-                            <a href="#" id="changeLanguage"><span id="languageName">English <i class="fa fa-caret-down"></i></span></a>
+                            <a style="display:none" href="#" id="changeLanguage"><span id="languageName">English <i class="fa fa-caret-down"></i></span></a>
                             <div class="language-currency-list hidden" id="languageList" >
                                 <ul style="display: none;">
                                     <li><a href="#"><img src="assets/images/flags/1.jpg" alt=""> English</a></li>
@@ -34,10 +34,10 @@
                     <!-- user information menu -->
                     <div class="user-information-menu">
                         <ul>
-                            <li><a href="wishlist.html">Lista de deseos</a> <span class="separator">|</span></li>
+                            <li style="display:none"><a href="wishlist.html" >Lista de deseos</a> <span class="separator">|</span></li>
                             <li><a href="{{route('cart.list')}}" >Check Out</a> <span class="separator">|</span></li>
-                            <li><a href="cart.html">Cart (<span id="cart-status">Empty</span>)</a> <span class="separator">|</span></li>
-                            <li><a href="login-register.html">Sign In</a></li>
+                            <li style="display:none"><a href="cart.html">Cart (<span id="cart-status">Empty</span>)</a> <span class="separator">|</span></li>
+                            <li style="display:none"><a href="login-register.html">Sign In</a></li>
                         </ul>
                     </div>
                     <!-- end of user information menu -->
@@ -108,9 +108,11 @@
                         <div class="main-menu">
                             <nav>
                                 <ul>
-                                    <li class="active menu-item-has-children"><a href="{{url('/')}}">Home</a>
+                                    <li class="active"><a href="{{url('/')}}">Home</a>
 
-                                        <!-- ======  Submenu block  ======= -->
+                                        <!-- ======  Submenu block 
+                                         <li class="active menu-item-has-children"><a href="{{url('/')}}">Home</a>
+                                        ======= -->
 
                                         <ul style="display: none;" class="sub-menu">
                                             <li class="active"><a href="/">Home One</a></li>
@@ -221,8 +223,8 @@
 
                                         <!-- ====  End of Submenu block  ==== -->
                                     </li>
-                                    <li><a href="about.html">Acerca de </a></li>
-                                    <li><a href="contact.html">Contacto</a></li>
+                                    <li><a href="{{route('complement.about')}}">Acerca de </a></li>
+                                    <li><a href="{{route('complement.contact')}}">Contacto</a></li>
                                 </ul>
                             </nav>
 

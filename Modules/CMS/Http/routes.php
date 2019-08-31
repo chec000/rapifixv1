@@ -128,6 +128,11 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Modules\CMS\Http\Controll
     Route::post('remove_image_inspire', ['uses' => 'InspireController@removeImage', 'as' => 'remove.inspire.image']);
     Route::post('inspire/legals', ['uses' => 'InspireController@legals', 'as' => 'inspire.legals']);
 
+    /** Complementos*/
+        Route::get('contact', ['uses' => 'StartController@showContact','as'=>'complement.contact']);
+        Route::get('about', ['uses' => 'StartController@showAbout','as'=>'complement.about']);
+        Route::get('sendemail/news', ['uses' => 'StartController@sendEmailContact','as'=>'complement.sendEmail']);
+        
 });
 
 Route::group(['middleware' => ['web'], 'namespace' => 'Modules\CMS\Http\Controllers'], function()
