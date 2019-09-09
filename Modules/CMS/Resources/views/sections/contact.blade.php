@@ -15,7 +15,7 @@
                                 <div class="col-lg-12">
                                     <div class="contact-form-container">
                                         <h2>Enviar mensaje</h2>
-                                        <form id="contact-form" action="{{route('complement.sendEmail')}}" method="get" class="contact-form">
+                                        <form id="contact-form" action="{{route('complement.send_mail.contact')}}" method="get" class="contact-form">
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <div class="form-group">

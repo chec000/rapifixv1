@@ -31,8 +31,14 @@ foreach (TranslatableUrlPrefix::getTranslatablePrefixesByIndex('shopping') as $l
 Route::group(['middleware' => ['web'], 'prefix' => 'shopping',
     'namespace' => 'Modules\Shopping\Http\Controllers'], function () {
     Route::get('/checkout/index',['as' => 'shopping.checkout.index','uses' =>'CheckoutController@index']);
+    
     Route::get('/checkout/getShippingAddress/{getFromWs}', ['as' => 'checkout.getShippingAddress', 'uses' => 'CheckoutController@getShippingAddress']);
-    Route::post('/checkout/shippingAddress/states', ['as' => 'checkout.shippingAddress.states', 'uses' => 'CheckoutController@states']);
+
+    Route::post('/checkout/shippingAddress/states', ['as' => 'checkout.test', 'uses' => 'CheckoutController@states']);
+    
+
+
+
     Route::post('/checkout/shippingAddress/cities', ['as' => 'checkout.shippingAddress.cities', 'uses' => 'CheckoutController@cities']);
     Route::post('/checkout/shippingAddress/citiesUSA', ['as' => 'checkout.shippingAddress.citiesUSA', 'uses' => 'CheckoutController@citiesUSA']);
     Route::post('/checkout/shippingAddress/zipcode', ['as' => 'checkout.shippingAddress.zipcode', 'uses' => 'CheckoutController@zipcode']);
@@ -51,8 +57,13 @@ Route::group(['middleware' => ['web'], 'prefix' => 'shopping',
     Route::get('/checkout/selectShippingAddress/{folio}', ['as' => 'checkout.selectShippingAddress', 'uses' => 'CheckoutController@selectShippingAddress']);
     Route::get('/checkout/quotation/getCartPreviewQuotation', ['as' => 'checkout.quotation.getCartPreviewQuotation',
         'uses' => 'CheckoutController@getResumeCartViewAfterQuotation']);
+    
+
     Route::get('/checkout/quotation/setChangePeriodSession/{change_period}', ['as' => 'checkout.quotation.setChangePeriodSession',
         'uses' => 'CheckoutController@setChangePeriodSession']);
+
+
+
     Route::get('/checkout/quotation/getInitQuotation/{process}', ['as' => 'checkout.quotation.getInitQuotation', 'uses' => 'CheckoutController@getInitQuotation']);
     Route::get('/checkout/quotation/getViewModalPromotions/{process}', ['as' => 'checkout.quotation.getViewModalPromotions', 'uses' => 'CheckoutController@getViewModalPromotions']);
     Route::post('/checkout/quotation/validateQuantityPromos', ['as' => 'checkout.quotation.validateQuantityPromos', 'uses' => 'PromotionController@validateQuantityPromos']);
@@ -264,6 +275,8 @@ Route::group(['middleware' => 'web', 'prefix' => 'shopping-cart', 'namespace' =>
 
         Route::get('/send-mail', 'ShoppingController@sendEmailShopping')
         ->name('cart.send_mail');
+
+
 
 
 

@@ -28,6 +28,8 @@ use Modules\Shopping\Entities\CountryProduct;
 use Modules\Shopping\Entities\GroupCountry;
 use Modules\Shopping\Entities\Legal;
 use Modules\CMS\Entities\PageLang;
+use Illuminate\Support\Facades\Mail;
+
 use Modules\CMS\Entities\Email;
 use View;
 use Request;
@@ -55,6 +57,27 @@ class StartController extends Controller
          * Enviar mensaje de contacto        
          *    */
             
+public function sendEmailNewContact(){      
+        try {            
+        $data=Request::all();
+        
+         Mail::send('shopping::frontend.shopping.email.contact',['data'=>$data],function ($m) use ($data){          
+            $m->to('sergiogalindo2010@hotmail.com','rapifix.com')->subject($data['contact_subject']);
+
+               
+         });   
+
+        return json_encode( true);
+            
+        
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        return json_encode( false);
+            
+        }
+        return json_encode( false);
+    }
+
     public function sendEmailContact(){      
         try {            
         $emailExistente = Email::where('email', '=', Request::get('EMAIL'))->get();        
@@ -74,6 +97,8 @@ class StartController extends Controller
         }
         return json_encode( false);
     }
+
+
 
         public function  showAbout(){
         $cart=\session()->get('portal.cart');

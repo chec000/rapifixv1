@@ -161,6 +161,13 @@ class CategoriesController extends Controller
             }
             $products[$categoryByCountry->country_id] = json_encode($productsJSON);
         }
+
+
+
+            var_dump($)
+
+        //Auth::user()->activeProductsByCountryAndBrand($category->country->id, $brand->id);
+
 //var_dump($products);
 //die();
        // $this->layoutData['modals']  = View::make('admin::shopping.categories.modals.country', ['title' => $title, 'groupsByCountry' => $categoriesByCountry, 'anotherCountries' => $anotherCountries]);

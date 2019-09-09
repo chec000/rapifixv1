@@ -131,8 +131,12 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Modules\CMS\Http\Controll
     /** Complementos*/
         Route::get('contact', ['uses' => 'StartController@showContact','as'=>'complement.contact']);
         Route::get('about', ['uses' => 'StartController@showAbout','as'=>'complement.about']);
+
         Route::get('sendemail/news', ['uses' => 'StartController@sendEmailContact','as'=>'complement.sendEmail']);
         
+        Route::get('/send-mail-contact', 'StartController@sendEmailNewContact')
+        ->name('complement.send_mail.contact');
+
 });
 
 Route::group(['middleware' => ['web'], 'namespace' => 'Modules\CMS\Http\Controllers'], function()
